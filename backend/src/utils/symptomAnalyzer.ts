@@ -1,4 +1,6 @@
 import { Urgency } from "../models/Case";
+import { isSymptomModelReady } from "./localModel";
+import { findCachedAnalysis, cacheAnalysis } from "./symptomVectorCache";
 
 export interface SymptomAnalysis {
   urgency: Urgency;
@@ -171,6 +173,44 @@ export function analyzeSymptomsLocally(symptoms: string[]): SymptomAnalysis {
       actionRequired:
         "Please monitor the patient and send another report if symptoms worsen before the callback. Ensure they stay hydrated.",
       callbackWindow: "within 24 hours",
+    };
+  }
+
+  if (
+    includesAny(normalized, ["facial pressure", "face pain", "sinus pressure", "sinus pain", "forehead pressure", "forehead pain"]) ||
+    (includesAny(normalized, ["nasal discharge", "yellow discharge", "green discharge", "thick discharge", "runny nose", "postnasal drip"]) &&
+      includesAny(normalized, ["facial pressure", "face pain", "pressure", "congestion", "blocked nose", "stuffy nose", "headache"]))
+  ) {
+    const hasRadiating = includesAny(normalized, ["radiating", "ear", "teeth", "tooth", "jaw"]);
+    const hasFever = includesAny(normalized, ["fever", "high fever"]);
+    const hasVisionChange = includesAny(normalized, ["blurred vision", "double vision", "swelling around eye", "eye swelling", "periorbital"]);
+
+    if (hasVisionChange || includesAny(normalized, ["stiff neck", "severe headache", "confusion"])) {
+      return {
+        urgency: "CRITICAL",
+        predictedDisease: "Possible Complicated Sinusitis or Intracranial Extension",
+        summary:
+          "Facial pressure or nasal discharge with vision changes, severe headache, stiff neck, or confusion raises concern for a serious sinus complication that has spread to the eye socket or brain structures. This is a medical emergency.",
+        actionRequired:
+          "Seek emergency care immediately. Do not delay — orbital or intracranial spread from sinus infection can progress rapidly.",
+        callbackWindow: "within 2 hours",
+        differentialDiagnoses: ["Orbital cellulitis", "Cavernous sinus thrombosis", "Intracranial abscess", "Meningitis", "Severe acute sinusitis"],
+        redFlags: ["Vision changes or eye swelling", "Severe headache", "Stiff neck", "Confusion or altered consciousness"],
+        confidence: "HIGH",
+      };
+    }
+
+    return {
+      urgency: "MODERATE",
+      predictedDisease: "Acute Bacterial Sinusitis",
+      summary:
+        `Facial pressure or pain, thick nasal discharge${hasRadiating ? ", and pain radiating to the ear or teeth" : ""}${hasFever ? " with fever" : ""} are consistent with acute bacterial sinusitis. This occurs when the sinus cavities become inflamed and infected, often after a cold or upper respiratory illness.`,
+      actionRequired:
+        "Arrange a clinical review — a clinician should assess whether antibiotics are appropriate. In the meantime, use saline nasal rinses if available, stay hydrated, and use pain relief as needed. Seek urgent care if vision changes, severe headache, swelling around the eyes, high fever, or stiff neck develop.",
+      callbackWindow: "within 24 hours",
+      differentialDiagnoses: ["Acute bacterial sinusitis", "Viral sinusitis (post-cold)", "Dental abscess with sinus involvement", "Allergic rhinitis with secondary infection", "Nasal polyps with infection"],
+      redFlags: ["Swelling around the eye or forehead", "Vision changes", "Severe or worsening headache", "High fever", "Stiff neck"],
+      confidence: "HIGH",
     };
   }
 
@@ -387,11 +427,26 @@ Rules:
 }
 
 export async function analyzeSymptoms(symptoms: string[]): Promise<SymptomAnalysis> {
-  const fallback = analyzeSymptomsLocally(symptoms);
-  if (process.env.SYMPTOM_ANALYZER === "gemma") {
-    return analyzeWithGemma(symptoms, fallback);
+  const llmReady = process.env.SYMPTOM_ANALYZER === "gemma" || isSymptomModelReady();
+
+  if (llmReady) {
+    // LLM is available — use it for best results, then cache in background
+    const fallback = analyzeSymptomsLocally(symptoms);
+    const result = await analyzeWithGemma(symptoms, fallback);
+    void cacheAnalysis(symptoms, result, "llm");
+    return result;
   }
-  return applySafetyOverrides(fallback, symptoms);
+
+  // LLM not ready — check vector cache for a semantically similar past result
+  const cached = await findCachedAnalysis(symptoms);
+  if (cached) {
+    return cached as SymptomAnalysis;
+  }
+
+  // Genuinely new pattern with no LLM and no cache — fall back to rules
+  const rulesResult = applySafetyOverrides(analyzeSymptomsLocally(symptoms), symptoms);
+  void cacheAnalysis(symptoms, rulesResult, "rules");
+  return rulesResult;
 }
 
 function patientActionText(actionRequired: string) {
