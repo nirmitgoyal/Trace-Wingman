@@ -2,17 +2,27 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import Case from "../models/Case";
 import { getCoordinatesForVillage, getVillageNames } from "../utils/geocode";
+import { getAnalysisFingerprint, getAnalysisModelName } from "../utils/analysisFingerprint";
+import { ensureLocalSymptomModel } from "../utils/localModel";
+import { analyzeSymptoms, SymptomAnalysis } from "../utils/symptomAnalyzer";
 
-dotenv.config({ path: "../../.env" });
+dotenv.config({ path: "../.env" });
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/sevak-dashboard";
 
-const symptoms = [
-  "Fever", "Cough", "Headache", "Diarrhea", "Vomiting", "Rash",
-  "Fatigue", "Body ache", "Sore throat", "Breathlessness",
-  "Chest pain", "Abdominal pain", "Dehydration", "Malaria symptoms",
-  "Dengue symptoms", "Typhoid symptoms", "Skin infection", "Eye infection",
-  "Joint pain", "Loss of appetite",
+const symptomTemplates = [
+  ["Persistent cough", "Night sweats", "Weight loss"],
+  ["Thirsty", "Frequent urination", "Blurred vision"],
+  ["Burning urination", "Cloudy urine", "Lower abdominal pain"],
+  ["High fever", "Chills", "Sweating"],
+  ["Severe headache", "Pain behind eyes", "High fever", "Rash"],
+  ["Severe diarrhea", "Vomiting", "Dehydration"],
+  ["Chest pain", "Shortness of breath", "Sweating"],
+  ["Seizure", "Loss of consciousness", "Confusion"],
+  ["Cough", "Runny nose", "Sore throat"],
+  ["Itchy rash", "Red bumps", "No fever"],
+  ["Stiff neck", "High fever", "Severe headache"],
+  ["Fever", "Abdominal pain", "Loss of appetite"],
 ];
 
 const locations = getVillageNames();
@@ -29,26 +39,28 @@ function randomPick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function randomSymptoms(): string[] {
-  const count = Math.floor(Math.random() * 4) + 1;
-  const picked = new Set<string>();
-  while (picked.size < count) {
-    picked.add(randomPick(symptoms));
-  }
-  return Array.from(picked);
+function point(longitude: number, latitude: number) {
+  return {
+    type: "Point" as const,
+    coordinates: [parseFloat(longitude.toFixed(6)), parseFloat(latitude.toFixed(6))] as [number, number],
+  };
 }
 
-function randomUrgency(): "CRITICAL" | "MODERATE" | "LOW" {
-  const r = Math.random();
-  if (r < 0.15) return "CRITICAL";
-  if (r < 0.5) return "MODERATE";
-  return "LOW";
+function symptomKey(caseSymptoms: string[]) {
+  return caseSymptoms.map((symptom) => symptom.trim().toLowerCase()).sort().join("|");
 }
 
 async function seed() {
   try {
     await mongoose.connect(MONGODB_URI);
     console.log("Connected to MongoDB");
+    await ensureLocalSymptomModel();
+
+    const analysisCache = new Map<string, SymptomAnalysis>();
+    for (const template of symptomTemplates) {
+      console.log(`Classifying template: ${template.join(", ")}`);
+      analysisCache.set(symptomKey(template), await analyzeSymptoms(template));
+    }
 
     await Case.deleteMany({});
     console.log("Cleared existing cases");
@@ -60,6 +72,10 @@ async function seed() {
       const coords = getCoordinatesForVillage(location);
       const lat = coords.lat + (Math.random() - 0.5) * 0.05;
       const lng = coords.lng + (Math.random() - 0.5) * 0.05;
+      const caseSymptoms = randomPick(symptomTemplates);
+      const key = symptomKey(caseSymptoms);
+      const analysis = analysisCache.get(key);
+      if (!analysis) throw new Error(`Missing analysis for symptoms: ${caseSymptoms.join(", ")}`);
 
       let state = "India";
       if (location === "Hartford" || location === "Stamford" || location === "New Haven") state = "Connecticut";
@@ -70,15 +86,25 @@ async function seed() {
         patientName: randomPick(names),
         age: Math.floor(Math.random() * 70) + 5,
         gender: randomPick(["Male", "Female", "Other"] as const),
-        symptoms: randomSymptoms(),
+        symptoms: caseSymptoms,
         village: location,
         district: location,
         state,
-        urgency: randomUrgency(),
-        latitude: parseFloat(lat.toFixed(4)),
-        longitude: parseFloat(lng.toFixed(4)),
+        urgency: analysis.urgency,
+        predictedDisease: analysis.predictedDisease,
+        aiAnalysis: analysis.summary,
+        recommendedAction: analysis.actionRequired,
+        callbackWindow: analysis.callbackWindow,
+        differentialDiagnoses: analysis.differentialDiagnoses || [],
+        redFlags: analysis.redFlags || [],
+        aiConfidence: analysis.confidence,
+        aiAnalysisHash: getAnalysisFingerprint(caseSymptoms),
+        aiModel: getAnalysisModelName(),
+        aiAnalyzedAt: new Date(),
+        reporterRole: "CAREGIVER",
+        location: point(lng, lat),
         status: "PENDING",
-        notes: "Automated test case",
+        notes: "Automated AI-classified test case",
         createdAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
       });
     }

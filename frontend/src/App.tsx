@@ -5,7 +5,7 @@ import { Filters } from "./components/Filters";
 import { CaseTable } from "./components/CaseTable";
 import { CaseMap } from "./components/CaseMap";
 import { SevakPortal } from "./components/SevakPortal";
-import { Alerts } from "./components/Alerts";
+import { CaseDetails } from "./components/CaseDetails";
 import { CaseRecord } from "./types";
 
 type View = "DASHBOARD" | "PORTAL";
@@ -69,7 +69,6 @@ function App() {
                     </div>
                 </div>
 
-                <Alerts stats={stats} />
                 <StatsCards stats={stats} />
 
                 <Filters
@@ -112,6 +111,9 @@ function App() {
       <footer className="footer">
         <span>Sevak Platform © 2026 — Optimized for 50,000+ Concurrent Cases</span>
       </footer>
+      {selectedCase && (
+        <CaseDetails caseRecord={selectedCase} onClose={() => setSelectedCase(null)} />
+      )}
     </div>
   );
 }

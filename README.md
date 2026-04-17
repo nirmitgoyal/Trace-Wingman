@@ -59,7 +59,15 @@ sevak-dashboard/
    ```
    MONGODB_URI=mongodb://localhost:27017/sevak-dashboard
    PORT=4000
+   SYMPTOM_ANALYZER=local
+   GEMMA_LOCAL_URL=
+   GEMMA_MODEL=
    ```
+
+   `SYMPTOM_ANALYZER=local` uses the built-in offline classifier. To use an on-device
+   Gemma-compatible service, set `SYMPTOM_ANALYZER=gemma`, `GEMMA_LOCAL_URL` to the
+   local generation endpoint, and `GEMMA_MODEL` to the local model name. The backend
+   falls back to the offline classifier if the local model is unavailable.
 
 3. **Seed database** (optional):
    ```bash

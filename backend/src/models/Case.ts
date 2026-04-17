@@ -12,11 +12,23 @@ export interface ICase extends Document {
   district: string;
   state: string;
   urgency: Urgency;
-  latitude: number;
-  longitude: number;
+  location: {
+    type: "Point";
+    coordinates: [number, number];
+  };
   status: "PENDING" | "IN_PROGRESS" | "RESOLVED";
   assignedCaregiver?: string;
   predictedDisease?: string;
+  aiAnalysis?: string;
+  recommendedAction?: string;
+  callbackWindow?: string;
+  differentialDiagnoses?: string[];
+  redFlags?: string[];
+  aiConfidence?: "LOW" | "MEDIUM" | "HIGH";
+  aiAnalysisHash?: string;
+  aiModel?: string;
+  aiAnalyzedAt?: Date;
+  reporterRole?: "PATIENT" | "CAREGIVER";
   notes: string;
   createdAt: Date;
   updatedAt: Date;
@@ -37,11 +49,45 @@ const CaseSchema = new Schema<ICase>(
       required: true,
       enum: ["CRITICAL", "MODERATE", "LOW"],
     },
-    latitude: { type: Number, required: true },
-    longitude: { type: Number, required: true },
+    location: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        required: true,
+        default: "Point",
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+        validate: {
+          validator(value: number[]) {
+            return (
+              value.length === 2 &&
+              Number.isFinite(value[0]) &&
+              Number.isFinite(value[1]) &&
+              value[0] >= -180 &&
+              value[0] <= 180 &&
+              value[1] >= -90 &&
+              value[1] <= 90
+            );
+          },
+          message: "location.coordinates must be [longitude, latitude]",
+        },
+      },
+    },
     status: { type: String, enum: ["PENDING", "IN_PROGRESS", "RESOLVED"], default: "PENDING" },
     assignedCaregiver: { type: String },
     predictedDisease: { type: String },
+    aiAnalysis: { type: String },
+    recommendedAction: { type: String },
+    callbackWindow: { type: String },
+    differentialDiagnoses: { type: [String], default: [] },
+    redFlags: { type: [String], default: [] },
+    aiConfidence: { type: String, enum: ["LOW", "MEDIUM", "HIGH"] },
+    aiAnalysisHash: { type: String },
+    aiModel: { type: String },
+    aiAnalyzedAt: { type: Date },
+    reporterRole: { type: String, enum: ["PATIENT", "CAREGIVER"] },
     notes: { type: String, default: "" },
   },
   {
@@ -52,5 +98,7 @@ const CaseSchema = new Schema<ICase>(
 CaseSchema.index({ urgency: 1 });
 CaseSchema.index({ district: 1 });
 CaseSchema.index({ createdAt: -1 });
+CaseSchema.index({ aiAnalysisHash: 1 });
+CaseSchema.index({ location: "2dsphere" });
 
 export default mongoose.model<ICase>("Case", CaseSchema);

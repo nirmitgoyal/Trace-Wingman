@@ -12,10 +12,24 @@ export interface CaseRecord {
   district: string;
   state: string;
   urgency: Urgency;
-  latitude: number;
-  longitude: number;
+  location?: {
+    type: "Point";
+    coordinates: [number, number];
+  };
+  latitude?: number;
+  longitude?: number;
   status: "PENDING" | "IN_PROGRESS" | "RESOLVED";
   assignedCaregiver?: string;
+  aiAnalysis?: string;
+  recommendedAction?: string;
+  callbackWindow?: string;
+  differentialDiagnoses?: string[];
+  redFlags?: string[];
+  aiConfidence?: "LOW" | "MEDIUM" | "HIGH";
+  aiAnalysisHash?: string;
+  aiModel?: string;
+  aiAnalyzedAt?: string;
+  reporterRole?: "PATIENT" | "CAREGIVER";
   notes: string;
   createdAt: string;
   updatedAt: string;
