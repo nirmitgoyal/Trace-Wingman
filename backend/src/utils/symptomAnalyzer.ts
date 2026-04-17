@@ -2,6 +2,14 @@ import { Urgency } from "../models/Case";
 import { isSymptomModelReady } from "./localModel";
 import { findCachedAnalysis, cacheAnalysis } from "./symptomVectorCache";
 
+export interface PatientContext {
+  age?: number;
+  gender?: string;
+  symptomDuration?: string;
+  /** Summary of recent cases in the same area, e.g. "12 dengue cases in this district in the last 7 days" */
+  clusterContext?: string;
+}
+
 export interface SymptomAnalysis {
   urgency: Urgency;
   predictedDisease: string;
@@ -169,7 +177,7 @@ function parseGemmaResponse(raw: string): SymptomAnalysis | null {
 // ---------------------------------------------------------------------------
 // LLM call
 // ---------------------------------------------------------------------------
-async function analyzeWithGemma(symptoms: string[]): Promise<SymptomAnalysis | null> {
+async function analyzeWithGemma(symptoms: string[], ctx: PatientContext = {}): Promise<SymptomAnalysis | null> {
   const url = process.env.GEMMA_LOCAL_URL || "http://localhost:11434/api/chat";
   const model = process.env.GEMMA_MODEL || "gemma4:e2b";
   const keepAlive = process.env.OLLAMA_KEEP_ALIVE || "30m";
@@ -181,10 +189,28 @@ async function analyzeWithGemma(symptoms: string[]): Promise<SymptomAnalysis | n
 
   const cleanedSymptoms = symptoms.map(cleanSymptom).filter(Boolean);
 
+  // Build patient context lines for the prompt
+  const patientLines: string[] = [];
+  if (ctx.age !== undefined && ctx.gender) {
+    patientLines.push(`Patient: ${ctx.age}-year-old ${ctx.gender}`);
+  } else if (ctx.age !== undefined) {
+    patientLines.push(`Patient age: ${ctx.age}`);
+  } else if (ctx.gender) {
+    patientLines.push(`Patient gender: ${ctx.gender}`);
+  }
+  if (ctx.symptomDuration) {
+    patientLines.push(`Symptom duration: ${ctx.symptomDuration}`);
+  }
+  if (ctx.clusterContext) {
+    patientLines.push(`Local disease activity (last 7 days): ${ctx.clusterContext}`);
+  }
+
   try {
     const system = `You are Sevak's local symptom triage assistant.
 Classify possible illness from symptom reports for community health surveillance.
 Be medically cautious, concise, and specific to the supplied symptoms.
+Use the patient's age, gender, and symptom duration to refine your diagnosis — age and sex affect disease likelihood significantly.
+If local disease activity is provided, treat it as an epidemiological clue but do not anchor to it without supporting symptoms.
 Do not force TB, malaria, dengue, or diabetes unless the symptoms clearly support them.
 Return strict JSON only — no markdown, no extra text, no reasoning outside the JSON.
 Schema:
@@ -199,7 +225,9 @@ Schema:
   "confidence": "LOW" | "MEDIUM" | "HIGH"
 }`;
 
-    const user = `Symptoms: ${cleanedSymptoms.join(", ")}
+    const contextBlock = patientLines.length > 0 ? `\n${patientLines.join("\n")}\n` : "";
+    const user = `${contextBlock}
+Symptoms: ${cleanedSymptoms.join(", ")}
 
 Urgency rules:
 - CRITICAL: breathing trouble, unconsciousness, seizure, chest pain, severe dehydration, meningitis signs, stroke signs, severe bleeding, sepsis, or serious infectious disease pattern.
@@ -307,11 +335,11 @@ export function buildPortalResponse(params: {
 // ---------------------------------------------------------------------------
 // Main entry point
 // ---------------------------------------------------------------------------
-export async function analyzeSymptoms(symptoms: string[]): Promise<SymptomAnalysis> {
+export async function analyzeSymptoms(symptoms: string[], ctx: PatientContext = {}): Promise<SymptomAnalysis> {
   const llmReady = process.env.SYMPTOM_ANALYZER === "gemma" || isSymptomModelReady();
 
   if (llmReady) {
-    const result = await analyzeWithGemma(symptoms);
+    const result = await analyzeWithGemma(symptoms, ctx);
     if (result) {
       void cacheAnalysis(symptoms, result, "llm");
       return result;
@@ -320,7 +348,7 @@ export async function analyzeSymptoms(symptoms: string[]): Promise<SymptomAnalys
     console.warn("[Analyzer] LLM call failed, checking vector cache as fallback.");
   }
 
-  // Check vector cache for a semantically similar past result
+  // Check vector cache for a semantically similar past result (context not used for cache key)
   const cached = await findCachedAnalysis(symptoms);
   if (cached) {
     console.log("[Analyzer] Serving result from vector cache.");

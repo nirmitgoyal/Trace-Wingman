@@ -1,0 +1,2577 @@
+[
+  {
+    "name": "Bridgeport",
+    "lat": 41.17923,
+    "lng": -73.18945,
+    "population": 147629,
+    "state": "Connecticut",
+    "district": "Greater Bridgeport Planning Region",
+    "aliases": [
+      "BDR",
+      "Bricport",
+      "Bridzhport",
+      "Bridzport"
+    ]
+  },
+  {
+    "name": "New Haven",
+    "lat": 41.30815,
+    "lng": -72.92816,
+    "population": 130322,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "HVN",
+      "N'ju Khehven",
+      "N'ju-Gehjvehn",
+      "N'ju-Gejven"
+    ]
+  },
+  {
+    "name": "Stamford",
+    "lat": 41.05343,
+    "lng": -73.53873,
+    "population": 128874,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Rippowams",
+      "Stamfordas",
+      "Stehmford",
+      "Stemford"
+    ]
+  },
+  {
+    "name": "North Stamford",
+    "lat": 41.13815,
+    "lng": -73.54346,
+    "population": 121230,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "bei shi dan fu",
+      "nwrt astamfwrd",
+      "nwrt aystamfwrd"
+    ]
+  },
+  {
+    "name": "Hartford",
+    "lat": 41.76371,
+    "lng": -72.68509,
+    "population": 121054,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Chartfornt",
+      "Gartford",
+      "HFD",
+      "Halakepoka"
+    ]
+  },
+  {
+    "name": "Waterbury",
+    "lat": 41.55815,
+    "lng": -73.0515,
+    "population": 108802,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Forest City",
+      "The Brass City",
+      "Uotrbri",
+      "Uoterberi"
+    ]
+  },
+  {
+    "name": "Norwalk",
+    "lat": 41.1176,
+    "lng": -73.4079,
+    "population": 88485,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Chichester",
+      "Naramake",
+      "Noruolk",
+      "Norvalk"
+    ]
+  },
+  {
+    "name": "Danbury",
+    "lat": 41.39482,
+    "lng": -73.45401,
+    "population": 84657,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Beantown",
+      "DXR",
+      "Danberi",
+      "Danbjuri"
+    ]
+  },
+  {
+    "name": "East Norwalk",
+    "lat": 41.10565,
+    "lng": -73.39845,
+    "population": 84530,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "nwrwak shrqy"
+    ]
+  },
+  {
+    "name": "New Britain",
+    "lat": 41.66121,
+    "lng": -72.77954,
+    "population": 72808,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Hardware City",
+      "N'ju Britan",
+      "N'ju-Briten",
+      "Nju Briten"
+    ]
+  },
+  {
+    "name": "West Hartford",
+    "lat": 41.76204,
+    "lng": -72.74204,
+    "population": 63268,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Vehst Khartford",
+      "Vest Kharford",
+      "Vest Khartford",
+      "Vest-Gartford"
+    ]
+  },
+  {
+    "name": "Bristol",
+    "lat": 41.67176,
+    "lng": -72.94927,
+    "population": 60452,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Bristol'",
+      "Bristul",
+      "Mixville Brook",
+      "beuliseuteul"
+    ]
+  },
+  {
+    "name": "Meriden",
+    "lat": 41.53815,
+    "lng": -72.80704,
+    "population": 59988,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Meridehn",
+      "Silver City",
+      "mei li deng",
+      "meriden"
+    ]
+  },
+  {
+    "name": "Hamden",
+    "lat": 41.39593,
+    "lng": -72.89677,
+    "population": 59847,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Khamdehn",
+      "hamdn",
+      "hamuden"
+    ]
+  },
+  {
+    "name": "Fairfield",
+    "lat": 41.14121,
+    "lng": -73.26373,
+    "population": 59052,
+    "state": "Connecticut",
+    "district": "Greater Bridgeport Planning Region",
+    "aliases": [
+      "Fajrfild",
+      "Fehrfild",
+      "Fejrfild",
+      "Feurfijld"
+    ]
+  },
+  {
+    "name": "West Haven",
+    "lat": 41.27065,
+    "lng": -72.94705,
+    "population": 54927,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Uehst-Khejven",
+      "Vehst Khehjvn",
+      "Vest Khehven",
+      "Vest Khejven"
+    ]
+  },
+  {
+    "name": "Milford",
+    "lat": 41.22232,
+    "lng": -73.0565,
+    "population": 52759,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Four Corners",
+      "Milfordas",
+      "Milfornt",
+      "Millfort"
+    ]
+  },
+  {
+    "name": "Stratford",
+    "lat": 41.18454,
+    "lng": -73.13317,
+    "population": 51384,
+    "state": "Connecticut",
+    "district": "Greater Bridgeport Planning Region",
+    "aliases": [
+      "Cupheag",
+      "Strehtford",
+      "astratfrd  kntykt",
+      "seuteulaespeodeu"
+    ]
+  },
+  {
+    "name": "City of Milford (balance)",
+    "lat": 41.22374,
+    "lng": -73.06164,
+    "population": 51271,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region"
+  },
+  {
+    "name": "East Hartford",
+    "lat": 41.78232,
+    "lng": -72.61203,
+    "population": 51252,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "EHT",
+      "Ist Khartford",
+      "ayst hartfwrd",
+      "ista hartapharda"
+    ]
+  },
+  {
+    "name": "Middletown",
+    "lat": 41.56232,
+    "lng": -72.65065,
+    "population": 46756,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Mattabeseck",
+      "Mattabesett",
+      "Mattabesset",
+      "Middltaun"
+    ]
+  },
+  {
+    "name": "Enfield",
+    "lat": 41.97621,
+    "lng": -72.59176,
+    "population": 45212,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Ehnfild",
+      "Freshwater",
+      "aynfyld",
+      "enfirudo"
+    ]
+  },
+  {
+    "name": "Southington",
+    "lat": 41.59649,
+    "lng": -72.8776,
+    "population": 43501,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Sausington",
+      "Sautington",
+      "Sousington",
+      "sajinton"
+    ]
+  },
+  {
+    "name": "Shelton",
+    "lat": 41.31649,
+    "lng": -73.09316,
+    "population": 41296,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Huntington",
+      "Huntington Landing",
+      "Ripton",
+      "Shehlton"
+    ]
+  },
+  {
+    "name": "Norwich",
+    "lat": 41.52426,
+    "lng": -72.07591,
+    "population": 39899,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Chelsea",
+      "Noridzh",
+      "Noruich",
+      "Norvich"
+    ]
+  },
+  {
+    "name": "Trumbull",
+    "lat": 41.24287,
+    "lng": -73.20067,
+    "population": 36018,
+    "state": "Connecticut",
+    "district": "Greater Bridgeport Planning Region",
+    "aliases": [
+      "Trambal",
+      "Trambul",
+      "Trumbull Center",
+      "White Plains"
+    ]
+  },
+  {
+    "name": "West Torrington",
+    "lat": 41.81843,
+    "lng": -73.14372,
+    "population": 36000,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "Torrington"
+    ]
+  },
+  {
+    "name": "Torrington",
+    "lat": 41.80065,
+    "lng": -73.12122,
+    "population": 34906,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "Mast Swamp",
+      "New Orleans Village",
+      "Spruce Swamp",
+      "Torington"
+    ]
+  },
+  {
+    "name": "Glastonbury",
+    "lat": 41.71232,
+    "lng": -72.60815,
+    "population": 31876,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Glastenbury",
+      "Glastonberi",
+      "Glastonbjuri",
+      "Naubuc"
+    ]
+  },
+  {
+    "name": "Naugatuck",
+    "lat": 41.48593,
+    "lng": -73.05066,
+    "population": 31538,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Judd's Meadow",
+      "Judds Meadow",
+      "Naugatak",
+      "Naugatuck Village"
+    ]
+  },
+  {
+    "name": "Manchester",
+    "lat": 41.77593,
+    "lng": -72.52148,
+    "population": 30577,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Central Manchester",
+      "Manchester Center",
+      "manchesuta",
+      "manshstr"
+    ]
+  },
+  {
+    "name": "Newington",
+    "lat": 41.69788,
+    "lng": -72.72371,
+    "population": 30562,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Nevington",
+      "Njuington",
+      "n'yu'ingatana",
+      "nywynghwn"
+    ]
+  },
+  {
+    "name": "Cheshire",
+    "lat": 41.49899,
+    "lng": -72.90066,
+    "population": 29443,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Cheshair",
+      "Cheshir",
+      "Cheshir Vilidz",
+      "Cheshire Center"
+    ]
+  },
+  {
+    "name": "Branford",
+    "lat": 41.27954,
+    "lng": -72.8151,
+    "population": 29438,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Branford Center",
+      "Brehnford",
+      "Totoket"
+    ]
+  },
+  {
+    "name": "East Haven",
+    "lat": 41.27621,
+    "lng": -72.86843,
+    "population": 29257,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "East Village",
+      "Easthaven",
+      "Iron Works Village",
+      "Ist Khehven"
+    ]
+  },
+  {
+    "name": "Windsor",
+    "lat": 41.8526,
+    "lng": -72.6437,
+    "population": 28778,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Uinsor",
+      "Vindzor",
+      "uinza",
+      "wen sha"
+    ]
+  },
+  {
+    "name": "New London",
+    "lat": 41.35565,
+    "lng": -72.09952,
+    "population": 27179,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Mameeg",
+      "N'ju London",
+      "N'ju-London",
+      "New-London"
+    ]
+  },
+  {
+    "name": "Wethersfield",
+    "lat": 41.71427,
+    "lng": -72.65259,
+    "population": 26668,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Pyquaq",
+      "Vedersfild",
+      "Vezersfild",
+      "Watertown"
+    ]
+  },
+  {
+    "name": "Mansfield City",
+    "lat": 41.76593,
+    "lng": -72.23369,
+    "population": 26439,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Mansfield"
+    ]
+  },
+  {
+    "name": "Westport",
+    "lat": 41.14149,
+    "lng": -73.3579,
+    "population": 26391,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Vehstport",
+      "Vestport",
+      "vestaporta",
+      "weseuteupoteu"
+    ]
+  },
+  {
+    "name": "Farmington",
+    "lat": 41.71982,
+    "lng": -72.83204,
+    "population": 25000,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Farmington Village",
+      "farmnghtwn",
+      "farmyngtwn  kntykt"
+    ]
+  },
+  {
+    "name": "South Windsor",
+    "lat": 41.82371,
+    "lng": -72.6212,
+    "population": 24412,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Saus Vindzor",
+      "Sous Vindsor"
+    ]
+  },
+  {
+    "name": "North Haven",
+    "lat": 41.39093,
+    "lng": -72.85954,
+    "population": 24093,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Bricktown",
+      "Nors Khehven",
+      "Nort Khejven",
+      "nartha hyabhena"
+    ]
+  },
+  {
+    "name": "Windham",
+    "lat": 41.69982,
+    "lng": -72.15702,
+    "population": 23072,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Hither Place",
+      "Hither-Place",
+      "South East Quarter",
+      "The Center"
+    ]
+  },
+  {
+    "name": "Guilford",
+    "lat": 41.28899,
+    "lng": -72.68176,
+    "population": 22498,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Gilford",
+      "Gilford Senter",
+      "Guilford Center",
+      "Menunkatucket"
+    ]
+  },
+  {
+    "name": "Bloomfield",
+    "lat": 41.82649,
+    "lng": -72.73009,
+    "population": 21535,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Blumfild",
+      "Greenfield",
+      "Messenger's Farms",
+      "blwmfyld  kntykt"
+    ]
+  },
+  {
+    "name": "Darien",
+    "lat": 41.07871,
+    "lng": -73.46929,
+    "population": 20732,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Dariehn",
+      "Dehrien",
+      "Derian",
+      "Derijen"
+    ]
+  },
+  {
+    "name": "Montville Center",
+    "lat": 41.47899,
+    "lng": -72.15119,
+    "population": 20180,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Montville"
+    ]
+  },
+  {
+    "name": "Southbury",
+    "lat": 41.48148,
+    "lng": -73.21317,
+    "population": 19836,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Sausbjuri",
+      "Sousbjuri"
+    ]
+  },
+  {
+    "name": "New Canaan",
+    "lat": 41.14676,
+    "lng": -73.49484,
+    "population": 19738,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "N'ju Kanaan",
+      "Nju Kanaan",
+      "n'yu kanana",
+      "nyw kanan"
+    ]
+  },
+  {
+    "name": "Waterford",
+    "lat": 41.3417,
+    "lng": -72.13597,
+    "population": 19281,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Central Waterford",
+      "Vaterford",
+      "Voterford",
+      "sentrala vatarapharda"
+    ]
+  },
+  {
+    "name": "Madison",
+    "lat": 41.27954,
+    "lng": -72.59843,
+    "population": 19100,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "East Guilford",
+      "MPE",
+      "Madison Center",
+      "Medison"
+    ]
+  },
+  {
+    "name": "Avon",
+    "lat": 41.80982,
+    "lng": -72.83065,
+    "population": 18932,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "East Avon",
+      "Ehvon",
+      "Hart's Nod",
+      "Nod Society"
+    ]
+  },
+  {
+    "name": "Ansonia",
+    "lat": 41.34621,
+    "lng": -73.079,
+    "population": 18854,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Ansonija",
+      "an suo ni ya",
+      "anasoniya",
+      "ancaniya"
+    ]
+  },
+  {
+    "name": "Wallingford Center",
+    "lat": 41.44987,
+    "lng": -72.81892,
+    "population": 18209,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Wallingford Center CDP",
+      "walynghfwrd sntr"
+    ]
+  },
+  {
+    "name": "Wilton",
+    "lat": 41.19537,
+    "lng": -73.4379,
+    "population": 18062,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Vilton"
+    ]
+  },
+  {
+    "name": "Willimantic",
+    "lat": 41.71065,
+    "lng": -72.20813,
+    "population": 17737,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Thread City",
+      "Vilimantik",
+      "Villimantik",
+      "Wallamantuck"
+    ]
+  },
+  {
+    "name": "Wallingford",
+    "lat": 41.45704,
+    "lng": -72.82316,
+    "population": 17712,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "East River",
+      "New Haven Village",
+      "Vallingford",
+      "Volingford Senter"
+    ]
+  },
+  {
+    "name": "Plainville",
+    "lat": 41.67454,
+    "lng": -72.85816,
+    "population": 17328,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Plehjnvill",
+      "Plejnvill'"
+    ]
+  },
+  {
+    "name": "Killingly Center",
+    "lat": 41.83871,
+    "lng": -71.86924,
+    "population": 17282,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region",
+    "aliases": [
+      "Aspenock",
+      "Killingly"
+    ]
+  },
+  {
+    "name": "Wolcott",
+    "lat": 41.60232,
+    "lng": -72.98677,
+    "population": 16639,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Wolcottsville"
+    ]
+  },
+  {
+    "name": "Seymour",
+    "lat": 41.39676,
+    "lng": -73.07594,
+    "population": 16562,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Amaug Suck",
+      "Chusetown",
+      "Humphreysville",
+      "Humphreyville"
+    ]
+  },
+  {
+    "name": "Plainfield",
+    "lat": 41.67649,
+    "lng": -71.91507,
+    "population": 15498,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region",
+    "aliases": [
+      "Plehjnfild",
+      "peulleinpildeu"
+    ]
+  },
+  {
+    "name": "Storrs",
+    "lat": 41.80843,
+    "lng": -72.24952,
+    "population": 15344,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Storrsville",
+      "Stors",
+      "astwrs",
+      "starsa"
+    ]
+  },
+  {
+    "name": "Ledyard",
+    "lat": 41.43982,
+    "lng": -72.01424,
+    "population": 15212,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Led Yard",
+      "Ledyard Center",
+      "Maushantuxet"
+    ]
+  },
+  {
+    "name": "Tolland",
+    "lat": 41.87149,
+    "lng": -72.36869,
+    "population": 14891,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region"
+  },
+  {
+    "name": "Ellington",
+    "lat": 41.90399,
+    "lng": -72.46981,
+    "population": 14693,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Dexter",
+      "Ehllington",
+      "Elenton",
+      "Ellington Center"
+    ]
+  },
+  {
+    "name": "North Branford",
+    "lat": 41.3276,
+    "lng": -72.76732,
+    "population": 14454,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Nors Brehnford",
+      "North Branford Village",
+      "North Farms",
+      "nwrth branfwrd"
+    ]
+  },
+  {
+    "name": "New Fairfield",
+    "lat": 41.46648,
+    "lng": -73.48568,
+    "population": 14126,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "N'ju Fajrfild",
+      "nyw fyrfyld"
+    ]
+  },
+  {
+    "name": "Orange",
+    "lat": 41.27843,
+    "lng": -73.02566,
+    "population": 13956,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Bryan's Farms",
+      "North Milford",
+      "Orange Center"
+    ]
+  },
+  {
+    "name": "Cromwell",
+    "lat": 41.5951,
+    "lng": -72.64537,
+    "population": 13750,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Kromvehll",
+      "Kromvel'",
+      "Kromvell",
+      "krwmwyl"
+    ]
+  },
+  {
+    "name": "Greenwich",
+    "lat": 41.02649,
+    "lng": -73.62846,
+    "population": 12942,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Grinuich",
+      "Grinvich",
+      "Horse Neck",
+      "ge lin ni zhi"
+    ]
+  },
+  {
+    "name": "Derby",
+    "lat": 41.32065,
+    "lng": -73.089,
+    "population": 12700,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Birmingham",
+      "Dehrbi",
+      "Derbi",
+      "East Huntington"
+    ]
+  },
+  {
+    "name": "Windsor Locks",
+    "lat": 41.92926,
+    "lng": -72.62731,
+    "population": 12498,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "BDL",
+      "Enfield Falls",
+      "Pine Meadow",
+      "Vindsor Loks"
+    ]
+  },
+  {
+    "name": "Plymouth",
+    "lat": 41.67204,
+    "lng": -73.05289,
+    "population": 12284,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Northbury",
+      "Plajmaus",
+      "Plimut",
+      "Plymouth Center"
+    ]
+  },
+  {
+    "name": "Stafford",
+    "lat": 41.98482,
+    "lng": -72.28897,
+    "population": 12029,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Furnace Hollow",
+      "Stafford Hollow",
+      "Stafford Springs",
+      "Stafford Village"
+    ]
+  },
+  {
+    "name": "Oxford",
+    "lat": 41.43399,
+    "lng": -73.11678,
+    "population": 11345,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Manchaug",
+      "OXC",
+      "Oksford",
+      "Oxford Center"
+    ]
+  },
+  {
+    "name": "Winchester Center",
+    "lat": 41.9001,
+    "lng": -73.13483,
+    "population": 10830,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "Old Society",
+      "Winchester"
+    ]
+  },
+  {
+    "name": "Old Saybrook",
+    "lat": 41.29177,
+    "lng": -72.3762,
+    "population": 10627,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Old Sehjbruk",
+      "Ould Sehjbruk",
+      "Pashbeshauke",
+      "Saybrook"
+    ]
+  },
+  {
+    "name": "Woodbury",
+    "lat": 41.54454,
+    "lng": -73.209,
+    "population": 9755,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Vudbari",
+      "Vudberi Senter",
+      "Vudbjuri",
+      "Woodberry"
+    ]
+  },
+  {
+    "name": "Bethel",
+    "lat": 41.37121,
+    "lng": -73.41401,
+    "population": 9549,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Behzel",
+      "Besehl",
+      "Betel",
+      "bei sai er"
+    ]
+  },
+  {
+    "name": "Prospect",
+    "lat": 41.50232,
+    "lng": -72.97872,
+    "population": 9476,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Waterbury South Farms"
+    ]
+  },
+  {
+    "name": "Thompson",
+    "lat": 41.95871,
+    "lng": -71.86257,
+    "population": 9358,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region",
+    "aliases": [
+      "Quinnatisset",
+      "Thompson Hill",
+      "Thompson Village",
+      "Tompson"
+    ]
+  },
+  {
+    "name": "Woodbridge",
+    "lat": 41.3526,
+    "lng": -73.00844,
+    "population": 9355,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Vudbridzh",
+      "wu de bu li qi",
+      "wwdbrydj  kantykt"
+    ]
+  },
+  {
+    "name": "Hebron",
+    "lat": 41.65788,
+    "lng": -72.36592,
+    "population": 9298,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Gay City",
+      "Khehbron",
+      "Pumptown",
+      "hybrwn"
+    ]
+  },
+  {
+    "name": "Groton",
+    "lat": 41.3501,
+    "lng": -72.07841,
+    "population": 9221,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "East Side",
+      "GON",
+      "Groton Bank",
+      "Groton Ferry"
+    ]
+  },
+  {
+    "name": "Oakville",
+    "lat": 41.59343,
+    "lng": -73.08539,
+    "population": 9047,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Okvil",
+      "Oukvill",
+      "The City",
+      "ao ke wei er"
+    ]
+  },
+  {
+    "name": "East Haddam",
+    "lat": 41.45315,
+    "lng": -72.4612,
+    "population": 9042,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Chapman Ferry",
+      "East Haddam Landing",
+      "Goodspeeds Landing",
+      "Ist Khaddam"
+    ]
+  },
+  {
+    "name": "Conning Towers-Nautilus Park",
+    "lat": 41.38548,
+    "lng": -72.06877,
+    "population": 8834,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Conning Towers-Nautilus Park CDP",
+      "Conning Towers-Nautilus Park Census Designated Place"
+    ]
+  },
+  {
+    "name": "Thompsonville",
+    "lat": 41.99704,
+    "lng": -72.59898,
+    "population": 8577,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Freshwater Brook",
+      "The City",
+      "Tompsonvil",
+      "Tompsonvill"
+    ]
+  },
+  {
+    "name": "Kensington",
+    "lat": 41.63538,
+    "lng": -72.76871,
+    "population": 8459,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Farmington Village",
+      "Great Swamp",
+      "ken xin dun",
+      "kenjinton"
+    ]
+  },
+  {
+    "name": "Riverside",
+    "lat": 41.03371,
+    "lng": -73.57818,
+    "population": 8416,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Riversajd",
+      "li fu sai de",
+      "ribasaido",
+      "rywrsayd"
+    ]
+  },
+  {
+    "name": "Winsted",
+    "lat": 41.92121,
+    "lng": -73.06011,
+    "population": 7712,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "East Village",
+      "Laurel City",
+      "Vinsted",
+      "ke li fu dun"
+    ]
+  },
+  {
+    "name": "Southwood Acres",
+    "lat": 41.9626,
+    "lng": -72.57148,
+    "population": 7657,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Sautvud Ejkers",
+      "Sautvud-Ejkers",
+      "sa'uthavuda ekarsa",
+      "sawthwwd akrs"
+    ]
+  },
+  {
+    "name": "Ridgefield",
+    "lat": 41.28148,
+    "lng": -73.49818,
+    "population": 7645,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Caudatowa",
+      "Ridzfild",
+      "Ridzhfild",
+      "rijaphilda"
+    ]
+  },
+  {
+    "name": "Easton",
+    "lat": 41.25287,
+    "lng": -73.29734,
+    "population": 7625,
+    "state": "Connecticut",
+    "district": "Greater Bridgeport Planning Region",
+    "aliases": [
+      "Iston",
+      "Istun",
+      "aystn  kntykt",
+      "aystwn"
+    ]
+  },
+  {
+    "name": "Rockville",
+    "lat": 41.86676,
+    "lng": -72.44953,
+    "population": 7474,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Rock",
+      "Rock Factory",
+      "Rock Village",
+      "Rokvill"
+    ]
+  },
+  {
+    "name": "Glastonbury Center",
+    "lat": 41.70093,
+    "lng": -72.59953,
+    "population": 7387,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Glastonberi Senter",
+      "Glastonberi-Senter",
+      "ge la si dun bo li sen te",
+      "ghlastwnbry sntr"
+    ]
+  },
+  {
+    "name": "Putnam",
+    "lat": 41.9151,
+    "lng": -71.90896,
+    "population": 7214,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region",
+    "aliases": [
+      "Cargill Falls",
+      "Great Falls",
+      "Patnam",
+      "Pomfret Street"
+    ]
+  },
+  {
+    "name": "Middlebury",
+    "lat": 41.52787,
+    "lng": -73.12761,
+    "population": 6974,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Middlbjuri",
+      "Middlebury Center",
+      "mydlbwry"
+    ]
+  },
+  {
+    "name": "Cos Cob",
+    "lat": 41.03343,
+    "lng": -73.59957,
+    "population": 6770,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Cos Cob Village",
+      "Kos Kab",
+      "Kos Kob",
+      "Kos-Kob"
+    ]
+  },
+  {
+    "name": "Old Greenwich",
+    "lat": 41.02287,
+    "lng": -73.56485,
+    "population": 6611,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Greenwich Old Town",
+      "Monakeway",
+      "Old Grinvich",
+      "Old-Grinuich"
+    ]
+  },
+  {
+    "name": "New Milford",
+    "lat": 41.57704,
+    "lng": -73.40845,
+    "population": 6523,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "N'ju Milford",
+      "Nju Milford",
+      "n'yu milapharda",
+      "nyw mylfwrd"
+    ]
+  },
+  {
+    "name": "Killingworth",
+    "lat": 41.35815,
+    "lng": -72.5637,
+    "population": 6174,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Hammonassett",
+      "Kenelmeworth",
+      "Kenelwort",
+      "Kenilworth"
+    ]
+  },
+  {
+    "name": "Portland",
+    "lat": 41.57288,
+    "lng": -72.64065,
+    "population": 5862,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "East Middletown",
+      "Portland Center",
+      "Portlend",
+      "portalyanda"
+    ]
+  },
+  {
+    "name": "Simsbury Center",
+    "lat": 41.88088,
+    "lng": -72.81116,
+    "population": 5836,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Simsbury Center CDP"
+    ]
+  },
+  {
+    "name": "Branford Center",
+    "lat": 41.27738,
+    "lng": -72.81511,
+    "population": 5819,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Branford Center CDP"
+    ]
+  },
+  {
+    "name": "Cheshire Village",
+    "lat": 41.5026,
+    "lng": -72.89952,
+    "population": 5786,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Cheshire Village CDP"
+    ]
+  },
+  {
+    "name": "Pawcatuck",
+    "lat": 41.37732,
+    "lng": -71.83368,
+    "population": 5624,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Paquatuck",
+      "Paucatuck",
+      "Pawcatuck Bridge",
+      "Pawcatuck Village"
+    ]
+  },
+  {
+    "name": "Sherwood Manor",
+    "lat": 42.01343,
+    "lng": -72.56425,
+    "population": 5410,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Shervud Mejnor",
+      "Shervud-Manor",
+      "seravuda menara",
+      "she wu de zhuang yuan"
+    ]
+  },
+  {
+    "name": "Terryville",
+    "lat": 41.67815,
+    "lng": -73.01094,
+    "population": 5387,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Poland",
+      "Terivil",
+      "Terrivill",
+      "Terrysville"
+    ]
+  },
+  {
+    "name": "Preston City",
+    "lat": 41.52899,
+    "lng": -71.97396,
+    "population": 5000,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Preston"
+    ]
+  },
+  {
+    "name": "Stafford Springs",
+    "lat": 41.95426,
+    "lng": -72.3023,
+    "population": 4988,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region"
+  },
+  {
+    "name": "Colchester",
+    "lat": 41.57565,
+    "lng": -72.33203,
+    "population": 4781,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Kolchester",
+      "kwltshstr"
+    ]
+  },
+  {
+    "name": "Hazardville",
+    "lat": 41.98732,
+    "lng": -72.54481,
+    "population": 4599,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region"
+  },
+  {
+    "name": "Lisbon",
+    "lat": 41.60399,
+    "lng": -72.01174,
+    "population": 4234,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Newent Parish"
+    ]
+  },
+  {
+    "name": "Long Hill",
+    "lat": 41.35399,
+    "lng": -72.0523,
+    "population": 4205,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Long-Gill",
+      "langa hila",
+      "lwngh hyl",
+      "lwnj hyl"
+    ]
+  },
+  {
+    "name": "Mystic",
+    "lat": 41.35427,
+    "lng": -71.96646,
+    "population": 4205,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Lower Mystic",
+      "Mistick",
+      "Misticke",
+      "Mistik"
+    ]
+  },
+  {
+    "name": "Salem",
+    "lat": 41.49038,
+    "lng": -72.27536,
+    "population": 4183,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Salem Center",
+      "Sejlem",
+      "sylm  kntykt"
+    ]
+  },
+  {
+    "name": "Byram",
+    "lat": 41.00426,
+    "lng": -73.65374,
+    "population": 4146,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Bajram",
+      "Bajrem",
+      "East Port Chester",
+      "East Portchester"
+    ]
+  },
+  {
+    "name": "East Windsor",
+    "lat": 41.91232,
+    "lng": -72.54509,
+    "population": 4069,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Braud Brook",
+      "Broad Brook",
+      "Broadbrook",
+      "Brod Bruk"
+    ]
+  },
+  {
+    "name": "Danielson",
+    "lat": 41.8026,
+    "lng": -71.88591,
+    "population": 3987,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region",
+    "aliases": [
+      "Danielson's Village",
+      "Danielsonville",
+      "Danijelson",
+      "West Killingly"
+    ]
+  },
+  {
+    "name": "Sherman",
+    "lat": 41.57926,
+    "lng": -73.49568,
+    "population": 3827,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Shehrman",
+      "Sherman Center",
+      "The City",
+      "shrmn  kntykt"
+    ]
+  },
+  {
+    "name": "Collinsville",
+    "lat": 41.81288,
+    "lng": -72.9201,
+    "population": 3746,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Cantonville",
+      "Kollinsvil'",
+      "South Canton"
+    ]
+  },
+  {
+    "name": "Heritage Village",
+    "lat": 41.48565,
+    "lng": -73.23789,
+    "population": 3736,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region"
+  },
+  {
+    "name": "Pemberwick",
+    "lat": 41.02565,
+    "lng": -73.66068,
+    "population": 3680,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Pembervik",
+      "peng bo wei ke",
+      "pmbrwyk",
+      "pmbrwyk  kantykt"
+    ]
+  },
+  {
+    "name": "Barkhamsted",
+    "lat": 41.92926,
+    "lng": -72.91399,
+    "population": 3647,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region"
+  },
+  {
+    "name": "Watertown",
+    "lat": 41.60621,
+    "lng": -73.11817,
+    "population": 3574,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Vatehrtaun",
+      "Votertaun",
+      "Watertown Center",
+      "woteotaun"
+    ]
+  },
+  {
+    "name": "Old Mystic",
+    "lat": 41.39149,
+    "lng": -71.96174,
+    "population": 3554,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Head of Mistick",
+      "Head of Mystic",
+      "Head of the River",
+      "Mystic"
+    ]
+  },
+  {
+    "name": "Washington",
+    "lat": 41.63148,
+    "lng": -73.31067,
+    "population": 3466,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "Vashington",
+      "Washington Center",
+      "Washington Green"
+    ]
+  },
+  {
+    "name": "Jewett City",
+    "lat": 41.60677,
+    "lng": -71.98091,
+    "population": 3441,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Dzuit Siti",
+      "Pachaug City",
+      "jeveta siti",
+      "juettoshiti"
+    ]
+  },
+  {
+    "name": "Lake Pocotopaug",
+    "lat": 41.59843,
+    "lng": -72.51037,
+    "population": 3436,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Lejk-Pokotopog",
+      "Pocotopaug Lake",
+      "bo ke tuo bo ge hu",
+      "leka pokotopauga"
+    ]
+  },
+  {
+    "name": "Clinton",
+    "lat": 41.27871,
+    "lng": -72.52759,
+    "population": 3368,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Hammonassett",
+      "Killingworth",
+      "Klinton",
+      "Klintun"
+    ]
+  },
+  {
+    "name": "Northwest Harwinton",
+    "lat": 41.77685,
+    "lng": -73.07922,
+    "population": 3252,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "Northwest Harwinton CDP",
+      "Nortvest Kharvinton",
+      "Nortvest-Garvinton",
+      "harwyntwn alshmalyt alghrbyt"
+    ]
+  },
+  {
+    "name": "Moosup",
+    "lat": 41.71288,
+    "lng": -71.88091,
+    "population": 3231,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region",
+    "aliases": [
+      "Cranska Village",
+      "Cranska Vitto",
+      "Gladdings Village",
+      "Gladdingville"
+    ]
+  },
+  {
+    "name": "Oxoboxo River",
+    "lat": 41.44391,
+    "lng": -72.12502,
+    "population": 3165,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Oxoboxo River CDP"
+    ]
+  },
+  {
+    "name": "Niantic",
+    "lat": 41.32538,
+    "lng": -72.19313,
+    "population": 3114,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Najantik",
+      "Nehantic",
+      "Nehantucket",
+      "nayantika"
+    ]
+  },
+  {
+    "name": "Coventry Lake",
+    "lat": 41.77232,
+    "lng": -72.33258,
+    "population": 2990,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Koventri Lejk",
+      "Koventri-Lejk",
+      "kabhentari leka",
+      "kao wen chui hu"
+    ]
+  },
+  {
+    "name": "Durham",
+    "lat": 41.48176,
+    "lng": -72.68121,
+    "population": 2933,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Daram",
+      "Darem",
+      "Durkham",
+      "dar'hyama"
+    ]
+  },
+  {
+    "name": "Blue Hills",
+    "lat": 41.81288,
+    "lng": -72.69759,
+    "population": 2901,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Blu Khils",
+      "Blu-Gills",
+      "blu hilsa",
+      "blw hylz"
+    ]
+  },
+  {
+    "name": "Central Waterford",
+    "lat": 41.34504,
+    "lng": -72.12948,
+    "population": 2887,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Central Waterford CDP",
+      "Central Waterford Census Designated Place"
+    ]
+  },
+  {
+    "name": "Kent",
+    "lat": 41.72482,
+    "lng": -73.47707,
+    "population": 2858,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "Kent Plains",
+      "Kent Village",
+      "knt  kntykt",
+      "kynt"
+    ]
+  },
+  {
+    "name": "Weatogue",
+    "lat": 41.84371,
+    "lng": -72.82843,
+    "population": 2776,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region"
+  },
+  {
+    "name": "East Hampton",
+    "lat": 41.57593,
+    "lng": -72.50259,
+    "population": 2691,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Ist Khehmpton",
+      "Ist Khempton",
+      "The Bell Town",
+      "ayst hambtwn"
+    ]
+  },
+  {
+    "name": "Guilford Center",
+    "lat": 41.28156,
+    "lng": -72.67619,
+    "population": 2597,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Guilford Center CDP"
+    ]
+  },
+  {
+    "name": "Plainfield Village",
+    "lat": 41.67686,
+    "lng": -71.92489,
+    "population": 2557,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region",
+    "aliases": [
+      "Plainfield Village CDP"
+    ]
+  },
+  {
+    "name": "Essex Village",
+    "lat": 41.35544,
+    "lng": -72.39101,
+    "population": 2495,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Eseks Vilidz",
+      "Esseks-Villedzh",
+      "Essex Village CDP",
+      "ai sai ke si cun"
+    ]
+  },
+  {
+    "name": "Deep River Center",
+    "lat": 41.38221,
+    "lng": -72.43862,
+    "population": 2484,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Deep River Center CDP"
+    ]
+  },
+  {
+    "name": "West Simsbury",
+    "lat": 41.87315,
+    "lng": -72.85815,
+    "population": 2447,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Case Farms",
+      "Farm Village",
+      "Farms",
+      "Farms Village"
+    ]
+  },
+  {
+    "name": "Westbrook Center",
+    "lat": 41.27997,
+    "lng": -72.44254,
+    "population": 2413,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Westbrook Center CDP"
+    ]
+  },
+  {
+    "name": "Glenville",
+    "lat": 41.03538,
+    "lng": -73.65985,
+    "population": 2327,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Glenvil",
+      "Glenvill",
+      "Sherwood Bridge",
+      "ge lun wei er"
+    ]
+  },
+  {
+    "name": "Salmon Brook",
+    "lat": 41.95649,
+    "lng": -72.79537,
+    "population": 2324,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Salmon Bruk",
+      "Salmon-Bruk",
+      "sa er meng bu lu ke",
+      "salmwn brwk"
+    ]
+  },
+  {
+    "name": "Madison Center",
+    "lat": 41.27925,
+    "lng": -72.60048,
+    "population": 2290,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Madison Center CDP",
+      "madyswn sntr"
+    ]
+  },
+  {
+    "name": "Old Saybrook Center",
+    "lat": 41.29123,
+    "lng": -72.37176,
+    "population": 2039,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Old Saybrook Center CDP",
+      "Old Sejbruk Senter",
+      "Old-Sejbruk-Senter",
+      "olda sebruka sentara"
+    ]
+  },
+  {
+    "name": "Bethlehem Village",
+    "lat": 41.6401,
+    "lng": -73.20308,
+    "population": 2021,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Bethlehem Village CDP"
+    ]
+  },
+  {
+    "name": "Newtown",
+    "lat": 41.41398,
+    "lng": -73.30345,
+    "population": 1967,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "N'jutaun",
+      "Njutaun",
+      "n'yuta'una",
+      "niu dui"
+    ]
+  },
+  {
+    "name": "Crystal Lake",
+    "lat": 41.93176,
+    "lng": -72.37842,
+    "population": 1945,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Kristal Lehjk",
+      "Kristal Lejk",
+      "Kristal-Lejk",
+      "Square Pond"
+    ]
+  },
+  {
+    "name": "North Granby",
+    "lat": 41.99593,
+    "lng": -72.82954,
+    "population": 1944,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region"
+  },
+  {
+    "name": "Thomaston",
+    "lat": 41.67399,
+    "lng": -73.07316,
+    "population": 1910,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Church Hollow",
+      "Plymouth Hollow",
+      "Thomas Town",
+      "Tomaston"
+    ]
+  },
+  {
+    "name": "Georgetown",
+    "lat": 41.25565,
+    "lng": -73.43484,
+    "population": 1805,
+    "state": "Connecticut",
+    "district": "Western Connecticut Planning Region",
+    "aliases": [
+      "Dzhordzhtaun",
+      "Dzordztaun",
+      "Long Hollow",
+      "jojitaun"
+    ]
+  },
+  {
+    "name": "Noank",
+    "lat": 41.32788,
+    "lng": -71.99063,
+    "population": 1796,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Naiwayhucke",
+      "Naiwayonk",
+      "Nauyang",
+      "Nawyonk"
+    ]
+  },
+  {
+    "name": "Somers",
+    "lat": 41.98537,
+    "lng": -72.4462,
+    "population": 1789,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Bittings Mill",
+      "Central Somers",
+      "Samers",
+      "Somehrs"
+    ]
+  },
+  {
+    "name": "Poquonock Bridge",
+    "lat": 41.3451,
+    "lng": -72.0248,
+    "population": 1727,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Pequonock Bridge",
+      "Pequot",
+      "Poquonnock",
+      "Poquonoc Bridge"
+    ]
+  },
+  {
+    "name": "Higganum",
+    "lat": 41.49704,
+    "lng": -72.55703,
+    "population": 1698,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Higganum Village",
+      "Higganumpus",
+      "Hockanum"
+    ]
+  },
+  {
+    "name": "East Brooklyn",
+    "lat": 41.79677,
+    "lng": -71.89729,
+    "population": 1638,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region",
+    "aliases": [
+      "Brooklyn Side Village",
+      "Ist Bruklin",
+      "Ist-Bruklin",
+      "Lockwood Village"
+    ]
+  },
+  {
+    "name": "Southport",
+    "lat": 41.13649,
+    "lng": -73.28345,
+    "population": 1585,
+    "state": "Connecticut",
+    "district": "Greater Bridgeport Planning Region",
+    "aliases": [
+      "Carey Corner",
+      "Mill Village",
+      "Sasco",
+      "Sasqua"
+    ]
+  },
+  {
+    "name": "Canton Valley",
+    "lat": 41.83426,
+    "lng": -72.89177,
+    "population": 1580,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region"
+  },
+  {
+    "name": "Chester Center",
+    "lat": 41.40132,
+    "lng": -72.4527,
+    "population": 1558,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Chester Center CDP",
+      "tshystr sntr"
+    ]
+  },
+  {
+    "name": "North Grosvenor Dale",
+    "lat": 41.98565,
+    "lng": -71.89868,
+    "population": 1530,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region",
+    "aliases": [
+      "Fishersville",
+      "Fisherville",
+      "Mount Hunger",
+      "North Grosvenordale"
+    ]
+  },
+  {
+    "name": "Woodmont",
+    "lat": 41.22815,
+    "lng": -72.99149,
+    "population": 1505,
+    "state": "Connecticut",
+    "district": "South Central Connecticut Planning Region",
+    "aliases": [
+      "Burwell Farms",
+      "Burwell's Farms",
+      "East Farms",
+      "Merwin Point"
+    ]
+  },
+  {
+    "name": "Uncasville",
+    "lat": 41.43454,
+    "lng": -72.1098,
+    "population": 1500,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Ankasvill",
+      "Bartlett",
+      "Uncas Ville"
+    ]
+  },
+  {
+    "name": "South Coventry",
+    "lat": 41.7701,
+    "lng": -72.30508,
+    "population": 1483,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region"
+  },
+  {
+    "name": "South Windham",
+    "lat": 41.67954,
+    "lng": -72.17036,
+    "population": 1421,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Spaffordsville"
+    ]
+  },
+  {
+    "name": "Moodus",
+    "lat": 41.50288,
+    "lng": -72.45009,
+    "population": 1413,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Machimoodus",
+      "Mechanicsville",
+      "Modus",
+      "Moodus Village"
+    ]
+  },
+  {
+    "name": "New Hartford Center",
+    "lat": 41.87996,
+    "lng": -72.9753,
+    "population": 1385,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "New Hartford Center CDP",
+      "Nju Khartford Senter",
+      "nyw hartfwrd sntr"
+    ]
+  },
+  {
+    "name": "Suffield Depot",
+    "lat": 41.98121,
+    "lng": -72.64981,
+    "population": 1325,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Saffild-Depot",
+      "Safild Dipo",
+      "sa fei er de de bo te",
+      "safyld dpw"
+    ]
+  },
+  {
+    "name": "Tariffville",
+    "lat": 41.90871,
+    "lng": -72.7601,
+    "population": 1324,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Griswoldville",
+      "Tariffvill",
+      "Tarifvil",
+      "The Falls"
+    ]
+  },
+  {
+    "name": "Woodbury Center",
+    "lat": 41.54453,
+    "lng": -73.20476,
+    "population": 1294,
+    "state": "Connecticut",
+    "district": "Naugatuck Valley Planning Region",
+    "aliases": [
+      "Woodbury Center CDP",
+      "wdbyry sntr"
+    ]
+  },
+  {
+    "name": "South Woodstock",
+    "lat": 41.93899,
+    "lng": -71.95952,
+    "population": 1291,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region",
+    "aliases": [
+      "Arnold Village",
+      "Arnoldtown",
+      "Codfish Flat",
+      "Codfish Town"
+    ]
+  },
+  {
+    "name": "Baltic",
+    "lat": 41.61704,
+    "lng": -72.08452,
+    "population": 1250,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region"
+  },
+  {
+    "name": "Litchfield",
+    "lat": 41.74732,
+    "lng": -73.18872,
+    "population": 1215,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "Bantam",
+      "Lichfijld",
+      "Lichfild",
+      "Litcfeld"
+    ]
+  },
+  {
+    "name": "Canaan",
+    "lat": 42.02731,
+    "lng": -73.32928,
+    "population": 1212,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "Canaan Depot",
+      "Canaan Village",
+      "Kanaan",
+      "Kejnan"
+    ]
+  },
+  {
+    "name": "Wauregan",
+    "lat": 41.74427,
+    "lng": -71.90924,
+    "population": 1205,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region",
+    "aliases": [
+      "Wauregan Village"
+    ]
+  },
+  {
+    "name": "New Preston",
+    "lat": 41.6751,
+    "lng": -73.35179,
+    "population": 1182,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "N'ju-Preston",
+      "New Preston Village",
+      "Nju Preston",
+      "North Purchase"
+    ]
+  },
+  {
+    "name": "Gales Ferry",
+    "lat": 41.42982,
+    "lng": -72.08202,
+    "population": 1162,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Gale Ferry",
+      "Gale Town",
+      "Gale's Ferry",
+      "Gale-town"
+    ]
+  },
+  {
+    "name": "Quinebaug",
+    "lat": 42.02371,
+    "lng": -71.9498,
+    "population": 1133,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region"
+  },
+  {
+    "name": "Saybrook Manor",
+    "lat": 41.28538,
+    "lng": -72.39897,
+    "population": 1052,
+    "state": "Connecticut",
+    "district": "Lower Connecticut River Valley Planning Region",
+    "aliases": [
+      "Indian Town",
+      "Sejbrug Mejnor",
+      "Sejbruk-Mehnor",
+      "Sejbruk-Menor"
+    ]
+  },
+  {
+    "name": "Terramuggus",
+    "lat": 41.6351,
+    "lng": -72.47036,
+    "population": 1025,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region"
+  },
+  {
+    "name": "Brooklyn",
+    "lat": 41.78815,
+    "lng": -71.9498,
+    "population": 981,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region",
+    "aliases": [
+      "Bruklin"
+    ]
+  },
+  {
+    "name": "Mansfield Center",
+    "lat": 41.76538,
+    "lng": -72.19813,
+    "population": 947,
+    "state": "Connecticut",
+    "district": "Capitol Planning Region",
+    "aliases": [
+      "Mansfield Village",
+      "Mansfild-Senter",
+      "Mensfild Senter",
+      "North End"
+    ]
+  },
+  {
+    "name": "Lakeville",
+    "lat": 41.96454,
+    "lng": -73.44012,
+    "population": 928,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "Furnace Village",
+      "Lake View",
+      "Leikvil",
+      "Lejkvil"
+    ]
+  },
+  {
+    "name": "Stonington",
+    "lat": 41.33593,
+    "lng": -71.9059,
+    "population": 908,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region",
+    "aliases": [
+      "Mistick",
+      "Pawcatuck",
+      "Southertown",
+      "Stonington Village"
+    ]
+  },
+  {
+    "name": "Union",
+    "lat": 41.99093,
+    "lng": -72.1573,
+    "population": 797,
+    "state": "Connecticut",
+    "district": "Northeastern Connecticut Planning Region",
+    "aliases": [
+      "Junion"
+    ]
+  },
+  {
+    "name": "Bantam",
+    "lat": 41.72454,
+    "lng": -73.23623,
+    "population": 735,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "Bantam Falls",
+      "Bantam Village",
+      "Peantam",
+      "ban tan"
+    ]
+  },
+  {
+    "name": "Sharon",
+    "lat": 41.87926,
+    "lng": -73.47679,
+    "population": 729,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "Sheron"
+    ]
+  },
+  {
+    "name": "Norfolk",
+    "lat": 41.99398,
+    "lng": -73.20206,
+    "population": 553,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "Norfok",
+      "Norfolk Center",
+      "nwrfwlk"
+    ]
+  },
+  {
+    "name": "Falls Village",
+    "lat": 41.95593,
+    "lng": -73.36317,
+    "population": 538,
+    "state": "Connecticut",
+    "district": "Northwest Hills Planning Region",
+    "aliases": [
+      "Canaan Falls",
+      "Housatonic Falls",
+      "The Falls"
+    ]
+  },
+  {
+    "name": "Groton Long Point",
+    "lat": 41.31454,
+    "lng": -72.00785,
+    "population": 513,
+    "state": "Connecticut",
+    "district": "Southeastern Connecticut Planning Region"
+  }
+]

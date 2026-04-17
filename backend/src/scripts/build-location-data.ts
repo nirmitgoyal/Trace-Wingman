@@ -2,15 +2,16 @@
  * build-location-data.ts
  *
  * Downloads GeoNames country dumps and extracts all populated places for
- * Texas (from the US dump) and India, then writes
+ * Connecticut and Texas (from the US dump) and India, then writes:
+ *   backend/src/data/locations-ct.json
  *   backend/src/data/locations-tx.json
  *   backend/src/data/locations-in.json
  *
  * Usage:
- *   npx tsx src/scripts/build-location-data.ts
- *   npx tsx src/scripts/build-location-data.ts --country=IN
- *   npx tsx src/scripts/build-location-data.ts --country=US,IN
- *   npx tsx src/scripts/build-location-data.ts --min-pop=5000
+ *   npx tsx src/scripts/build-location-data.ts           # CT + TX + India
+ *   npx tsx src/scripts/build-location-data.ts --country=CT
+ *   npx tsx src/scripts/build-location-data.ts --country=CT,TX,IN
+ *   npx tsx src/scripts/build-location-data.ts --min-pop=500
  *
  * GeoNames data is public domain: https://www.geonames.org/export/
  */
@@ -99,6 +100,28 @@ export interface LocationEntry {
   aliases?: string[];
 }
 
+/** Download and cache the GeoNames admin2 name lookup table (all countries). */
+async function loadAdmin2Names(cacheDir: string): Promise<Map<string, string>> {
+  const url = `${GEONAMES_BASE}/admin2Codes.txt`;
+  const filePath = path.join(cacheDir, "admin2Codes.txt");
+
+  if (!fs.existsSync(filePath)) {
+    console.log("  Downloading admin2Codes.txt for county/district name lookup …");
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Failed to download admin2Codes.txt: ${res.status}`);
+    fs.writeFileSync(filePath, await res.text());
+  }
+
+  // Format: "US.TX.227\tMontgomery County\tMontgomery County\t4699701"
+  const map = new Map<string, string>();
+  const lines = fs.readFileSync(filePath, "utf-8").split("\n");
+  for (const line of lines) {
+    const [code, name] = line.split("\t");
+    if (code && name) map.set(code.trim(), name.trim());
+  }
+  return map;
+}
+
 async function downloadAndExtract(countryCode: string, destDir: string): Promise<string> {
   const url = `${GEONAMES_BASE}/${countryCode}.zip`;
   const zipPath = path.join(destDir, `${countryCode}.zip`);
@@ -131,7 +154,9 @@ async function parseGeoNamesFile(
   txtPath: string,
   filter: (fields: string[]) => boolean,
   mapState: (admin1: string) => string,
-  minPop: number
+  minPop: number,
+  admin2Names: Map<string, string>,
+  countryCode: string
 ): Promise<LocationEntry[]> {
   const rl = readline.createInterface({ input: fs.createReadStream(txtPath), crlfDelay: Infinity });
 
@@ -165,7 +190,12 @@ async function parseGeoNamesFile(
     const lat = parseFloat(fields[4]);
     const lng = parseFloat(fields[5]);
     const admin1 = fields[10].trim();
-    const admin2 = fields[11].trim();
+    const admin2Code = fields[11].trim();
+
+    // Resolve admin2 numeric code → human-readable county/district name
+    const admin2Key = `${countryCode}.${admin1}.${admin2Code}`;
+    const district = admin2Names.get(admin2Key) || undefined;
+
     const stateName = mapState(admin1);
 
     entries.push({
@@ -174,7 +204,7 @@ async function parseGeoNamesFile(
       lng,
       population: pop,
       state: stateName,
-      district: admin2 || undefined,
+      district,
       aliases: altNames.length > 0 ? altNames : undefined,
     });
   }
@@ -194,24 +224,43 @@ function deduplicateByName(entries: LocationEntry[]): LocationEntry[] {
   return Array.from(seen.values()).sort((a, b) => b.population - a.population);
 }
 
-async function buildTexas(cacheDir: string, minPop: number): Promise<LocationEntry[]> {
-  console.log("\n[Texas] Downloading US GeoNames dump …");
-  const txtPath = await downloadAndExtract("US", cacheDir);
+async function buildUSState(
+  label: string,
+  admin1Code: string,
+  stateName: string,
+  cacheDir: string,
+  minPop: number,
+  admin2Names: Map<string, string>
+): Promise<LocationEntry[]> {
+  console.log(`\n[${label}] Downloading US GeoNames dump …`);
+  const txtPath = await downloadAndExtract("US", cacheDir); // reuses cache if already downloaded
 
-  console.log("[Texas] Parsing …");
+  console.log(`[${label}] Parsing …`);
   const entries = await parseGeoNamesFile(
     txtPath,
-    (fields) => fields[10] === "TX",
-    () => "Texas",
-    minPop
+    (fields) => fields[10] === admin1Code,
+    () => stateName,
+    minPop,
+    admin2Names,
+    "US"
   );
 
   const deduped = deduplicateByName(entries);
-  console.log(`[Texas] Found ${deduped.length} places (min-pop=${minPop})`);
+  console.log(`[${label}] Found ${deduped.length} places (min-pop=${minPop})`);
   return deduped;
 }
 
-async function buildIndia(cacheDir: string, minPop: number): Promise<LocationEntry[]> {
+function buildTexas(cacheDir: string, minPop: number, admin2Names: Map<string, string>) {
+  return buildUSState("Texas", "TX", "Texas", cacheDir, minPop, admin2Names);
+}
+
+function buildConnecticut(cacheDir: string, minPop: number, admin2Names: Map<string, string>) {
+  // CT towns can be very small — default min-pop of 1000 may skip some hamlets.
+  // GeoNames includes all 169 CT municipalities regardless of population.
+  return buildUSState("Connecticut", "CT", "Connecticut", cacheDir, minPop, admin2Names);
+}
+
+async function buildIndia(cacheDir: string, minPop: number, admin2Names: Map<string, string>): Promise<LocationEntry[]> {
   console.log("\n[India] Downloading India GeoNames dump …");
   const txtPath = await downloadAndExtract("IN", cacheDir);
 
@@ -220,7 +269,9 @@ async function buildIndia(cacheDir: string, minPop: number): Promise<LocationEnt
     txtPath,
     () => true,
     (admin1) => IN_ADMIN1_CODES[admin1] || "India",
-    minPop
+    minPop,
+    admin2Names,
+    "IN"
   );
 
   const deduped = deduplicateByName(entries);
@@ -233,22 +284,33 @@ async function main() {
   const countriesArg = args.find((a) => a.startsWith("--country="));
   const minPopArg = args.find((a) => a.startsWith("--min-pop="));
 
-  const countries = countriesArg ? countriesArg.split("=")[1].split(",") : ["US", "IN"];
-  const minPop = minPopArg ? parseInt(minPopArg.split("=")[1], 10) : 1000;
+  const countries = countriesArg ? countriesArg.split("=")[1].split(",").map(s => s.trim().toUpperCase()) : ["CT", "TX", "IN"];
+  const minPop = minPopArg ? parseInt(minPopArg.split("=")[1], 10) : 500;
 
   const cacheDir = path.join(DATA_DIR, ".cache");
   fs.mkdirSync(cacheDir, { recursive: true });
   fs.mkdirSync(DATA_DIR, { recursive: true });
 
-  if (countries.includes("US") || countries.includes("TX")) {
-    const txEntries = await buildTexas(cacheDir, minPop);
+  console.log("\nLoading admin2 district name lookup table …");
+  const admin2Names = await loadAdmin2Names(cacheDir);
+  console.log(`  Loaded ${admin2Names.size} admin2 entries`);
+
+  if (countries.includes("CT")) {
+    const ctEntries = await buildConnecticut(cacheDir, minPop, admin2Names);
+    const outPath = path.join(DATA_DIR, "locations-ct.json");
+    fs.writeFileSync(outPath, JSON.stringify(ctEntries, null, 2));
+    console.log(`\nWrote ${ctEntries.length} Connecticut locations → ${outPath}`);
+  }
+
+  if (countries.includes("TX") || countries.includes("US")) {
+    const txEntries = await buildTexas(cacheDir, minPop, admin2Names);
     const outPath = path.join(DATA_DIR, "locations-tx.json");
     fs.writeFileSync(outPath, JSON.stringify(txEntries, null, 2));
-    console.log(`\nWrote ${txEntries.length} Texas locations → ${outPath}`);
+    console.log(`Wrote ${txEntries.length} Texas locations → ${outPath}`);
   }
 
   if (countries.includes("IN")) {
-    const inEntries = await buildIndia(cacheDir, minPop);
+    const inEntries = await buildIndia(cacheDir, minPop, admin2Names);
     const outPath = path.join(DATA_DIR, "locations-in.json");
     fs.writeFileSync(outPath, JSON.stringify(inEntries, null, 2));
     console.log(`Wrote ${inEntries.length} India locations → ${outPath}`);

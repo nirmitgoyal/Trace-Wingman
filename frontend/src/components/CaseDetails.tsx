@@ -57,6 +57,7 @@ export function CaseDetails({ caseRecord, onClose }: Props) {
           <DetailRow label="State" value={caseRecord.state} />
           <DetailRow label="Latitude" value={latitude} />
           <DetailRow label="Longitude" value={longitude} />
+          <DetailRow label="Symptom Duration" value={caseRecord.symptomDuration} />
           <DetailRow label="Callback Window" value={caseRecord.callbackWindow} />
           <DetailRow label="AI Model" value={caseRecord.aiModel} />
           <DetailRow label="AI Analyzed" value={caseRecord.aiAnalyzedAt ? formatDate(caseRecord.aiAnalyzedAt) : undefined} />

@@ -939,6 +939,18 @@ td {
   padding: 16px;
 }
 
+/* Pandemic active state — pulsing red border */
+.alerts-pandemic-active {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: var(--critical);
+  animation: pandemic-pulse 2s ease-in-out infinite;
+}
+
+@keyframes pandemic-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.15); }
+}
+
 .alerts-header {
   display: flex;
   align-items: center;
@@ -946,12 +958,15 @@ td {
   margin-bottom: 12px;
 }
 
+.alerts-header.pandemic h3 { color: var(--critical); font-size: 17px; }
+.alerts-header.regional h3 { color: #f97316; font-size: 16px; }
+
 .alert-icon { font-size: 20px; }
 .alerts-header h3 { font-size: 16px; color: var(--critical); text-transform: uppercase; letter-spacing: 1px; }
 
 .alerts-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 12px;
 }
 
@@ -964,6 +979,23 @@ td {
   flex-direction: column;
   gap: 4px;
 }
+
+/* Tier-specific accent colours */
+.alert-pandemic { border-left-color: #ef4444; background: rgba(239, 68, 68, 0.08); }
+.alert-regional { border-left-color: #f97316; }
+.alert-outbreak  { border-left-color: #eab308; }
+
+.alert-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+.alert-pandemic .alert-badge { color: #ef4444; }
+.alert-regional .alert-badge { color: #f97316; }
+.alert-outbreak  .alert-badge { color: #eab308; }
 
 .alert-location { font-weight: 700; color: white; }
 .alert-disease { color: var(--critical); font-size: 13px; font-weight: 600; }

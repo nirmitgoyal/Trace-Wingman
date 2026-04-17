@@ -4,7 +4,7 @@ import { caseEvents } from "../utils/events";
 import { resolveLocation, searchLocations } from "../utils/geocode";
 import { notifyAdmin } from "../utils/notifications";
 import { getAnalysisFingerprint, getAnalysisModelName } from "../utils/analysisFingerprint";
-import { analyzeSymptoms, buildPortalResponse } from "../utils/symptomAnalyzer";
+import { analyzeSymptoms, buildPortalResponse, PatientContext } from "../utils/symptomAnalyzer";
 
 const POPULATIONS: Record<string, number> = {
   "GLOBAL": 8000000000,
@@ -104,15 +104,54 @@ export function getLocationSuggestions(req: Request, res: Response) {
   res.json({ locations: searchLocations(query) });
 }
 
+/** Summarize recent circulating diseases in a district/state for cluster-aware LLM context. */
+async function buildClusterContext(districtName: string, stateName: string): Promise<string | undefined> {
+  const last7Days = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  const locationFilter = districtName && districtName !== "Unknown"
+    ? { district: { $regex: districtName, $options: "i" } }
+    : stateName && stateName !== "Unknown"
+    ? { state: { $regex: stateName, $options: "i" } }
+    : null;
+
+  if (!locationFilter) return undefined;
+
+  const recent = await Case.aggregate([
+    { $match: { ...locationFilter, createdAt: { $gt: last7Days }, predictedDisease: { $exists: true, $ne: "" } } },
+    { $group: { _id: "$predictedDisease", count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+    { $limit: 5 },
+  ]);
+
+  if (recent.length === 0) return undefined;
+
+  const scope = districtName && districtName !== "Unknown" ? `${districtName} district` : `${stateName} state`;
+  const parts = recent.map((r: { _id: string; count: number }) => `${r.count} case${r.count > 1 ? "s" : ""} of ${r._id}`);
+  return `${parts.join(", ")} reported in ${scope} in the last 7 days`;
+}
+
 export async function createCase(req: Request, res: Response) {
     try {
-        const { symptoms, role, reporterRole, village, district, state, latitude, longitude, location: requestLocation, ...rest } = req.body;
+        const { symptoms, role, reporterRole, village, district, state, latitude, longitude, location: requestLocation, symptomDuration, ...rest } = req.body;
         const normalizedSymptoms = Array.isArray(symptoms)
           ? symptoms.map((s: unknown) => String(s).trim()).filter(Boolean)
           : String(symptoms || "").split(",").map((s) => s.trim()).filter(Boolean);
-        const analysis = await analyzeSymptoms(normalizedSymptoms);
-        const analysisHash = getAnalysisFingerprint(normalizedSymptoms);
+
         const location = resolveLocation(village || "");
+        const resolvedDistrict = district || location.district || location.name;
+        const resolvedState = state || location.state;
+
+        // Build cluster context from recent cases in this area (fire in parallel with setup)
+        const clusterContext = await buildClusterContext(resolvedDistrict, resolvedState);
+
+        const patientCtx: PatientContext = {
+          age: Number.isFinite(Number(rest.age)) ? Number(rest.age) : undefined,
+          gender: rest.gender || undefined,
+          symptomDuration: symptomDuration || undefined,
+          clusterContext,
+        };
+
+        const analysis = await analyzeSymptoms(normalizedSymptoms, patientCtx);
+        const analysisHash = getAnalysisFingerprint(normalizedSymptoms);
         const requestCoordinates = requestLocation?.coordinates;
         const coords = Array.isArray(requestCoordinates) &&
           Number.isFinite(Number(requestCoordinates[0])) &&
@@ -122,13 +161,13 @@ export async function createCase(req: Request, res: Response) {
           ? { lat: Number(latitude), lng: Number(longitude) }
           : { lat: location.lat, lng: location.lng };
         const finalRole = reporterRole || role || (rest.worker_phone === "Web-Patient" ? "PATIENT" : "CAREGIVER");
-        
+
         const newCase = new Case({
             ...rest,
             symptoms: normalizedSymptoms,
             village: location.name,
-            district: district || location.district || location.name,
-            state: state || location.state,
+            district: resolvedDistrict,
+            state: resolvedState,
             urgency: analysis.urgency,
             location: locationPoint(coords.lng, coords.lat),
             predictedDisease: analysis.predictedDisease,
@@ -141,6 +180,7 @@ export async function createCase(req: Request, res: Response) {
             aiAnalysisHash: analysisHash,
             aiModel: getAnalysisModelName(),
             aiAnalyzedAt: new Date(),
+            symptomDuration: symptomDuration || undefined,
             reporterRole: finalRole,
             status: "PENDING"
         });
@@ -177,20 +217,34 @@ export async function getStats(req: Request, res: Response) {
     const filter = regionFilter(region) || {};
 
     const last7Days = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const last14Days = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
 
-    const [total, critical, moderate, low, outbreaks, byDistrict] = await Promise.all([
+    const [total, critical, moderate, low, villageOutbreaks, stateOutbreaks, pandemicCheck, byDistrict] = await Promise.all([
       Case.countDocuments(filter),
       Case.countDocuments({ ...filter, urgency: "CRITICAL" }),
       Case.countDocuments({ ...filter, urgency: "MODERATE" }),
       Case.countDocuments({ ...filter, urgency: "LOW" }),
+      // Village-level outbreak: ≥3 cases, same disease + village, last 7 days
       Case.aggregate([
-        { $match: { ...filter, createdAt: { $gt: last7Days } } },
-        { $group: { 
-            _id: { village: "$village", disease: "$predictedDisease" },
-            count: { $sum: 1 }
-        }},
-        { $match: { count: { $gt: 10 } } },
-        { $sort: { count: -1 } }
+        { $match: { ...filter, createdAt: { $gt: last7Days }, predictedDisease: { $exists: true, $ne: "" } } },
+        { $group: { _id: { village: "$village", disease: "$predictedDisease" }, count: { $sum: 1 } } },
+        { $match: { count: { $gte: 3 } } },
+        { $sort: { count: -1 } },
+      ]),
+      // State-level alert: ≥15 cases, same disease + state, last 7 days
+      Case.aggregate([
+        { $match: { ...filter, createdAt: { $gt: last7Days }, predictedDisease: { $exists: true, $ne: "" } } },
+        { $group: { _id: { state: "$state", disease: "$predictedDisease" }, count: { $sum: 1 }, villages: { $addToSet: "$village" } } },
+        { $match: { count: { $gte: 15 } } },
+        { $sort: { count: -1 } },
+      ]),
+      // Pandemic check: same disease across ≥3 distinct states, last 14 days
+      Case.aggregate([
+        { $match: { ...filter, createdAt: { $gt: last14Days }, predictedDisease: { $exists: true, $ne: "" } } },
+        { $group: { _id: "$predictedDisease", states: { $addToSet: "$state" }, count: { $sum: 1 } } },
+        { $project: { disease: "$_id", stateCount: { $size: "$states" }, count: 1 } },
+        { $match: { stateCount: { $gte: 3 }, count: { $gte: 30 } } },
+        { $sort: { count: -1 } },
       ]),
       Case.aggregate([
         { $match: filter },
@@ -200,8 +254,49 @@ export async function getStats(req: Request, res: Response) {
       ]),
     ]);
 
+    // Merge into unified alerts array with severity tiers
+    type AlertLevel = "OUTBREAK" | "REGIONAL_ALERT" | "PANDEMIC_ALERT";
+    interface OutbreakAlert {
+      location: string;
+      disease: string;
+      count: number;
+      alertLevel: AlertLevel;
+    }
+
+    // Pandemic alerts (highest tier, 14-day window)
+    const pandemicAlerts: OutbreakAlert[] = pandemicCheck.map((p: any) => ({
+      location: "Multiple regions",
+      disease: p.disease,
+      count: p.count,
+      alertLevel: "PANDEMIC_ALERT" as AlertLevel,
+    }));
+
+    // State-level regional alerts — exclude diseases already flagged as pandemic
+    const pandemicDiseases = new Set(pandemicAlerts.map(a => a.disease));
+    const regionalAlerts: OutbreakAlert[] = stateOutbreaks
+      .filter((o: any) => !pandemicDiseases.has(o._id.disease))
+      .map((o: any) => ({
+        location: o._id.state,
+        disease: o._id.disease,
+        count: o.count,
+        alertLevel: "REGIONAL_ALERT" as AlertLevel,
+      }));
+
+    // Village-level outbreaks — exclude diseases already at higher tier
+    const escalatedDiseases = new Set([...pandemicAlerts, ...regionalAlerts].map(a => a.disease));
+    const villageAlerts: OutbreakAlert[] = villageOutbreaks
+      .filter((o: any) => !escalatedDiseases.has(o._id.disease))
+      .map((o: any) => ({
+        location: o._id.village,
+        disease: o._id.disease,
+        count: o.count,
+        alertLevel: "OUTBREAK" as AlertLevel,
+      }));
+
+    const outbreaks: OutbreakAlert[] = [...pandemicAlerts, ...regionalAlerts, ...villageAlerts];
+
     const regionName = (region as string) || "GLOBAL";
-    res.json({ total, critical, moderate, low, population: POPULATIONS[regionName] || 0, byDistrict, outbreaks: outbreaks.map(o => ({ location: o._id.village, disease: o._id.disease, count: o.count, severity: "HIGH" })) });
+    res.json({ total, critical, moderate, low, population: POPULATIONS[regionName] || 0, byDistrict, outbreaks });
   } catch (error) {
     res.status(500).json({ error: "Failed" });
   }

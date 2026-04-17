@@ -28,6 +28,7 @@ export interface ICase extends Document {
   aiAnalysisHash?: string;
   aiModel?: string;
   aiAnalyzedAt?: Date;
+  symptomDuration?: string;
   reporterRole?: "PATIENT" | "CAREGIVER";
   notes: string;
   createdAt: Date;
@@ -87,6 +88,7 @@ const CaseSchema = new Schema<ICase>(
     aiAnalysisHash: { type: String },
     aiModel: { type: String },
     aiAnalyzedAt: { type: Date },
+    symptomDuration: { type: String },
     reporterRole: { type: String, enum: ["PATIENT", "CAREGIVER"] },
     notes: { type: String, default: "" },
   },

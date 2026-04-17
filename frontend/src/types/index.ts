@@ -29,6 +29,7 @@ export interface CaseRecord {
   aiAnalysisHash?: string;
   aiModel?: string;
   aiAnalyzedAt?: string;
+  symptomDuration?: string;
   reporterRole?: "PATIENT" | "CAREGIVER";
   notes: string;
   createdAt: string;
@@ -50,10 +51,10 @@ export interface StatsResponse {
   population: number;
   region: string;
   outbreaks?: {
-      location: string;
-      disease: string;
-      count: number;
-      severity: string;
+    location: string;
+    disease: string;
+    count: number;
+    alertLevel: "OUTBREAK" | "REGIONAL_ALERT" | "PANDEMIC_ALERT";
   }[];
   byDistrict: { district: string; count: number }[];
 }
