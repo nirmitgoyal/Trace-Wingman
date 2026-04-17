@@ -37,6 +37,7 @@ export function SevakPortal({ onCaseCreated }: Props) {
     district: "",
     state: "",
     symptoms: "",
+    symptomDuration: "",
     notes: ""
   });
   const [submitting, setSubmitting] = useState(false);
@@ -55,6 +56,7 @@ export function SevakPortal({ onCaseCreated }: Props) {
       district: "",
       state: "",
       symptoms: "",
+      symptomDuration: "",
       notes: "",
     });
     setSubmissionResponse(null);
@@ -307,12 +309,28 @@ export function SevakPortal({ onCaseCreated }: Props) {
         </div>
         <div className="form-group">
           <label>Symptoms (comma separated)</label>
-          <textarea 
-            required 
-            placeholder="e.g. Fever, Cough, Chest pain" 
-            value={formData.symptoms} 
+          <textarea
+            required
+            placeholder="e.g. Fever, Cough, Chest pain"
+            value={formData.symptoms}
             onChange={e => setBody({...formData, symptoms: e.target.value})}
           />
+        </div>
+        <div className="form-group">
+          <label>How long have symptoms been present?</label>
+          <select
+            value={formData.symptomDuration}
+            onChange={e => setBody({...formData, symptomDuration: e.target.value})}
+          >
+            <option value="">Not sure / prefer not to say</option>
+            <option value="Less than 24 hours">Less than 24 hours</option>
+            <option value="1–2 days">1–2 days</option>
+            <option value="3–5 days">3–5 days</option>
+            <option value="About a week">About a week</option>
+            <option value="1–2 weeks">1–2 weeks</option>
+            <option value="More than 2 weeks">More than 2 weeks</option>
+            <option value="More than a month">More than a month</option>
+          </select>
         </div>
         <button className="submit-btn" disabled={submitting}>
           {submitting ? "Logging..." : "Submit Case"}
