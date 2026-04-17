@@ -3,7 +3,7 @@
  *
  * All real work lives in `utils/caseFactory` and `utils/illnessGenerator` so
  * the CLI path and the stress-test API path (`POST /api/stress/seed`) share
- * identical behaviour. No field is hardcoded here — illnesses come from the
+ * identical behaviour. No field is hardcoded here \u2014 illnesses come from the
  * local LLM at runtime, locations come from `resolveLocation`, and every AI
  * field is produced by `analyzeSymptoms`.
  */
