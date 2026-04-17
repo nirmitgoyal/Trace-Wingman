@@ -85,29 +85,30 @@ export async function ensureLocalSymptomModel() {
 
   try {
     if (!(await canReachOllama())) {
-      console.log("Ollama is not reachable. Starting local Ollama server...");
+      console.log("[LLM] Ollama not reachable — attempting to start local server...");
       startOllamaServer();
     }
 
     if (!(await waitForOllama())) {
-      console.warn("Ollama did not become reachable. Sevak will use local rule-based fallback until it is available.");
+      console.warn("[LLM] ⚠️  Ollama did not become reachable. Symptom analysis will use the vector cache until Ollama is available.");
       return;
     }
 
     if (!(await modelExists(GEMMA_MODEL))) {
       if (process.env.AUTO_PULL_GEMMA === "false") {
-        console.warn(`Gemma model ${GEMMA_MODEL} is missing and AUTO_PULL_GEMMA=false. Using rule-based fallback.`);
+        console.warn(`[LLM] ⚠️  Model ${GEMMA_MODEL} not found and AUTO_PULL_GEMMA=false. Symptom analysis will use the vector cache.`);
         warmupStarted = false; // allow retry on next request
         return;
       }
 
-      console.log(`Gemma model ${GEMMA_MODEL} is missing. Downloading with Ollama...`);
+      console.log(`[LLM] Model ${GEMMA_MODEL} not found — downloading now (this may take a few minutes)...`);
       await runOllama(["pull", GEMMA_MODEL]);
     }
 
+    console.log(`[LLM] Warming up ${GEMMA_MODEL}...`);
     await warmModel(GEMMA_MODEL);
     modelReady = true;
-    console.log(`Local symptom analyzer ready: ${GEMMA_MODEL}`);
+    console.log(`\n✅  [LLM] ${GEMMA_MODEL} is ready — AI symptom analysis is LIVE.\n`);
   } catch (error) {
     console.warn("Local symptom analyzer is not ready. Sevak will continue with fallback analysis.", error);
   }

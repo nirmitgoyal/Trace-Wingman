@@ -10,6 +10,9 @@
     "seed": "tsx src/seed/seed.ts",
     "seed:bulk": "tsx src/seed/seed_bulk.ts",
     "reclassify:cases": "tsx src/jobs/reclassify_cases.ts",
+    "build:locations": "tsx src/scripts/build-location-data.ts",
+    "build:locations:tx": "tsx src/scripts/build-location-data.ts --country=US",
+    "build:locations:india": "tsx src/scripts/build-location-data.ts --country=IN",
     "test": "jest --forceExit --detectOpenHandles"
   },
   "dependencies": {
