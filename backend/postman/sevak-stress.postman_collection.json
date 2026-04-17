@@ -1,0 +1,235 @@
+{
+  "info": {
+    "name": "Sevak Stress Test",
+    "_postman_id": "sevak-stress-collection",
+    "description": "Postman collection for the Sevak backend's /api/stress endpoints.\n\nHow to use:\n1. Set the `baseUrl` collection variable (default http://localhost:4000).\n2. Run the **Full Stress Run** folder top-to-bottom for a one-click end-to-end test, or hit individual endpoints.\n3. Every response includes `durationMs` plus per-operation latency summaries (p50/p95/p99) you can pipe into Postman test assertions.\n\nThe backend must be started with `ENABLE_STRESS_API=true` for these routes to be mounted.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:4000", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/stress/status",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "stress", "status"]
+        },
+        "description": "Live counts (Case, SymptomCache), LLM readiness, scenario cache size, canonical duration + region lists."
+      }
+    },
+    {
+      "name": "Cases Stats (outbreak tiers)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/cases/stats",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "cases", "stats"]
+        },
+        "description": "Hit the existing /api/cases/stats endpoint to confirm OUTBREAK / REGIONAL_ALERT / PANDEMIC_ALERT entries appear after running the outbreak step."
+      }
+    },
+    {
+      "name": "Reset DB",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{}" },
+        "url": {
+          "raw": "{{baseUrl}}/api/stress/reset",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "stress", "reset"]
+        },
+        "description": "Wipes Case and SymptomCache collections. Also clears the in-process analysis cache and scenario cache."
+      }
+    },
+    {
+      "name": "Generate Illness Scenarios",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"count\": 25,\n  \"force\": false\n}" },
+        "url": {
+          "raw": "{{baseUrl}}/api/stress/illnesses",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "stress", "illnesses"]
+        },
+        "description": "Asks the LLM to produce 25 unique illness scenarios (symptoms + region hints + typical durations + suggestedTier). Set `force: true` to regenerate."
+      }
+    },
+    {
+      "name": "Seed 200 cases",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"total\": 200,\n  \"split\": { \"india\": 120, \"ct\": 40, \"tx\": 40 }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/stress/seed",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "stress", "seed"]
+        },
+        "description": "Inserts `total` cases spread across CT / TX / India using the current illness scenarios. Response includes p50/p95/p99 per-case latency and llmAnalysisMs percentiles."
+      }
+    },
+    {
+      "name": "Trigger Outbreak (all tiers)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"tier\": \"all\"\n}" },
+        "url": {
+          "raw": "{{baseUrl}}/api/stress/outbreak",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "stress", "outbreak"]
+        },
+        "description": "Fires clusters that trigger village OUTBREAK (5 cases), state REGIONAL_ALERT (18 cases), and multi-state PANDEMIC_ALERT (36 cases). `tier` can also be `village`, `regional`, or `pandemic`."
+      }
+    },
+    {
+      "name": "Odd Cases (LLM edge probing)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"count\": 20\n}" },
+        "url": {
+          "raw": "{{baseUrl}}/api/stress/odd-cases",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "stress", "odd-cases"]
+        },
+        "description": "Asks the LLM for ambiguous/atypical symptom bundles, classifies each, and returns an observations array of symptoms \u2192 predictedDisease / urgency / confidence."
+      }
+    },
+    {
+      "name": "Vector Cache Bench",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"seedCount\": 150,\n  \"probeCount\": 100\n}" },
+        "url": {
+          "raw": "{{baseUrl}}/api/stress/vector-bench",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "stress", "vector-bench"]
+        },
+        "description": "Wipes SymptomCache, seeds it by running analyses through the real pipeline, then runs three probe batches (exact / semantic paraphrase / nonsense) and reports hit-rate + p50/p95/p99 latency per batch."
+      }
+    },
+    {
+      "name": "Full Stress Run",
+      "item": [
+        {
+          "name": "1) Reset",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": {
+              "raw": "{{baseUrl}}/api/stress/reset",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stress", "reset"]
+            }
+          }
+        },
+        {
+          "name": "2) Generate Scenarios",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"count\": 25, \"force\": true }" },
+            "url": {
+              "raw": "{{baseUrl}}/api/stress/illnesses",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stress", "illnesses"]
+            }
+          }
+        },
+        {
+          "name": "3) Seed 200",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"total\": 200 }" },
+            "url": {
+              "raw": "{{baseUrl}}/api/stress/seed",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stress", "seed"]
+            }
+          }
+        },
+        {
+          "name": "4) Trigger All Outbreak Tiers",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"tier\": \"all\" }" },
+            "url": {
+              "raw": "{{baseUrl}}/api/stress/outbreak",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stress", "outbreak"]
+            }
+          }
+        },
+        {
+          "name": "5) Odd Cases",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"count\": 20 }" },
+            "url": {
+              "raw": "{{baseUrl}}/api/stress/odd-cases",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stress", "odd-cases"]
+            }
+          }
+        },
+        {
+          "name": "6) Vector Cache Bench",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"seedCount\": 150, \"probeCount\": 100 }" },
+            "url": {
+              "raw": "{{baseUrl}}/api/stress/vector-bench",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "stress", "vector-bench"]
+            }
+          }
+        },
+        {
+          "name": "7) Verify Alerts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cases/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cases", "stats"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "One-Shot Full Run",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{ \"total\": 200 }" },
+        "url": {
+          "raw": "{{baseUrl}}/api/stress/full-run",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "stress", "full-run"]
+        },
+        "description": "Server-side convenience that chains reset \u2192 illnesses \u2192 seed \u2192 outbreak(all) \u2192 odd-cases \u2192 vector-bench and returns a consolidated report with per-step durations."
+      }
+    }
+  ]
+}

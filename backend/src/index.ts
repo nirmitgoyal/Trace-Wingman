@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
 import caseRoutes from "./routes/caseRoutes";
+import stressRoutes from "./routes/stressRoutes";
 import { ensureLocalSymptomModel, ensureLocalSymptomModelInBackground } from "./utils/localModel";
 
 dotenv.config({ path: "../.env" });
@@ -14,10 +15,16 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/sevak-
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "2mb" }));
 
 // API Routes
 app.use("/api/cases", caseRoutes);
+
+// Stress-test API — only mounted when explicitly enabled, never in prod.
+if (process.env.ENABLE_STRESS_API === "true") {
+  app.use("/api/stress", stressRoutes);
+  console.log("[stress] /api/stress endpoints mounted (ENABLE_STRESS_API=true)");
+}
 
 // Health check
 app.get("/api/health", (_req, res) => {

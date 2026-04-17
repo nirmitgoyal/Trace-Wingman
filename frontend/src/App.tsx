@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useCases } from "./hooks/useCases";
 import { StatsCards } from "./components/StatsCards";
+import { Alerts } from "./components/Alerts";
 import { Filters } from "./components/Filters";
 import { CaseTable } from "./components/CaseTable";
 import { CaseMap } from "./components/CaseMap";
@@ -70,6 +71,8 @@ function App() {
                 </div>
 
                 <StatsCards stats={stats} />
+
+                <Alerts stats={stats} />
 
                 <Filters
                 urgencyFilter={urgencyFilter}

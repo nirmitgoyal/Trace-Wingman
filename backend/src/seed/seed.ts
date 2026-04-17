@@ -1,123 +1,118 @@
+/**
+ * CLI wrapper for the 200-case seed.
+ *
+ * All real work lives in `utils/caseFactory` and `utils/illnessGenerator` so
+ * the CLI path and the stress-test API path (`POST /api/stress/seed`) share
+ * identical behaviour. No field is hardcoded here — illnesses come from the
+ * local LLM at runtime, locations come from `resolveLocation`, and every AI
+ * field is produced by `analyzeSymptoms`.
+ */
+
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import Case from "../models/Case";
-import { getCoordinatesForVillage, getVillageNames } from "../utils/geocode";
-import { getAnalysisFingerprint, getAnalysisModelName } from "../utils/analysisFingerprint";
+import SymptomCache from "../models/SymptomCache";
 import { ensureLocalSymptomModel } from "../utils/localModel";
-import { analyzeSymptoms, SymptomAnalysis } from "../utils/symptomAnalyzer";
+import { generateIllnessScenarios, IllnessScenario, RegionHint } from "../utils/illnessGenerator";
+import {
+  buildCaseDoc,
+  insertCases,
+  pickVillageForRegion,
+  villagesForRegion,
+  clearAnalysisCache,
+} from "../utils/caseFactory";
+import { SymptomDuration } from "../utils/symptomDuration";
 
 dotenv.config({ path: "../.env" });
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/sevak-dashboard";
+const TOTAL = Number(process.env.SEED_CASE_COUNT || 200);
 
-const symptomTemplates = [
-  ["Persistent cough", "Night sweats", "Weight loss"],
-  ["Thirsty", "Frequent urination", "Blurred vision"],
-  ["Burning urination", "Cloudy urine", "Lower abdominal pain"],
-  ["High fever", "Chills", "Sweating"],
-  ["Severe headache", "Pain behind eyes", "High fever", "Rash"],
-  ["Severe diarrhea", "Vomiting", "Dehydration"],
-  ["Chest pain", "Shortness of breath", "Sweating"],
-  ["Seizure", "Loss of consciousness", "Confusion"],
-  ["Cough", "Runny nose", "Sore throat"],
-  ["Itchy rash", "Red bumps", "No fever"],
-  ["Stiff neck", "High fever", "Severe headache"],
-  ["Fever", "Abdominal pain", "Loss of appetite"],
-];
-
-const locations = getVillageNames();
-
-const names = [
-  "Rajesh Kumar", "Sunita Devi", "John Smith", "Maria Garcia", "Ravi Shankar",
-  "Sarah Johnson", "David Miller", "James Brown", "Suresh Yadav", "Anita Kumari",
-  "Vikram Patel", "Robert Davis", "Jennifer Wilson", "Pooja Gupta", "Ramesh Chandra",
-  "Kavita Devi", "Anil Kumar", "Lakshmi Devi", "Manoj Tiwari", "Savita Kumari",
-  "Prakash Rao", "Linda Taylor", "Sanjay Mishra", "Rekha Devi", "Dinesh Prasad",
-];
-
-function randomPick<T>(arr: T[]): T {
+function pickOne<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
-
-function point(longitude: number, latitude: number) {
-  return {
-    type: "Point" as const,
-    coordinates: [parseFloat(longitude.toFixed(6)), parseFloat(latitude.toFixed(6))] as [number, number],
-  };
+function randomInRange(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function roleFlip(): "PATIENT" | "CAREGIVER" {
+  return Math.random() < 0.55 ? "PATIENT" : "CAREGIVER";
+}
+function genderFromBias(bias: IllnessScenario["genderBias"]): "Male" | "Female" | "Other" {
+  if (bias === "Male") return "Male";
+  if (bias === "Female") return "Female";
+  return pickOne(["Male", "Female", "Other"] as const);
 }
 
-function symptomKey(caseSymptoms: string[]) {
-  return caseSymptoms.map((symptom) => symptom.trim().toLowerCase()).sort().join("|");
-}
-
-async function seed() {
+async function main() {
   try {
     await mongoose.connect(MONGODB_URI);
-    console.log("Connected to MongoDB");
+    console.log("[seed] Connected to MongoDB");
+
     await ensureLocalSymptomModel();
+    console.log("[seed] LLM ready");
 
-    const analysisCache = new Map<string, SymptomAnalysis>();
-    for (const template of symptomTemplates) {
-      console.log(`Classifying template: ${template.join(", ")}`);
-      analysisCache.set(symptomKey(template), await analyzeSymptoms(template));
+    console.log("[seed] Wiping Case and SymptomCache collections...");
+    await Promise.all([Case.deleteMany({}), SymptomCache.deleteMany({})]);
+    clearAnalysisCache();
+
+    console.log("[seed] Asking LLM for 25 illness scenarios...");
+    const scenarios = await generateIllnessScenarios(25);
+    console.log(`[seed] Received ${scenarios.length} validated scenarios`);
+
+    const split: Record<RegionHint, number> = {
+      INDIA: Math.round(TOTAL * 0.6),
+      CT: Math.round(TOTAL * 0.2),
+      TEXAS: Math.round(TOTAL * 0.2),
+    };
+    const assigned = split.INDIA + split.CT + split.TEXAS;
+    if (assigned !== TOTAL) split.INDIA += TOTAL - assigned;
+
+    const byRegion: Record<RegionHint, IllnessScenario[]> = { CT: [], TEXAS: [], INDIA: [] };
+    for (const s of scenarios) for (const r of s.regionHints) byRegion[r].push(s);
+    for (const r of ["CT", "TEXAS", "INDIA"] as RegionHint[]) {
+      if (byRegion[r].length === 0) byRegion[r] = scenarios;
     }
 
-    await Case.deleteMany({});
-    console.log("Cleared existing cases");
+    const docs: Record<string, unknown>[] = [];
+    const twoWeeksMs = 14 * 24 * 60 * 60 * 1000;
+    const counts: Record<RegionHint, number> = { CT: 0, TEXAS: 0, INDIA: 0 };
 
-    const cases = [];
-
-    for (let i = 0; i < 200; i++) {
-      const location = randomPick(locations);
-      const coords = getCoordinatesForVillage(location);
-      const lat = coords.lat + (Math.random() - 0.5) * 0.05;
-      const lng = coords.lng + (Math.random() - 0.5) * 0.05;
-      const caseSymptoms = randomPick(symptomTemplates);
-      const key = symptomKey(caseSymptoms);
-      const analysis = analysisCache.get(key);
-      if (!analysis) throw new Error(`Missing analysis for symptoms: ${caseSymptoms.join(", ")}`);
-
-      let state = "India";
-      if (location === "Hartford" || location === "Stamford" || location === "New Haven") state = "Connecticut";
-      if (location === "Austin" || location === "Houston" || location === "Dallas" || location === "San Antonio") state = "Texas";
-
-      cases.push({
-        worker_phone: "SEED-TEST-ACCOUNT",
-        patientName: randomPick(names),
-        age: Math.floor(Math.random() * 70) + 5,
-        gender: randomPick(["Male", "Female", "Other"] as const),
-        symptoms: caseSymptoms,
-        village: location,
-        district: location,
-        state,
-        urgency: analysis.urgency,
-        predictedDisease: analysis.predictedDisease,
-        aiAnalysis: analysis.summary,
-        recommendedAction: analysis.actionRequired,
-        callbackWindow: analysis.callbackWindow,
-        differentialDiagnoses: analysis.differentialDiagnoses || [],
-        redFlags: analysis.redFlags || [],
-        aiConfidence: analysis.confidence,
-        aiAnalysisHash: getAnalysisFingerprint(caseSymptoms),
-        aiModel: getAnalysisModelName(),
-        aiAnalyzedAt: new Date(),
-        reporterRole: "CAREGIVER",
-        location: point(lng, lat),
-        status: "PENDING",
-        notes: "Automated AI-classified test case",
-        createdAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
-      });
+    for (const region of ["INDIA", "CT", "TEXAS"] as RegionHint[]) {
+      if (villagesForRegion(region).length === 0) {
+        console.warn(`[seed] No villages available for region ${region}, skipping`);
+        continue;
+      }
+      for (let i = 0; i < split[region]; i++) {
+        const scenario = pickOne(byRegion[region]);
+        const duration = pickOne(scenario.typicalDurations as SymptomDuration[]);
+        const age = randomInRange(scenario.ageRange[0], scenario.ageRange[1]);
+        const built = await buildCaseDoc({
+          symptoms: scenario.symptoms,
+          age,
+          gender: genderFromBias(scenario.genderBias),
+          village: pickVillageForRegion(region),
+          symptomDuration: duration,
+          role: roleFlip(),
+          createdAt: new Date(Date.now() - Math.random() * twoWeeksMs),
+        });
+        docs.push(built.doc);
+        counts[region]++;
+        if ((counts[region] % 20) === 0) {
+          console.log(`[seed]   ${region}: ${counts[region]}/${split[region]}`);
+        }
+      }
     }
 
-    await Case.insertMany(cases);
-    console.log(`Seeded ${cases.length} cases`);
-
+    const inserted = await insertCases(docs);
+    console.log(`[seed] Inserted ${inserted} cases`);
+    console.log(`[seed] By region: INDIA=${counts.INDIA} CT=${counts.CT} TEXAS=${counts.TEXAS}`);
     await mongoose.disconnect();
-    console.log("Done");
-  } catch (error) {
-    console.error("Seed failed:", error);
+    console.log("[seed] Done");
+  } catch (err) {
+    console.error("[seed] failed:", err);
+    try { await mongoose.disconnect(); } catch { /* noop */ }
     process.exit(1);
   }
 }
 
-seed();
+main();

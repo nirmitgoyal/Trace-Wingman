@@ -224,6 +224,28 @@ function deduplicateByName(entries: LocationEntry[]): LocationEntry[] {
   return Array.from(seen.values()).sort((a, b) => b.population - a.population);
 }
 
+/**
+ * Hard assertion that the final array has no duplicate `name` values.
+ * Case-insensitive check so a future GeoNames change that produced
+ * differently-cased duplicates would still be caught.
+ */
+function assertNoDuplicates(entries: LocationEntry[], label: string): void {
+  const seen = new Map<string, number>();
+  for (const entry of entries) {
+    const key = entry.name.toLowerCase();
+    seen.set(key, (seen.get(key) ?? 0) + 1);
+  }
+  const dupes: string[] = [];
+  for (const [name, count] of seen) {
+    if (count > 1) dupes.push(`${name} (×${count})`);
+  }
+  if (dupes.length > 0) {
+    throw new Error(
+      `[${label}] ❌  Refusing to write: ${dupes.length} duplicate name(s) found after dedup: ${dupes.slice(0, 10).join(", ")}`,
+    );
+  }
+}
+
 async function buildUSState(
   label: string,
   admin1Code: string,
@@ -297,6 +319,7 @@ async function main() {
 
   if (countries.includes("CT")) {
     const ctEntries = await buildConnecticut(cacheDir, minPop, admin2Names);
+    assertNoDuplicates(ctEntries, "Connecticut");
     const outPath = path.join(DATA_DIR, "locations-ct.json");
     fs.writeFileSync(outPath, JSON.stringify(ctEntries, null, 2));
     console.log(`\nWrote ${ctEntries.length} Connecticut locations → ${outPath}`);
@@ -304,6 +327,7 @@ async function main() {
 
   if (countries.includes("TX") || countries.includes("US")) {
     const txEntries = await buildTexas(cacheDir, minPop, admin2Names);
+    assertNoDuplicates(txEntries, "Texas");
     const outPath = path.join(DATA_DIR, "locations-tx.json");
     fs.writeFileSync(outPath, JSON.stringify(txEntries, null, 2));
     console.log(`Wrote ${txEntries.length} Texas locations → ${outPath}`);
@@ -311,6 +335,7 @@ async function main() {
 
   if (countries.includes("IN")) {
     const inEntries = await buildIndia(cacheDir, minPop, admin2Names);
+    assertNoDuplicates(inEntries, "India");
     const outPath = path.join(DATA_DIR, "locations-in.json");
     fs.writeFileSync(outPath, JSON.stringify(inEntries, null, 2));
     console.log(`Wrote ${inEntries.length} India locations → ${outPath}`);
