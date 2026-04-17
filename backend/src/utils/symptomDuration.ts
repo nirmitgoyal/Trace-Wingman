@@ -6,7 +6,7 @@
  * backend code (seeds, stress-test API, LLM context builders) can import a
  * single typed list instead of retyping the literals.
  *
- * IMPORTANT: the day-range entries use the Unicode EN DASH (U+2013 "–"), not
+ * IMPORTANT: the day-range entries use the Unicode EN DASH (U+2013 "\u2013"), not
  * the ASCII hyphen. Case documents in MongoDB are written with en-dashes and
  * the Portal emits en-dashes, so string comparisons must match exactly.
  */
@@ -28,5 +28,5 @@ export function isValidSymptomDuration(value: unknown): value is SymptomDuration
   return typeof value === "string" && (SYMPTOM_DURATIONS as readonly string[]).includes(value);
 }
 
-/** Non-empty durations only — useful for seeds that must supply a real value. */
+/** Non-empty durations only \u2014 useful for seeds that must supply a real value. */
 export const NON_EMPTY_SYMPTOM_DURATIONS = SYMPTOM_DURATIONS.filter((d) => d !== "") as readonly SymptomDuration[];

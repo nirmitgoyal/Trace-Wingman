@@ -40,7 +40,7 @@ const AnalysisSchema = new Schema<ICachedAnalysis>(
 
 const SymptomCacheSchema = new Schema<ISymptomCache>(
   {
-    // SHA-256 of sorted, normalized symptom strings — unique key for exact lookup
+    // SHA-256 of sorted, normalized symptom strings \u2014 unique key for exact lookup
     symptomHash: { type: String, required: true, unique: true },
     symptoms: { type: [String], required: true },
     // Dense embedding vector from Ollama (e.g. nomic-embed-text, 768-dim)
