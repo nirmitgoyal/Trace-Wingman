@@ -4,6 +4,11 @@ const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || "http://localhost:11434";
 const GEMMA_MODEL = process.env.GEMMA_MODEL || "gemma4:e2b";
 
 let warmupStarted = false;
+let modelReady = false;
+
+export function isSymptomModelReady() {
+  return modelReady;
+}
 
 async function canReachOllama() {
   try {
@@ -75,7 +80,6 @@ async function warmModel(model: string) {
 }
 
 export async function ensureLocalSymptomModel() {
-  if (process.env.SYMPTOM_ANALYZER !== "gemma") return;
   if (warmupStarted) return;
   warmupStarted = true;
 
@@ -92,7 +96,8 @@ export async function ensureLocalSymptomModel() {
 
     if (!(await modelExists(GEMMA_MODEL))) {
       if (process.env.AUTO_PULL_GEMMA === "false") {
-        console.warn(`Gemma model ${GEMMA_MODEL} is missing and AUTO_PULL_GEMMA=false. Using fallback analyzer.`);
+        console.warn(`Gemma model ${GEMMA_MODEL} is missing and AUTO_PULL_GEMMA=false. Using rule-based fallback.`);
+        warmupStarted = false; // allow retry on next request
         return;
       }
 
@@ -101,6 +106,7 @@ export async function ensureLocalSymptomModel() {
     }
 
     await warmModel(GEMMA_MODEL);
+    modelReady = true;
     console.log(`Local symptom analyzer ready: ${GEMMA_MODEL}`);
   } catch (error) {
     console.warn("Local symptom analyzer is not ready. Sevak will continue with fallback analysis.", error);
