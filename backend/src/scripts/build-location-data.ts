@@ -2,15 +2,16 @@
  * build-location-data.ts
  *
  * Downloads GeoNames country dumps and extracts all populated places for
- * Texas (from the US dump) and India, then writes
+ * Connecticut and Texas (from the US dump) and India, then writes:
+ *   backend/src/data/locations-ct.json
  *   backend/src/data/locations-tx.json
  *   backend/src/data/locations-in.json
  *
  * Usage:
- *   npx tsx src/scripts/build-location-data.ts
- *   npx tsx src/scripts/build-location-data.ts --country=IN
- *   npx tsx src/scripts/build-location-data.ts --country=US,IN
- *   npx tsx src/scripts/build-location-data.ts --min-pop=5000
+ *   npx tsx src/scripts/build-location-data.ts           # CT + TX + India
+ *   npx tsx src/scripts/build-location-data.ts --country=CT
+ *   npx tsx src/scripts/build-location-data.ts --country=CT,TX,IN
+ *   npx tsx src/scripts/build-location-data.ts --min-pop=500
  *
  * GeoNames data is public domain: https://www.geonames.org/export/
  */
@@ -194,21 +195,37 @@ function deduplicateByName(entries: LocationEntry[]): LocationEntry[] {
   return Array.from(seen.values()).sort((a, b) => b.population - a.population);
 }
 
-async function buildTexas(cacheDir: string, minPop: number): Promise<LocationEntry[]> {
-  console.log("\n[Texas] Downloading US GeoNames dump …");
-  const txtPath = await downloadAndExtract("US", cacheDir);
+async function buildUSState(
+  label: string,
+  admin1Code: string,
+  stateName: string,
+  cacheDir: string,
+  minPop: number
+): Promise<LocationEntry[]> {
+  console.log(`\n[${label}] Downloading US GeoNames dump …`);
+  const txtPath = await downloadAndExtract("US", cacheDir); // reuses cache if already downloaded
 
-  console.log("[Texas] Parsing …");
+  console.log(`[${label}] Parsing …`);
   const entries = await parseGeoNamesFile(
     txtPath,
-    (fields) => fields[10] === "TX",
-    () => "Texas",
+    (fields) => fields[10] === admin1Code,
+    () => stateName,
     minPop
   );
 
   const deduped = deduplicateByName(entries);
-  console.log(`[Texas] Found ${deduped.length} places (min-pop=${minPop})`);
+  console.log(`[${label}] Found ${deduped.length} places (min-pop=${minPop})`);
   return deduped;
+}
+
+function buildTexas(cacheDir: string, minPop: number) {
+  return buildUSState("Texas", "TX", "Texas", cacheDir, minPop);
+}
+
+function buildConnecticut(cacheDir: string, minPop: number) {
+  // CT towns can be very small — default min-pop of 1000 may skip some hamlets.
+  // GeoNames includes all 169 CT municipalities regardless of population.
+  return buildUSState("Connecticut", "CT", "Connecticut", cacheDir, minPop);
 }
 
 async function buildIndia(cacheDir: string, minPop: number): Promise<LocationEntry[]> {
@@ -233,18 +250,25 @@ async function main() {
   const countriesArg = args.find((a) => a.startsWith("--country="));
   const minPopArg = args.find((a) => a.startsWith("--min-pop="));
 
-  const countries = countriesArg ? countriesArg.split("=")[1].split(",") : ["US", "IN"];
-  const minPop = minPopArg ? parseInt(minPopArg.split("=")[1], 10) : 1000;
+  const countries = countriesArg ? countriesArg.split("=")[1].split(",").map(s => s.trim().toUpperCase()) : ["CT", "TX", "IN"];
+  const minPop = minPopArg ? parseInt(minPopArg.split("=")[1], 10) : 500;
 
   const cacheDir = path.join(DATA_DIR, ".cache");
   fs.mkdirSync(cacheDir, { recursive: true });
   fs.mkdirSync(DATA_DIR, { recursive: true });
 
-  if (countries.includes("US") || countries.includes("TX")) {
+  if (countries.includes("CT")) {
+    const ctEntries = await buildConnecticut(cacheDir, minPop);
+    const outPath = path.join(DATA_DIR, "locations-ct.json");
+    fs.writeFileSync(outPath, JSON.stringify(ctEntries, null, 2));
+    console.log(`\nWrote ${ctEntries.length} Connecticut locations → ${outPath}`);
+  }
+
+  if (countries.includes("TX") || countries.includes("US")) {
     const txEntries = await buildTexas(cacheDir, minPop);
     const outPath = path.join(DATA_DIR, "locations-tx.json");
     fs.writeFileSync(outPath, JSON.stringify(txEntries, null, 2));
-    console.log(`\nWrote ${txEntries.length} Texas locations → ${outPath}`);
+    console.log(`Wrote ${txEntries.length} Texas locations → ${outPath}`);
   }
 
   if (countries.includes("IN")) {
