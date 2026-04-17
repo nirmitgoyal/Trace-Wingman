@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
 import caseRoutes from "./routes/caseRoutes";
+import { ensureLocalSymptomModel, ensureLocalSymptomModelInBackground } from "./utils/localModel";
 
 dotenv.config({ path: "../.env" });
 
@@ -33,6 +34,12 @@ app.get("*", (_req, res) => {
 // Connect to MongoDB and start server
 async function start() {
   try {
+    if (process.env.LOCAL_LLM_STARTUP === "blocking") {
+      await ensureLocalSymptomModel();
+    } else {
+      ensureLocalSymptomModelInBackground();
+    }
+
     await mongoose.connect(MONGODB_URI);
     console.log("Connected to MongoDB");
     app.listen(PORT, () => {

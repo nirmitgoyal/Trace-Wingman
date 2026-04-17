@@ -45,8 +45,9 @@ describe("Sevak Dashboard API", () => {
     expect(c).toHaveProperty("village");
     expect(c).toHaveProperty("district");
     expect(c).toHaveProperty("urgency");
-    expect(c).toHaveProperty("latitude");
-    expect(c).toHaveProperty("longitude");
+    expect(c).toHaveProperty("location");
+    expect(c.location.type).toBe("Point");
+    expect(c.location.coordinates).toEqual(expect.any(Array));
     expect(c).toHaveProperty("createdAt");
     expect(["CRITICAL", "MODERATE", "LOW"]).toContain(c.urgency);
   });
@@ -98,8 +99,10 @@ describe("Sevak Dashboard API", () => {
       district: "TestDistrict",
       state: "TestState",
       urgency: "MODERATE",
-      latitude: 25.0,
-      longitude: 80.0,
+      location: {
+        type: "Point",
+        coordinates: [80.0, 25.0],
+      },
       notes: "test case",
     };
 

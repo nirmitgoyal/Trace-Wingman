@@ -8,6 +8,8 @@
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
     "seed": "tsx src/seed/seed.ts",
+    "seed:bulk": "tsx src/seed/seed_bulk.ts",
+    "reclassify:cases": "tsx src/jobs/reclassify_cases.ts",
     "test": "jest --forceExit --detectOpenHandles"
   },
   "dependencies": {

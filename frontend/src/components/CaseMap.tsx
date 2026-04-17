@@ -22,6 +22,13 @@ const REGION_CENTERS: Record<string, { center: [number, number], zoom: number }>
   "TEXAS": { center: [31.9, -99.9], zoom: 6 },
 };
 
+function caseLatLng(caseRecord: CaseRecord): [number, number] | null {
+  const longitude = caseRecord.location?.coordinates?.[0] ?? caseRecord.longitude;
+  const latitude = caseRecord.location?.coordinates?.[1] ?? caseRecord.latitude;
+  if (typeof latitude !== "number" || typeof longitude !== "number") return null;
+  return [latitude, longitude];
+}
+
 export function CaseMap({ cases, villageStats, selectedCase, region }: Props) {
   const mapRef = useRef<L.Map | null>(null);
   const markersRef = useRef<L.LayerGroup | null>(null);
@@ -67,8 +74,10 @@ export function CaseMap({ cases, villageStats, selectedCase, region }: Props) {
 
     if (mapMode === "POINTS") {
       cases.forEach((c) => {
+        const latLng = caseLatLng(c);
+        if (!latLng) return;
         const color = URGENCY_COLORS[c.urgency] || "#6b7280";
-        const marker = L.circleMarker([c.latitude, c.longitude], {
+        const marker = L.circleMarker(latLng, {
           radius: c.urgency === "CRITICAL" ? 10 : 7,
           fillColor: color,
           color: "#fff",
@@ -112,7 +121,12 @@ export function CaseMap({ cases, villageStats, selectedCase, region }: Props) {
           markersRef.current!.addLayer(marker);
       });
     } else {
-        const points = cases.map(c => [c.latitude, c.longitude, c.urgency === "CRITICAL" ? 1.0 : 0.5]);
+        const points = cases
+          .map(c => {
+            const latLng = caseLatLng(c);
+            return latLng ? [latLng[0], latLng[1], c.urgency === "CRITICAL" ? 1.0 : 0.5] : null;
+          })
+          .filter((point): point is [number, number, number] => Boolean(point));
         // @ts-ignore
         heatRef.current = L.heatLayer(points, {
             radius: 25,
@@ -125,7 +139,9 @@ export function CaseMap({ cases, villageStats, selectedCase, region }: Props) {
 
   useEffect(() => {
     if (selectedCase && mapRef.current) {
-      mapRef.current.setView([selectedCase.latitude, selectedCase.longitude], 10, {
+      const latLng = caseLatLng(selectedCase);
+      if (!latLng) return;
+      mapRef.current.setView(latLng, 10, {
         animate: true,
       });
     }
