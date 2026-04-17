@@ -6,3 +6,8 @@ build/
 .DS_Store
 tsconfig.tsbuildinfo
 *.tmp
+# GeoNames download cache (large zip/txt files, regenerate with npm run build:locations)
+backend/src/data/.cache/
+# Generated location JSON files (commit if you want them bundled, otherwise regenerate)
+# backend/src/data/locations-tx.json
+# backend/src/data/locations-in.json

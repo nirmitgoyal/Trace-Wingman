@@ -1,4 +1,3 @@
-// Mock geocoding and population data: maps location names to coords and population
 export interface LocationData {
   lat: number;
   lng: number;
@@ -8,67 +7,675 @@ export interface LocationData {
   aliases?: string[];
 }
 
-const locationData: Record<string, LocationData> = {
-  "Patna": { lat: 25.6117, lng: 85.1446, population: 2049000, state: "India" },
-  "Danapur": { lat: 25.6242, lng: 85.0489, population: 182000, state: "India" },
-  "Hajipur": { lat: 25.6855, lng: 85.2135, population: 147000, state: "India" },
-  "Muzaffarpur": { lat: 26.1209, lng: 85.3647, population: 354000, state: "India" },
-  "Gaya": { lat: 24.7955, lng: 85.0002, population: 474000, state: "India" },
-  "Bhagalpur": { lat: 25.2425, lng: 86.9842, population: 400000, state: "India" },
-  "Varanasi": { lat: 25.3176, lng: 82.9739, population: 1201000, state: "India" },
-  "Lucknow": { lat: 26.8467, lng: 80.9462, population: 2817000, state: "India" },
-  "Jhansi": { lat: 25.4484, lng: 78.5685, population: 505000, state: "India" },
-  "Agra": { lat: 27.1767, lng: 78.0081, population: 1585000, state: "India" },
-  "Bhopal": { lat: 23.2599, lng: 77.4126, population: 1798000, state: "India" },
-  "Indore": { lat: 22.7196, lng: 75.8577, population: 1964000, state: "India" },
-  "Nagpur": { lat: 21.1458, lng: 79.0882, population: 2405000, state: "India" },
-  "Jaipur": { lat: 26.9124, lng: 75.7873, population: 3046000, state: "India" },
-  "Udaipur": { lat: 24.5854, lng: 73.7125, population: 451000, state: "India" },
-  "Raipur": { lat: 21.2514, lng: 81.6296, population: 1010000, state: "India" },
-  "Ranchi": { lat: 23.3441, lng: 85.3096, population: 1073000, state: "India" },
-  "Dhanbad": { lat: 23.7957, lng: 86.4304, population: 1162000, state: "India" },
-  "Kolkata": { lat: 22.5726, lng: 88.3639, population: 4496000, state: "India" },
-  "Siliguri": { lat: 26.7271, lng: 88.3953, population: 705000, state: "India" },
-  "Dehradun": { lat: 30.3165, lng: 78.0322, population: 578000, state: "India" },
-  "Shimla": { lat: 31.1048, lng: 77.1734, population: 169000, state: "India" },
-  "Chandigarh": { lat: 30.7333, lng: 76.7794, population: 1055000, state: "India" },
-  "Amritsar": { lat: 31.634, lng: 74.8723, population: 1132000, state: "India" },
-  "Srinagar": { lat: 34.0837, lng: 74.7973, population: 1180000, state: "India" },
-  "Jammu": { lat: 32.7266, lng: 74.857, population: 502000, state: "India" },
-  "Hyderabad": { lat: 17.385, lng: 78.4867, population: 6731000, state: "India" },
-  "Warangal": { lat: 17.9784, lng: 79.5941, population: 615000, state: "India" },
-  "Vijayawada": { lat: 16.5062, lng: 80.648, population: 1021000, state: "India" },
-  "Chennai": { lat: 13.0827, lng: 80.2707, population: 7088000, state: "India" },
-  "Madurai": { lat: 9.9252, lng: 78.1198, population: 1017000, state: "India" },
-  "Thiruvananthapuram": { lat: 8.5241, lng: 76.9366, population: 743000, state: "India" },
-  "Kochi": { lat: 9.9312, lng: 76.2673, population: 601000, state: "India" },
-  "Bengaluru": { lat: 12.9716, lng: 77.5946, population: 8443000, state: "India", aliases: ["Bangalore", "Bangoluru"] },
-  "Mangalore": { lat: 12.9141, lng: 74.856, population: 484000, state: "India" },
-  "Pune": { lat: 18.5204, lng: 73.8567, population: 3124000, state: "India" },
-  "Mumbai": { lat: 19.076, lng: 72.8777, population: 12442000, state: "India" },
-  "Ahmedabad": { lat: 23.0225, lng: 72.5714, population: 5577000, state: "India" },
-  "Surat": { lat: 21.1702, lng: 72.8311, population: 4466000, state: "India" },
-  "Guwahati": { lat: 26.1445, lng: 91.7362, population: 957000, state: "India" },
-  "Imphal": { lat: 24.817, lng: 93.9368, population: 268000, state: "India" },
-  "Aligarh": { lat: 27.8974, lng: 78.0880, population: 1216000, state: "India" },
-  "Khair": { lat: 27.9392, lng: 77.8347, population: 102000, state: "India" },
-  "Hartford": { lat: 41.7637, lng: -72.6851, population: 121000, state: "Connecticut" },
-  "Stamford": { lat: 41.0534, lng: -73.5387, population: 135000, state: "Connecticut" },
-  "New Haven": { lat: 41.3083, lng: -72.9279, population: 134000, state: "Connecticut" },
-  "Monroe, Connecticut": { lat: 41.3326, lng: -73.2073, population: 18000, state: "Connecticut", district: "Monroe" },
-  "Austin": { lat: 30.2672, lng: -97.7431, population: 961000, state: "Texas" },
-  "Houston": { lat: 29.7604, lng: -95.3698, population: 2304000, state: "Texas" },
-  "Dallas": { lat: 32.7767, lng: -96.7970, population: 1304000, state: "Texas" },
-  "San Antonio": { lat: 29.4241, lng: -98.4936, population: 1434000, state: "Texas" },
-  "Monroe, Texas": { lat: 33.1035, lng: -96.6706, population: 50000, state: "Texas", district: "Monroe" },
-  "Monroe, India": { lat: 20.5937, lng: 78.9629, population: 50000, state: "India", district: "Monroe" },
+// ---------------------------------------------------------------------------
+// Connecticut — all 169 municipalities
+// ---------------------------------------------------------------------------
+const CT_LOCATIONS: Record<string, LocationData> = {
+  "Andover": { lat: 41.7398, lng: -72.3705, population: 3303, state: "Connecticut" },
+  "Ansonia": { lat: 41.3437, lng: -73.0787, population: 18954, state: "Connecticut" },
+  "Ashford": { lat: 41.8762, lng: -72.1468, population: 4317, state: "Connecticut" },
+  "Avon": { lat: 41.7912, lng: -72.8343, population: 18098, state: "Connecticut" },
+  "Barkhamsted": { lat: 41.9298, lng: -72.9779, population: 3799, state: "Connecticut" },
+  "Beacon Falls": { lat: 41.4404, lng: -73.0620, population: 6168, state: "Connecticut" },
+  "Berlin": { lat: 41.6218, lng: -72.7793, population: 20175, state: "Connecticut" },
+  "Bethany": { lat: 41.4398, lng: -72.9979, population: 5563, state: "Connecticut" },
+  "Bethel": { lat: 41.3712, lng: -73.4140, population: 19267, state: "Connecticut" },
+  "Bethlehem": { lat: 41.6373, lng: -73.1929, population: 3607, state: "Connecticut" },
+  "Bloomfield": { lat: 41.8334, lng: -72.7279, population: 21535, state: "Connecticut" },
+  "Bolton": { lat: 41.7748, lng: -72.4312, population: 5263, state: "Connecticut" },
+  "Bozrah": { lat: 41.5418, lng: -72.1823, population: 2863, state: "Connecticut" },
+  "Branford": { lat: 41.2795, lng: -72.8143, population: 28026, state: "Connecticut" },
+  "Bridgeport": { lat: 41.1865, lng: -73.1952, population: 148654, state: "Connecticut" },
+  "Bridgewater": { lat: 41.5373, lng: -73.3584, population: 1727, state: "Connecticut" },
+  "Bristol": { lat: 41.6718, lng: -72.9493, population: 60477, state: "Connecticut" },
+  "Brookfield": { lat: 41.4748, lng: -73.4051, population: 17833, state: "Connecticut" },
+  "Brooklyn": { lat: 41.7937, lng: -71.9457, population: 8210, state: "Connecticut" },
+  "Burlington": { lat: 41.7748, lng: -72.9651, population: 9301, state: "Connecticut" },
+  "Canaan": { lat: 42.0262, lng: -73.3290, population: 1234, state: "Connecticut" },
+  "Canterbury": { lat: 41.6962, lng: -71.9765, population: 5132, state: "Connecticut" },
+  "Canton": { lat: 41.8612, lng: -72.9026, population: 10292, state: "Connecticut" },
+  "Chaplin": { lat: 41.8062, lng: -72.1140, population: 2305, state: "Connecticut" },
+  "Cheshire": { lat: 41.4990, lng: -72.9004, population: 29261, state: "Connecticut" },
+  "Chester": { lat: 41.4023, lng: -72.4468, population: 3994, state: "Connecticut" },
+  "Clinton": { lat: 41.2790, lng: -72.5276, population: 13260, state: "Connecticut" },
+  "Colchester": { lat: 41.5762, lng: -72.3312, population: 16124, state: "Connecticut" },
+  "Columbia": { lat: 41.6962, lng: -72.2818, population: 5485, state: "Connecticut" },
+  "Cornwall": { lat: 41.8423, lng: -73.3290, population: 1605, state: "Connecticut" },
+  "Coventry": { lat: 41.7773, lng: -72.3476, population: 12435, state: "Connecticut" },
+  "Cromwell": { lat: 41.5962, lng: -72.6490, population: 14005, state: "Connecticut" },
+  "Danbury": { lat: 41.3948, lng: -73.4540, population: 84694, state: "Connecticut" },
+  "Darien": { lat: 41.0787, lng: -73.4693, population: 21371, state: "Connecticut" },
+  "Deep River": { lat: 41.3823, lng: -72.4340, population: 4629, state: "Connecticut" },
+  "Derby": { lat: 41.3262, lng: -73.0876, population: 12902, state: "Connecticut" },
+  "Durham": { lat: 41.4823, lng: -72.6815, population: 7437, state: "Connecticut" },
+  "East Granby": { lat: 41.9573, lng: -72.7393, population: 5148, state: "Connecticut" },
+  "East Haddam": { lat: 41.4748, lng: -72.4629, population: 9126, state: "Connecticut" },
+  "East Hampton": { lat: 41.5773, lng: -72.5026, population: 12959, state: "Connecticut" },
+  "East Hartford": { lat: 41.7623, lng: -72.6129, population: 51252, state: "Connecticut" },
+  "East Haven": { lat: 41.2748, lng: -72.8679, population: 29257, state: "Connecticut" },
+  "East Lyme": { lat: 41.3873, lng: -72.2290, population: 19159, state: "Connecticut" },
+  "East Windsor": { lat: 41.9062, lng: -72.6179, population: 11422, state: "Connecticut" },
+  "Eastford": { lat: 41.8923, lng: -72.0929, population: 1749, state: "Connecticut" },
+  "Easton": { lat: 41.2512, lng: -73.3040, population: 7490, state: "Connecticut" },
+  "Ellington": { lat: 41.9073, lng: -72.4590, population: 16117, state: "Connecticut" },
+  "Enfield": { lat: 41.9762, lng: -72.5926, population: 44654, state: "Connecticut" },
+  "Essex": { lat: 41.3523, lng: -72.3929, population: 6668, state: "Connecticut" },
+  "Fairfield": { lat: 41.1412, lng: -73.2637, population: 61512, state: "Connecticut" },
+  "Farmington": { lat: 41.7162, lng: -72.8326, population: 25340, state: "Connecticut" },
+  "Franklin": { lat: 41.6173, lng: -72.1651, population: 1922, state: "Connecticut" },
+  "Glastonbury": { lat: 41.7023, lng: -72.6076, population: 34427, state: "Connecticut" },
+  "Goshen": { lat: 41.8473, lng: -73.2401, population: 2976, state: "Connecticut" },
+  "Granby": { lat: 42.0123, lng: -72.8479, population: 11282, state: "Connecticut" },
+  "Greenwich": { lat: 41.0262, lng: -73.6282, population: 63518, state: "Connecticut" },
+  "Griswold": { lat: 41.5962, lng: -71.9476, population: 11951, state: "Connecticut" },
+  "Groton": { lat: 41.3512, lng: -72.0093, population: 39907, state: "Connecticut" },
+  "Guilford": { lat: 41.2887, lng: -72.6829, population: 22166, state: "Connecticut" },
+  "Haddam": { lat: 41.4573, lng: -72.5101, population: 8346, state: "Connecticut" },
+  "Hamden": { lat: 41.3959, lng: -72.8968, population: 60960, state: "Connecticut" },
+  "Hampton": { lat: 41.7823, lng: -72.0651, population: 1863, state: "Connecticut" },
+  "Hartford": { lat: 41.7637, lng: -72.6851, population: 121054, state: "Connecticut" },
+  "Hartland": { lat: 42.0073, lng: -72.9726, population: 2114, state: "Connecticut" },
+  "Harwinton": { lat: 41.7723, lng: -73.0590, population: 5642, state: "Connecticut" },
+  "Hebron": { lat: 41.6573, lng: -72.3651, population: 9686, state: "Connecticut" },
+  "Kent": { lat: 41.7273, lng: -73.4740, population: 2858, state: "Connecticut" },
+  "Killingly": { lat: 41.8323, lng: -71.8651, population: 17370, state: "Connecticut" },
+  "Killingworth": { lat: 41.3598, lng: -72.5726, population: 6525, state: "Connecticut" },
+  "Lebanon": { lat: 41.6273, lng: -72.2390, population: 7308, state: "Connecticut" },
+  "Ledyard": { lat: 41.4412, lng: -72.0101, population: 15051, state: "Connecticut" },
+  "Lisbon": { lat: 41.5873, lng: -71.9901, population: 4338, state: "Connecticut" },
+  "Litchfield": { lat: 41.7473, lng: -73.1879, population: 8466, state: "Connecticut" },
+  "Lyme": { lat: 41.3773, lng: -72.3301, population: 2406, state: "Connecticut" },
+  "Madison": { lat: 41.2798, lng: -72.5976, population: 18269, state: "Connecticut" },
+  "Manchester": { lat: 41.7762, lng: -72.5218, population: 58241, state: "Connecticut" },
+  "Mansfield": { lat: 41.7673, lng: -72.2190, population: 25948, state: "Connecticut" },
+  "Marlborough": { lat: 41.6373, lng: -72.4576, population: 6404, state: "Connecticut" },
+  "Meriden": { lat: 41.5382, lng: -72.8073, population: 59479, state: "Connecticut" },
+  "Middlebury": { lat: 41.5262, lng: -73.1276, population: 7575, state: "Connecticut" },
+  "Middlefield": { lat: 41.5123, lng: -72.7190, population: 4425, state: "Connecticut" },
+  "Middletown": { lat: 41.5623, lng: -72.6501, population: 47648, state: "Connecticut" },
+  "Milford": { lat: 41.2215, lng: -73.0568, population: 52759, state: "Connecticut" },
+  "Monroe": { lat: 41.3326, lng: -73.2073, population: 19479, state: "Connecticut" },
+  "Montville": { lat: 41.4612, lng: -72.1518, population: 19571, state: "Connecticut" },
+  "Morris": { lat: 41.6848, lng: -73.1926, population: 2388, state: "Connecticut" },
+  "Naugatuck": { lat: 41.4859, lng: -73.0512, population: 31862, state: "Connecticut" },
+  "New Britain": { lat: 41.6612, lng: -72.7793, population: 73206, state: "Connecticut" },
+  "New Canaan": { lat: 41.1473, lng: -73.4951, population: 20622, state: "Connecticut" },
+  "New Fairfield": { lat: 41.4648, lng: -73.4840, population: 13881, state: "Connecticut" },
+  "New Hartford": { lat: 41.8773, lng: -72.9776, population: 6907, state: "Connecticut" },
+  "New Haven": { lat: 41.3083, lng: -72.9279, population: 134023, state: "Connecticut" },
+  "New London": { lat: 41.3551, lng: -72.0998, population: 27620, state: "Connecticut" },
+  "New Milford": { lat: 41.5773, lng: -73.4084, population: 27121, state: "Connecticut" },
+  "Newington": { lat: 41.6973, lng: -72.7251, population: 30562, state: "Connecticut" },
+  "Newtown": { lat: 41.4137, lng: -73.2973, population: 27560, state: "Connecticut" },
+  "Norfolk": { lat: 41.9923, lng: -73.1990, population: 1709, state: "Connecticut" },
+  "North Branford": { lat: 41.3223, lng: -72.7776, population: 14406, state: "Connecticut" },
+  "North Canaan": { lat: 42.0223, lng: -73.3351, population: 3313, state: "Connecticut" },
+  "North Haven": { lat: 41.3898, lng: -72.8593, population: 23768, state: "Connecticut" },
+  "North Stonington": { lat: 41.4573, lng: -71.8876, population: 5297, state: "Connecticut" },
+  "Norwalk": { lat: 41.1177, lng: -73.4082, population: 91184, state: "Connecticut" },
+  "Norwich": { lat: 41.5240, lng: -72.0759, population: 40493, state: "Connecticut" },
+  "Old Lyme": { lat: 41.3148, lng: -72.3429, population: 7603, state: "Connecticut" },
+  "Old Saybrook": { lat: 41.2962, lng: -72.3718, population: 10162, state: "Connecticut" },
+  "Orange": { lat: 41.2773, lng: -73.0251, population: 14117, state: "Connecticut" },
+  "Oxford": { lat: 41.4348, lng: -73.1176, population: 13209, state: "Connecticut" },
+  "Plainfield": { lat: 41.6773, lng: -71.9201, population: 15405, state: "Connecticut" },
+  "Plainville": { lat: 41.6773, lng: -72.8576, population: 17716, state: "Connecticut" },
+  "Plymouth": { lat: 41.6723, lng: -73.0426, population: 12243, state: "Connecticut" },
+  "Pomfret": { lat: 41.8923, lng: -71.9751, population: 4247, state: "Connecticut" },
+  "Portland": { lat: 41.5773, lng: -72.6376, population: 9508, state: "Connecticut" },
+  "Preston": { lat: 41.5048, lng: -71.9751, population: 4726, state: "Connecticut" },
+  "Prospect": { lat: 41.5012, lng: -72.9826, population: 9405, state: "Connecticut" },
+  "Putnam": { lat: 41.9073, lng: -71.9101, population: 9584, state: "Connecticut" },
+  "Redding": { lat: 41.3073, lng: -73.3840, population: 9158, state: "Connecticut" },
+  "Ridgefield": { lat: 41.2837, lng: -73.4984, population: 25033, state: "Connecticut" },
+  "Rocky Hill": { lat: 41.6623, lng: -72.6526, population: 19709, state: "Connecticut" },
+  "Roxbury": { lat: 41.5573, lng: -73.3001, population: 2262, state: "Connecticut" },
+  "Salem": { lat: 41.4898, lng: -72.2651, population: 4151, state: "Connecticut" },
+  "Salisbury": { lat: 41.9823, lng: -73.4279, population: 3977, state: "Connecticut" },
+  "Scotland": { lat: 41.6973, lng: -72.0876, population: 1726, state: "Connecticut" },
+  "Seymour": { lat: 41.3962, lng: -73.0726, population: 16540, state: "Connecticut" },
+  "Sharon": { lat: 41.8823, lng: -73.4740, population: 2782, state: "Connecticut" },
+  "Shelton": { lat: 41.3162, lng: -73.0929, population: 41862, state: "Connecticut" },
+  "Sherman": { lat: 41.5873, lng: -73.4976, population: 3581, state: "Connecticut" },
+  "Simsbury": { lat: 41.8762, lng: -72.8126, population: 24517, state: "Connecticut" },
+  "Somers": { lat: 41.9873, lng: -72.4426, population: 11444, state: "Connecticut" },
+  "South Windsor": { lat: 41.8323, lng: -72.5726, population: 25709, state: "Connecticut" },
+  "Southbury": { lat: 41.4798, lng: -73.2201, population: 19904, state: "Connecticut" },
+  "Southington": { lat: 41.5948, lng: -72.8793, population: 43069, state: "Connecticut" },
+  "Sprague": { lat: 41.6223, lng: -71.9976, population: 2984, state: "Connecticut" },
+  "Stafford": { lat: 41.9823, lng: -72.3151, population: 11307, state: "Connecticut" },
+  "Sterling": { lat: 41.6973, lng: -71.8351, population: 3830, state: "Connecticut" },
+  "Stonington": { lat: 41.3363, lng: -71.9076, population: 18545, state: "Connecticut" },
+  "Stratford": { lat: 41.1845, lng: -73.1332, population: 51384, state: "Connecticut" },
+  "Suffield": { lat: 41.9873, lng: -72.6526, population: 15735, state: "Connecticut" },
+  "Thomaston": { lat: 41.6723, lng: -73.0726, population: 7887, state: "Connecticut" },
+  "Thompson": { lat: 41.9623, lng: -71.8876, population: 9459, state: "Connecticut" },
+  "Tolland": { lat: 41.8723, lng: -72.3651, population: 15052, state: "Connecticut" },
+  "Torrington": { lat: 41.8006, lng: -73.1218, population: 35515, state: "Connecticut" },
+  "Trumbull": { lat: 41.2437, lng: -73.2001, population: 36018, state: "Connecticut" },
+  "Union": { lat: 41.9973, lng: -72.1651, population: 854, state: "Connecticut" },
+  "Vernon": { lat: 41.8323, lng: -72.4576, population: 29179, state: "Connecticut" },
+  "Voluntown": { lat: 41.5748, lng: -71.8576, population: 2603, state: "Connecticut" },
+  "Wallingford": { lat: 41.4573, lng: -72.8229, population: 45135, state: "Connecticut" },
+  "Warren": { lat: 41.7448, lng: -73.3551, population: 1461, state: "Connecticut" },
+  "Washington": { lat: 41.6298, lng: -73.3101, population: 3578, state: "Connecticut" },
+  "Waterbury": { lat: 41.5582, lng: -73.0515, population: 114403, state: "Connecticut" },
+  "Waterford": { lat: 41.3548, lng: -72.1476, population: 19517, state: "Connecticut" },
+  "Watertown": { lat: 41.6073, lng: -73.1201, population: 22514, state: "Connecticut" },
+  "West Hartford": { lat: 41.7623, lng: -72.7418, population: 63268, state: "Connecticut" },
+  "West Haven": { lat: 41.2709, lng: -72.9470, population: 55564, state: "Connecticut" },
+  "Westbrook": { lat: 41.2873, lng: -72.4476, population: 6938, state: "Connecticut" },
+  "Weston": { lat: 41.2012, lng: -73.3840, population: 10179, state: "Connecticut" },
+  "Westport": { lat: 41.1415, lng: -73.3579, population: 28220, state: "Connecticut" },
+  "Wethersfield": { lat: 41.7123, lng: -72.6601, population: 26668, state: "Connecticut" },
+  "Willington": { lat: 41.8773, lng: -72.2676, population: 6041, state: "Connecticut" },
+  "Wilton": { lat: 41.1948, lng: -73.4390, population: 18503, state: "Connecticut" },
+  "Winchester": { lat: 41.8973, lng: -73.1426, population: 11242, state: "Connecticut" },
+  "Windham": { lat: 41.7023, lng: -72.1576, population: 25268, state: "Connecticut" },
+  "Windsor": { lat: 41.8523, lng: -72.6426, population: 29044, state: "Connecticut" },
+  "Windsor Locks": { lat: 41.9298, lng: -72.6276, population: 12498, state: "Connecticut" },
+  "Wolcott": { lat: 41.5998, lng: -72.9826, population: 16680, state: "Connecticut" },
+  "Woodbridge": { lat: 41.3562, lng: -73.0051, population: 8990, state: "Connecticut" },
+  "Woodbury": { lat: 41.5398, lng: -73.2126, population: 9975, state: "Connecticut" },
+  "Woodstock": { lat: 41.9623, lng: -72.0001, population: 8135, state: "Connecticut" },
 };
 
-function normalizeLocationName(location: string) {
-  const normalized = location.trim().replace(/\s+/g, " ");
-  const exact = Object.keys(locationData).find((name) => name.toLowerCase() === normalized.toLowerCase());
+// ---------------------------------------------------------------------------
+// Texas — major cities and towns
+// ---------------------------------------------------------------------------
+const TX_LOCATIONS: Record<string, LocationData> = {
+  "Houston": { lat: 29.7604, lng: -95.3698, population: 2304580, state: "Texas" },
+  "San Antonio": { lat: 29.4241, lng: -98.4936, population: 1434625, state: "Texas" },
+  "Dallas": { lat: 32.7767, lng: -96.7970, population: 1304379, state: "Texas" },
+  "Austin": { lat: 30.2672, lng: -97.7431, population: 961855, state: "Texas" },
+  "Fort Worth": { lat: 32.7555, lng: -97.3308, population: 895008, state: "Texas" },
+  "El Paso": { lat: 31.7619, lng: -106.4850, population: 678815, state: "Texas" },
+  "Arlington": { lat: 32.7357, lng: -97.1081, population: 394266, state: "Texas" },
+  "Corpus Christi": { lat: 27.8006, lng: -97.3964, population: 317773, state: "Texas" },
+  "Plano": { lat: 33.0198, lng: -96.6989, population: 285494, state: "Texas" },
+  "Laredo": { lat: 27.5306, lng: -99.4803, population: 257156, state: "Texas" },
+  "Lubbock": { lat: 33.5779, lng: -101.8552, population: 255885, state: "Texas" },
+  "Garland": { lat: 32.9126, lng: -96.6389, population: 234943, state: "Texas" },
+  "Irving": { lat: 32.8140, lng: -96.9489, population: 239798, state: "Texas" },
+  "Amarillo": { lat: 35.2220, lng: -101.8313, population: 199924, state: "Texas" },
+  "Grand Prairie": { lat: 32.7460, lng: -96.9978, population: 193023, state: "Texas" },
+  "McKinney": { lat: 33.1972, lng: -96.6397, population: 199177, state: "Texas" },
+  "Frisco": { lat: 33.1507, lng: -96.8236, population: 200490, state: "Texas" },
+  "Brownsville": { lat: 25.9017, lng: -97.4975, population: 183045, state: "Texas" },
+  "Pasadena": { lat: 29.6911, lng: -95.2091, population: 153333, state: "Texas" },
+  "Mesquite": { lat: 32.7668, lng: -96.5992, population: 139824, state: "Texas" },
+  "Killeen": { lat: 31.1171, lng: -97.7278, population: 153095, state: "Texas" },
+  "McAllen": { lat: 26.2034, lng: -98.2300, population: 142212, state: "Texas" },
+  "Denton": { lat: 33.2148, lng: -97.1331, population: 139869, state: "Texas" },
+  "Waco": { lat: 31.5493, lng: -97.1467, population: 134432, state: "Texas" },
+  "Carrollton": { lat: 32.9537, lng: -96.8903, population: 133434, state: "Texas" },
+  "Midland": { lat: 31.9974, lng: -102.0779, population: 131826, state: "Texas" },
+  "Round Rock": { lat: 30.5083, lng: -97.6789, population: 128779, state: "Texas" },
+  "Beaumont": { lat: 30.0802, lng: -94.1266, population: 118296, state: "Texas" },
+  "Abilene": { lat: 32.4487, lng: -99.7331, population: 123420, state: "Texas" },
+  "Sugar Land": { lat: 29.6197, lng: -95.6349, population: 118488, state: "Texas" },
+  "Odessa": { lat: 31.8457, lng: -102.3676, population: 114428, state: "Texas" },
+  "College Station": { lat: 30.6280, lng: -96.3344, population: 115418, state: "Texas" },
+  "Pearland": { lat: 29.5635, lng: -95.2860, population: 122000, state: "Texas" },
+  "Richardson": { lat: 32.9483, lng: -96.7299, population: 115169, state: "Texas" },
+  "The Woodlands": { lat: 30.1658, lng: -95.4613, population: 114436, state: "Texas" },
+  "San Angelo": { lat: 31.4638, lng: -100.4370, population: 100724, state: "Texas" },
+  "Lewisville": { lat: 33.0462, lng: -96.9942, population: 106586, state: "Texas" },
+  "Tyler": { lat: 32.3513, lng: -95.3011, population: 105995, state: "Texas" },
+  "League City": { lat: 29.5075, lng: -95.0949, population: 102010, state: "Texas" },
+  "Wichita Falls": { lat: 33.9137, lng: -98.4934, population: 104553, state: "Texas" },
+  "Allen": { lat: 33.1032, lng: -96.6705, population: 105623, state: "Texas" },
+  "Edinburg": { lat: 26.3017, lng: -98.1633, population: 101170, state: "Texas" },
+  "Bryan": { lat: 30.6744, lng: -96.3698, population: 83260, state: "Texas" },
+  "New Braunfels": { lat: 29.7030, lng: -98.1245, population: 90469, state: "Texas" },
+  "Conroe": { lat: 30.3119, lng: -95.4560, population: 89222, state: "Texas" },
+  "Flower Mound": { lat: 33.0146, lng: -97.0964, population: 79620, state: "Texas" },
+  "Longview": { lat: 32.5007, lng: -94.7405, population: 81443, state: "Texas" },
+  "Pharr": { lat: 26.1948, lng: -98.1833, population: 77320, state: "Texas" },
+  "Missouri City": { lat: 29.6185, lng: -95.5388, population: 74946, state: "Texas" },
+  "Mission": { lat: 26.2159, lng: -98.3252, population: 84021, state: "Texas" },
+  "Cedar Park": { lat: 30.5052, lng: -97.8203, population: 77595, state: "Texas" },
+  "Harlingen": { lat: 26.1906, lng: -97.6961, population: 65665, state: "Texas" },
+  "Georgetown": { lat: 30.6333, lng: -97.6772, population: 67176, state: "Texas" },
+  "Baytown": { lat: 29.7355, lng: -94.9774, population: 75418, state: "Texas" },
+  "Mansfield": { lat: 32.5632, lng: -97.1417, population: 71084, state: "Texas" },
+  "Pflugerville": { lat: 30.4394, lng: -97.6200, population: 65380, state: "Texas" },
+  "Rowlett": { lat: 32.9029, lng: -96.5638, population: 66457, state: "Texas" },
+  "Victoria": { lat: 28.8053, lng: -97.0036, population: 67078, state: "Texas" },
+  "Wylie": { lat: 33.0151, lng: -96.5388, population: 53402, state: "Texas" },
+  "Desoto": { lat: 32.5896, lng: -96.8572, population: 53035, state: "Texas" },
+  "North Richland Hills": { lat: 32.8343, lng: -97.2289, population: 69204, state: "Texas" },
+  "Leander": { lat: 30.5788, lng: -97.8531, population: 59956, state: "Texas" },
+  "Kyle": { lat: 29.9891, lng: -97.8772, population: 54000, state: "Texas" },
+  "Temple": { lat: 31.0982, lng: -97.3428, population: 76004, state: "Texas" },
+  "Euless": { lat: 32.8371, lng: -97.0819, population: 56397, state: "Texas" },
+  "Duncanville": { lat: 32.6518, lng: -96.9083, population: 39605, state: "Texas" },
+  "San Marcos": { lat: 29.8827, lng: -97.9414, population: 67553, state: "Texas" },
+  "Grapevine": { lat: 32.9343, lng: -97.0781, population: 50195, state: "Texas" },
+  "Cedar Hill": { lat: 32.5885, lng: -96.9561, population: 45028, state: "Texas" },
+  "Coppell": { lat: 32.9543, lng: -97.0150, population: 40342, state: "Texas" },
+  "Haltom City": { lat: 32.7990, lng: -97.2697, population: 44903, state: "Texas" },
+  "Bedford": { lat: 32.8440, lng: -97.1430, population: 48592, state: "Texas" },
+  "Sherman": { lat: 33.6357, lng: -96.6089, population: 43733, state: "Texas" },
+  "Weslaco": { lat: 26.1595, lng: -97.9908, population: 40218, state: "Texas" },
+  "Port Arthur": { lat: 29.8849, lng: -93.9399, population: 55945, state: "Texas" },
+  "Texarkana": { lat: 33.4251, lng: -94.0477, population: 37442, state: "Texas" },
+  "Galveston": { lat: 29.3013, lng: -94.7977, population: 50176, state: "Texas" },
+  "Hurst": { lat: 32.8232, lng: -97.1886, population: 37337, state: "Texas" },
+  "Huntsville": { lat: 30.7235, lng: -95.5508, population: 41190, state: "Texas" },
+  "Lufkin": { lat: 31.3382, lng: -94.7291, population: 35067, state: "Texas" },
+  "Nacogdoches": { lat: 31.6035, lng: -94.6557, population: 33045, state: "Texas" },
+  "Rosenberg": { lat: 29.5572, lng: -95.8083, population: 36273, state: "Texas" },
+  "Waxahachie": { lat: 32.3868, lng: -96.8489, population: 35643, state: "Texas" },
+  "Katy": { lat: 29.7858, lng: -95.8244, population: 21894, state: "Texas" },
+  "Southlake": { lat: 32.9401, lng: -97.1344, population: 29936, state: "Texas" },
+  "Seguin": { lat: 29.5688, lng: -97.9644, population: 28831, state: "Texas" },
+  "Del Rio": { lat: 29.3627, lng: -100.8968, population: 35591, state: "Texas" },
+  "Burleson": { lat: 32.5421, lng: -97.3208, population: 46595, state: "Texas" },
+  "Kingsville": { lat: 27.5158, lng: -97.8561, population: 25327, state: "Texas" },
+  "Eagle Pass": { lat: 28.7091, lng: -100.4995, population: 28130, state: "Texas" },
+  "Uvalde": { lat: 29.2097, lng: -99.7862, population: 15751, state: "Texas" },
+  "Spring": { lat: 30.0799, lng: -95.4172, population: 54298, state: "Texas" },
+  "Humble": { lat: 29.9988, lng: -95.2652, population: 15133, state: "Texas" },
+  "Copperas Cove": { lat: 31.1224, lng: -97.9036, population: 32032, state: "Texas" },
+  "Longview": { lat: 32.5007, lng: -94.7405, population: 81443, state: "Texas" },
+  "Laredо": { lat: 27.5306, lng: -99.4803, population: 257156, state: "Texas" },
+  "Midlothian": { lat: 32.4824, lng: -96.9939, population: 28185, state: "Texas" },
+  "Schertz": { lat: 29.5521, lng: -98.2645, population: 39979, state: "Texas" },
+  "DeSoto": { lat: 32.5896, lng: -96.8572, population: 53035, state: "Texas" },
+  "Luling": { lat: 29.6830, lng: -97.6483, population: 5833, state: "Texas" },
+  "Longview": { lat: 32.5007, lng: -94.7405, population: 81443, state: "Texas" },
+};
+
+// ---------------------------------------------------------------------------
+// India — organized by state with major cities/towns
+// ---------------------------------------------------------------------------
+const INDIA_LOCATIONS: Record<string, LocationData> = {
+  // Andhra Pradesh
+  "Visakhapatnam": { lat: 17.6868, lng: 83.2185, population: 2035922, state: "Andhra Pradesh", aliases: ["Vizag"] },
+  "Vijayawada": { lat: 16.5062, lng: 80.6480, population: 1048240, state: "Andhra Pradesh" },
+  "Guntur": { lat: 16.3067, lng: 80.4365, population: 647508, state: "Andhra Pradesh" },
+  "Nellore": { lat: 14.4426, lng: 79.9865, population: 565436, state: "Andhra Pradesh" },
+  "Kurnool": { lat: 15.8281, lng: 78.0373, population: 484327, state: "Andhra Pradesh" },
+  "Rajahmundry": { lat: 17.0005, lng: 81.8040, population: 341831, state: "Andhra Pradesh" },
+  "Tirupati": { lat: 13.6288, lng: 79.4192, population: 459985, state: "Andhra Pradesh" },
+  "Kakinada": { lat: 16.9891, lng: 82.2475, population: 312538, state: "Andhra Pradesh" },
+  "Kadapa": { lat: 14.4753, lng: 78.8237, population: 344078, state: "Andhra Pradesh" },
+  "Amaravati": { lat: 16.5137, lng: 80.5157, population: 100000, state: "Andhra Pradesh" },
+  "Anantapur": { lat: 14.6819, lng: 77.6006, population: 276142, state: "Andhra Pradesh" },
+  "Eluru": { lat: 16.7107, lng: 81.0952, population: 215804, state: "Andhra Pradesh" },
+  "Ongole": { lat: 15.5057, lng: 80.0499, population: 200077, state: "Andhra Pradesh" },
+  "Vizianagaram": { lat: 18.1066, lng: 83.4205, population: 222077, state: "Andhra Pradesh" },
+  // Arunachal Pradesh
+  "Itanagar": { lat: 27.0844, lng: 93.6053, population: 44971, state: "Arunachal Pradesh" },
+  "Naharlagun": { lat: 27.1044, lng: 93.6944, population: 30709, state: "Arunachal Pradesh" },
+  // Assam
+  "Guwahati": { lat: 26.1445, lng: 91.7362, population: 957352, state: "Assam" },
+  "Silchar": { lat: 24.8333, lng: 92.7789, population: 228985, state: "Assam" },
+  "Dibrugarh": { lat: 27.4728, lng: 94.9120, population: 154019, state: "Assam" },
+  "Jorhat": { lat: 26.7465, lng: 94.2026, population: 153889, state: "Assam" },
+  "Nagaon": { lat: 26.3467, lng: 92.6847, population: 147231, state: "Assam" },
+  "Tinsukia": { lat: 27.4924, lng: 95.3553, population: 137248, state: "Assam" },
+  "Tezpur": { lat: 26.6338, lng: 92.7926, population: 100228, state: "Assam" },
+  // Bihar
+  "Patna": { lat: 25.6117, lng: 85.1446, population: 2049156, state: "Bihar" },
+  "Gaya": { lat: 24.7955, lng: 85.0002, population: 474094, state: "Bihar" },
+  "Bhagalpur": { lat: 25.2425, lng: 86.9842, population: 410210, state: "Bihar" },
+  "Muzaffarpur": { lat: 26.1209, lng: 85.3647, population: 354588, state: "Bihar" },
+  "Darbhanga": { lat: 26.1542, lng: 85.8918, population: 307144, state: "Bihar" },
+  "Purnia": { lat: 25.7771, lng: 87.4753, population: 279077, state: "Bihar" },
+  "Arrah": { lat: 25.5566, lng: 84.6633, population: 261430, state: "Bihar" },
+  "Begusarai": { lat: 25.4182, lng: 86.1272, population: 252008, state: "Bihar" },
+  "Katihar": { lat: 25.5391, lng: 87.5735, population: 240565, state: "Bihar" },
+  "Hajipur": { lat: 25.6855, lng: 85.2135, population: 147688, state: "Bihar" },
+  "Danapur": { lat: 25.6242, lng: 85.0489, population: 182000, state: "Bihar" },
+  "Munger": { lat: 25.3722, lng: 86.4736, population: 213100, state: "Bihar" },
+  "Chapra": { lat: 25.7724, lng: 84.7464, population: 212639, state: "Bihar" },
+  "Bihar Sharif": { lat: 25.1985, lng: 85.5155, population: 297268, state: "Bihar" },
+  "Saharsa": { lat: 25.8789, lng: 86.5953, population: 156690, state: "Bihar" },
+  // Chhattisgarh
+  "Raipur": { lat: 21.2514, lng: 81.6296, population: 1010087, state: "Chhattisgarh" },
+  "Bhilai": { lat: 21.2090, lng: 81.4285, population: 625698, state: "Chhattisgarh" },
+  "Bilaspur": { lat: 22.0797, lng: 82.1409, population: 495002, state: "Chhattisgarh" },
+  "Korba": { lat: 22.3595, lng: 82.7501, population: 358690, state: "Chhattisgarh" },
+  "Rajnandgaon": { lat: 21.0967, lng: 81.0342, population: 163122, state: "Chhattisgarh" },
+  "Jagdalpur": { lat: 19.0776, lng: 82.0184, population: 143500, state: "Chhattisgarh" },
+  // Goa
+  "Panaji": { lat: 15.4909, lng: 73.8278, population: 114405, state: "Goa" },
+  "Vasco da Gama": { lat: 15.3982, lng: 73.8113, population: 100000, state: "Goa" },
+  "Margao": { lat: 15.2736, lng: 73.9574, population: 100000, state: "Goa", aliases: ["Madgaon"] },
+  "Mapusa": { lat: 15.5937, lng: 73.8118, population: 40000, state: "Goa" },
+  // Gujarat
+  "Ahmedabad": { lat: 23.0225, lng: 72.5714, population: 5570585, state: "Gujarat", aliases: ["Amdavad"] },
+  "Surat": { lat: 21.1702, lng: 72.8311, population: 4462002, state: "Gujarat" },
+  "Vadodara": { lat: 22.3072, lng: 73.1812, population: 1666703, state: "Gujarat", aliases: ["Baroda"] },
+  "Rajkot": { lat: 22.3039, lng: 70.8022, population: 1286678, state: "Gujarat" },
+  "Bhavnagar": { lat: 21.7645, lng: 72.1519, population: 605882, state: "Gujarat" },
+  "Jamnagar": { lat: 22.4707, lng: 70.0577, population: 600943, state: "Gujarat" },
+  "Junagadh": { lat: 21.5222, lng: 70.4579, population: 319462, state: "Gujarat" },
+  "Gandhinagar": { lat: 23.2156, lng: 72.6369, population: 302764, state: "Gujarat" },
+  "Anand": { lat: 22.5645, lng: 72.9289, population: 268463, state: "Gujarat" },
+  "Navsari": { lat: 20.9467, lng: 72.9520, population: 168445, state: "Gujarat" },
+  "Morbi": { lat: 22.8173, lng: 70.8380, population: 196474, state: "Gujarat" },
+  "Mehsana": { lat: 23.5880, lng: 72.3693, population: 199871, state: "Gujarat" },
+  "Surendranagar": { lat: 22.7271, lng: 71.6408, population: 166312, state: "Gujarat" },
+  "Bharuch": { lat: 21.7051, lng: 72.9959, population: 180999, state: "Gujarat" },
+  "Valsad": { lat: 20.6120, lng: 72.9244, population: 170034, state: "Gujarat" },
+  "Porbandar": { lat: 21.6425, lng: 69.6293, population: 150421, state: "Gujarat" },
+  // Haryana
+  "Faridabad": { lat: 28.4089, lng: 77.3178, population: 1404653, state: "Haryana" },
+  "Gurgaon": { lat: 28.4595, lng: 77.0266, population: 876824, state: "Haryana", aliases: ["Gurugram"] },
+  "Panipat": { lat: 29.3909, lng: 76.9635, population: 450993, state: "Haryana" },
+  "Ambala": { lat: 30.3782, lng: 76.7767, population: 225000, state: "Haryana" },
+  "Yamunanagar": { lat: 30.1290, lng: 77.2674, population: 254000, state: "Haryana" },
+  "Rohtak": { lat: 28.8955, lng: 76.6066, population: 295248, state: "Haryana" },
+  "Hisar": { lat: 29.1492, lng: 75.7217, population: 302350, state: "Haryana" },
+  "Karnal": { lat: 29.6857, lng: 76.9905, population: 286754, state: "Haryana" },
+  "Sonipat": { lat: 28.9931, lng: 77.0151, population: 260508, state: "Haryana" },
+  "Panchkula": { lat: 30.6942, lng: 76.8606, population: 225000, state: "Haryana" },
+  // Himachal Pradesh
+  "Shimla": { lat: 31.1048, lng: 77.1734, population: 169578, state: "Himachal Pradesh" },
+  "Dharamsala": { lat: 32.2190, lng: 76.3234, population: 30764, state: "Himachal Pradesh" },
+  "Mandi": { lat: 31.7088, lng: 76.9318, population: 27564, state: "Himachal Pradesh" },
+  "Solan": { lat: 30.9045, lng: 77.0967, population: 41403, state: "Himachal Pradesh" },
+  "Kullu": { lat: 31.9579, lng: 77.1092, population: 18306, state: "Himachal Pradesh" },
+  "Manali": { lat: 32.2432, lng: 77.1892, population: 8096, state: "Himachal Pradesh" },
+  // Jharkhand
+  "Ranchi": { lat: 23.3441, lng: 85.3096, population: 1073440, state: "Jharkhand" },
+  "Jamshedpur": { lat: 22.8046, lng: 86.2029, population: 1339438, state: "Jharkhand", aliases: ["Tatanagar"] },
+  "Dhanbad": { lat: 23.7957, lng: 86.4304, population: 1162472, state: "Jharkhand" },
+  "Bokaro": { lat: 23.6693, lng: 86.1511, population: 563417, state: "Jharkhand" },
+  "Deoghar": { lat: 24.4854, lng: 86.6940, population: 203116, state: "Jharkhand" },
+  "Hazaribagh": { lat: 23.9969, lng: 85.3618, population: 157480, state: "Jharkhand" },
+  "Giridih": { lat: 24.1853, lng: 86.3007, population: 156562, state: "Jharkhand" },
+  // Karnataka
+  "Bengaluru": { lat: 12.9716, lng: 77.5946, population: 8443675, state: "Karnataka", aliases: ["Bangalore", "Bangoluru", "Bengalore"] },
+  "Mysuru": { lat: 12.2958, lng: 76.6394, population: 920550, state: "Karnataka", aliases: ["Mysore"] },
+  "Hubli": { lat: 15.3647, lng: 75.1240, population: 943857, state: "Karnataka", aliases: ["Hubballi", "Dharwad"] },
+  "Mangaluru": { lat: 12.9141, lng: 74.8560, population: 484785, state: "Karnataka", aliases: ["Mangalore"] },
+  "Belgaum": { lat: 15.8497, lng: 74.4977, population: 610350, state: "Karnataka", aliases: ["Belagavi"] },
+  "Davanagere": { lat: 14.4644, lng: 75.9218, population: 427570, state: "Karnataka" },
+  "Ballari": { lat: 15.1394, lng: 76.9214, population: 410445, state: "Karnataka", aliases: ["Bellary"] },
+  "Tumkur": { lat: 13.3379, lng: 77.1010, population: 305821, state: "Karnataka", aliases: ["Tumakuru"] },
+  "Shivamogga": { lat: 13.9299, lng: 75.5681, population: 322428, state: "Karnataka", aliases: ["Shimoga"] },
+  "Bidar": { lat: 17.9104, lng: 77.5199, population: 215000, state: "Karnataka" },
+  "Gulbarga": { lat: 17.3297, lng: 76.8343, population: 534841, state: "Karnataka", aliases: ["Kalaburagi"] },
+  "Raichur": { lat: 16.2120, lng: 77.3566, population: 232456, state: "Karnataka" },
+  "Hassan": { lat: 13.0068, lng: 76.1004, population: 133436, state: "Karnataka" },
+  "Udupi": { lat: 13.3409, lng: 74.7421, population: 180000, state: "Karnataka" },
+  // Kerala
+  "Thiruvananthapuram": { lat: 8.5241, lng: 76.9366, population: 743691, state: "Kerala", aliases: ["Trivandrum"] },
+  "Kochi": { lat: 9.9312, lng: 76.2673, population: 677381, state: "Kerala", aliases: ["Cochin", "Ernakulam"] },
+  "Kozhikode": { lat: 11.2588, lng: 75.7804, population: 609224, state: "Kerala", aliases: ["Calicut"] },
+  "Thrissur": { lat: 10.5276, lng: 76.2144, population: 315596, state: "Kerala" },
+  "Kollam": { lat: 8.8932, lng: 76.6141, population: 349033, state: "Kerala", aliases: ["Quilon"] },
+  "Palakkad": { lat: 10.7867, lng: 76.6548, population: 185518, state: "Kerala", aliases: ["Palghat"] },
+  "Alappuzha": { lat: 9.4981, lng: 76.3388, population: 174164, state: "Kerala", aliases: ["Alleppey"] },
+  "Malappuram": { lat: 11.0730, lng: 76.0737, population: 170854, state: "Kerala" },
+  "Kannur": { lat: 11.8745, lng: 75.3704, population: 80756, state: "Kerala", aliases: ["Cannanore"] },
+  "Kottayam": { lat: 9.5916, lng: 76.5222, population: 132878, state: "Kerala" },
+  "Kasaragod": { lat: 12.4996, lng: 74.9869, population: 62139, state: "Kerala" },
+  // Madhya Pradesh
+  "Bhopal": { lat: 23.2599, lng: 77.4126, population: 1798218, state: "Madhya Pradesh" },
+  "Indore": { lat: 22.7196, lng: 75.8577, population: 1964086, state: "Madhya Pradesh" },
+  "Jabalpur": { lat: 23.1815, lng: 79.9864, population: 1054336, state: "Madhya Pradesh" },
+  "Gwalior": { lat: 26.2183, lng: 78.1828, population: 1054420, state: "Madhya Pradesh" },
+  "Ujjain": { lat: 23.1765, lng: 75.7885, population: 515215, state: "Madhya Pradesh" },
+  "Sagar": { lat: 23.8388, lng: 78.7378, population: 274772, state: "Madhya Pradesh" },
+  "Dewas": { lat: 22.9676, lng: 76.0534, population: 289550, state: "Madhya Pradesh" },
+  "Satna": { lat: 24.5853, lng: 80.8322, population: 280688, state: "Madhya Pradesh" },
+  "Ratlam": { lat: 23.3315, lng: 75.0367, population: 273892, state: "Madhya Pradesh" },
+  "Rewa": { lat: 24.5362, lng: 81.3037, population: 235654, state: "Madhya Pradesh" },
+  "Murwara": { lat: 23.8400, lng: 80.3960, population: 222836, state: "Madhya Pradesh", aliases: ["Katni"] },
+  "Singrauli": { lat: 24.1997, lng: 82.6750, population: 284032, state: "Madhya Pradesh" },
+  "Bhind": { lat: 26.5629, lng: 78.7877, population: 198386, state: "Madhya Pradesh" },
+  "Chhindwara": { lat: 22.0574, lng: 78.9382, population: 175221, state: "Madhya Pradesh" },
+  "Vidisha": { lat: 23.5251, lng: 77.8182, population: 155959, state: "Madhya Pradesh" },
+  "Hoshangabad": { lat: 22.7524, lng: 77.7221, population: 133656, state: "Madhya Pradesh" },
+  // Maharashtra
+  "Mumbai": { lat: 19.0760, lng: 72.8777, population: 12442373, state: "Maharashtra", aliases: ["Bombay"] },
+  "Pune": { lat: 18.5204, lng: 73.8567, population: 3124458, state: "Maharashtra", aliases: ["Poona"] },
+  "Nagpur": { lat: 21.1458, lng: 79.0882, population: 2405421, state: "Maharashtra" },
+  "Thane": { lat: 19.2183, lng: 72.9781, population: 1818872, state: "Maharashtra" },
+  "Pimpri-Chinchwad": { lat: 18.6279, lng: 73.8009, population: 1727692, state: "Maharashtra" },
+  "Nashik": { lat: 19.9975, lng: 73.7898, population: 1486053, state: "Maharashtra" },
+  "Kalyan": { lat: 19.2437, lng: 73.1355, population: 1246381, state: "Maharashtra" },
+  "Vasai-Virar": { lat: 19.3919, lng: 72.8397, population: 1221233, state: "Maharashtra" },
+  "Aurangabad": { lat: 19.8762, lng: 75.3433, population: 1175116, state: "Maharashtra", aliases: ["Sambhajinagar"] },
+  "Navi Mumbai": { lat: 19.0330, lng: 73.0297, population: 1119477, state: "Maharashtra" },
+  "Solapur": { lat: 17.6805, lng: 75.9064, population: 951558, state: "Maharashtra", aliases: ["Sholapur"] },
+  "Mira-Bhayander": { lat: 19.2952, lng: 72.8543, population: 814655, state: "Maharashtra" },
+  "Bhiwandi": { lat: 19.2981, lng: 73.0636, population: 711329, state: "Maharashtra" },
+  "Amravati": { lat: 20.9320, lng: 77.7523, population: 646801, state: "Maharashtra" },
+  "Nanded": { lat: 19.1383, lng: 77.3210, population: 550564, state: "Maharashtra" },
+  "Kolhapur": { lat: 16.7050, lng: 74.2433, population: 549283, state: "Maharashtra" },
+  "Akola": { lat: 20.7002, lng: 77.0082, population: 427032, state: "Maharashtra" },
+  "Latur": { lat: 18.4088, lng: 76.5604, population: 382754, state: "Maharashtra" },
+  "Dhule": { lat: 20.9042, lng: 74.7749, population: 341182, state: "Maharashtra" },
+  "Ahmednagar": { lat: 19.0952, lng: 74.7496, population: 350905, state: "Maharashtra" },
+  "Chandrapur": { lat: 19.9615, lng: 79.2961, population: 322214, state: "Maharashtra" },
+  "Parbhani": { lat: 19.2666, lng: 76.7727, population: 307450, state: "Maharashtra" },
+  "Jalgaon": { lat: 21.0077, lng: 75.5626, population: 460468, state: "Maharashtra" },
+  "Ichalkaranji": { lat: 16.6933, lng: 74.4601, population: 342736, state: "Maharashtra" },
+  "Gondia": { lat: 21.4607, lng: 80.1969, population: 139000, state: "Maharashtra" },
+  "Yavatmal": { lat: 20.3888, lng: 78.1204, population: 157124, state: "Maharashtra" },
+  // Manipur
+  "Imphal": { lat: 24.8170, lng: 93.9368, population: 268243, state: "Manipur" },
+  // Meghalaya
+  "Shillong": { lat: 25.5788, lng: 91.8933, population: 354759, state: "Meghalaya" },
+  // Mizoram
+  "Aizawl": { lat: 23.7271, lng: 92.7176, population: 293416, state: "Mizoram" },
+  // Nagaland
+  "Kohima": { lat: 25.6701, lng: 94.1077, population: 99039, state: "Nagaland" },
+  "Dimapur": { lat: 25.9067, lng: 93.7232, population: 379117, state: "Nagaland" },
+  // Odisha
+  "Bhubaneswar": { lat: 20.2961, lng: 85.8245, population: 837737, state: "Odisha" },
+  "Cuttack": { lat: 20.4625, lng: 85.8830, population: 606007, state: "Odisha" },
+  "Rourkela": { lat: 22.2604, lng: 84.8536, population: 552978, state: "Odisha" },
+  "Brahmapur": { lat: 19.3150, lng: 84.7941, population: 355823, state: "Odisha", aliases: ["Berhampur"] },
+  "Sambalpur": { lat: 21.4669, lng: 83.9756, population: 183507, state: "Odisha" },
+  "Puri": { lat: 19.8135, lng: 85.8312, population: 200564, state: "Odisha" },
+  "Balasore": { lat: 21.4942, lng: 86.9335, population: 136416, state: "Odisha" },
+  // Punjab
+  "Amritsar": { lat: 31.6340, lng: 74.8723, population: 1132761, state: "Punjab" },
+  "Ludhiana": { lat: 30.9010, lng: 75.8573, population: 1618879, state: "Punjab" },
+  "Jalandhar": { lat: 31.3260, lng: 75.5762, population: 873725, state: "Punjab" },
+  "Patiala": { lat: 30.3398, lng: 76.3869, population: 406192, state: "Punjab" },
+  "Bathinda": { lat: 30.2110, lng: 74.9455, population: 285813, state: "Punjab" },
+  "Hoshiarpur": { lat: 31.5143, lng: 75.9115, population: 168536, state: "Punjab" },
+  "Mohali": { lat: 30.7046, lng: 76.7179, population: 175885, state: "Punjab", aliases: ["SAS Nagar"] },
+  "Firozpur": { lat: 30.9320, lng: 74.6079, population: 124380, state: "Punjab" },
+  "Gurdaspur": { lat: 32.0390, lng: 75.4050, population: 113478, state: "Punjab" },
+  "Phagwara": { lat: 31.2222, lng: 75.7715, population: 170260, state: "Punjab" },
+  // Rajasthan
+  "Jaipur": { lat: 26.9124, lng: 75.7873, population: 3046163, state: "Rajasthan" },
+  "Jodhpur": { lat: 26.2389, lng: 73.0243, population: 1033918, state: "Rajasthan" },
+  "Kota": { lat: 25.2138, lng: 75.8648, population: 1001365, state: "Rajasthan" },
+  "Bikaner": { lat: 28.0229, lng: 73.3119, population: 647804, state: "Rajasthan" },
+  "Ajmer": { lat: 26.4499, lng: 74.6399, population: 551360, state: "Rajasthan" },
+  "Udaipur": { lat: 24.5854, lng: 73.7125, population: 451735, state: "Rajasthan" },
+  "Bhilwara": { lat: 25.3471, lng: 74.6313, population: 380000, state: "Rajasthan" },
+  "Alwar": { lat: 27.5530, lng: 76.6346, population: 341422, state: "Rajasthan" },
+  "Bharatpur": { lat: 27.2152, lng: 77.4941, population: 252342, state: "Rajasthan" },
+  "Pali": { lat: 25.7711, lng: 73.3234, population: 230000, state: "Rajasthan" },
+  "Sikar": { lat: 27.6094, lng: 75.1399, population: 237024, state: "Rajasthan" },
+  "Tonk": { lat: 26.1653, lng: 75.7888, population: 146651, state: "Rajasthan" },
+  "Sri Ganganagar": { lat: 29.9038, lng: 73.8772, population: 286791, state: "Rajasthan" },
+  "Hanumangarh": { lat: 29.5830, lng: 74.3252, population: 155624, state: "Rajasthan" },
+  "Jhunjhunu": { lat: 28.1288, lng: 75.3999, population: 118473, state: "Rajasthan" },
+  "Chittorgarh": { lat: 24.8887, lng: 74.6269, population: 117440, state: "Rajasthan" },
+  "Sawai Madhopur": { lat: 26.0226, lng: 76.3500, population: 105362, state: "Rajasthan" },
+  "Nagaur": { lat: 27.2013, lng: 73.7341, population: 100000, state: "Rajasthan" },
+  "Barmer": { lat: 25.7521, lng: 71.3967, population: 95849, state: "Rajasthan" },
+  "Banswara": { lat: 23.5470, lng: 74.4411, population: 93082, state: "Rajasthan" },
+  // Sikkim
+  "Gangtok": { lat: 27.3314, lng: 88.6138, population: 100286, state: "Sikkim" },
+  // Tamil Nadu
+  "Chennai": { lat: 13.0827, lng: 80.2707, population: 7088000, state: "Tamil Nadu", aliases: ["Madras"] },
+  "Coimbatore": { lat: 11.0168, lng: 76.9558, population: 1061447, state: "Tamil Nadu" },
+  "Madurai": { lat: 9.9252, lng: 78.1198, population: 1017865, state: "Tamil Nadu" },
+  "Tiruchirappalli": { lat: 10.7905, lng: 78.7047, population: 916857, state: "Tamil Nadu", aliases: ["Trichy", "Tiruchi"] },
+  "Salem": { lat: 11.6643, lng: 78.1460, population: 831038, state: "Tamil Nadu" },
+  "Tirunelveli": { lat: 8.7139, lng: 77.7567, population: 530148, state: "Tamil Nadu" },
+  "Tiruppur": { lat: 11.1085, lng: 77.3411, population: 877778, state: "Tamil Nadu" },
+  "Vellore": { lat: 12.9165, lng: 79.1325, population: 484453, state: "Tamil Nadu" },
+  "Erode": { lat: 11.3410, lng: 77.7172, population: 543083, state: "Tamil Nadu" },
+  "Thanjavur": { lat: 10.7870, lng: 79.1378, population: 222349, state: "Tamil Nadu" },
+  "Thoothukudi": { lat: 8.7642, lng: 78.1348, population: 294105, state: "Tamil Nadu", aliases: ["Tuticorin"] },
+  "Dindigul": { lat: 10.3624, lng: 77.9695, population: 196959, state: "Tamil Nadu" },
+  "Nagercoil": { lat: 8.1833, lng: 77.4119, population: 224772, state: "Tamil Nadu" },
+  "Kancheepuram": { lat: 12.8185, lng: 79.7006, population: 164624, state: "Tamil Nadu" },
+  "Cuddalore": { lat: 11.7480, lng: 79.7714, population: 180712, state: "Tamil Nadu" },
+  "Vellore": { lat: 12.9165, lng: 79.1325, population: 484453, state: "Tamil Nadu" },
+  "Kumbakonam": { lat: 10.9602, lng: 79.3845, population: 148676, state: "Tamil Nadu" },
+  "Pondicherry": { lat: 11.9416, lng: 79.8083, population: 244377, state: "Tamil Nadu", aliases: ["Puducherry"] },
+  // Telangana
+  "Hyderabad": { lat: 17.3850, lng: 78.4867, population: 6809970, state: "Telangana" },
+  "Warangal": { lat: 17.9784, lng: 79.5941, population: 811844, state: "Telangana" },
+  "Nizamabad": { lat: 18.6725, lng: 78.0941, population: 311152, state: "Telangana" },
+  "Karimnagar": { lat: 18.4386, lng: 79.1288, population: 261185, state: "Telangana" },
+  "Khammam": { lat: 17.2473, lng: 80.1514, population: 262095, state: "Telangana" },
+  "Ramagundam": { lat: 18.7569, lng: 79.4734, population: 268951, state: "Telangana" },
+  "Mahbubnagar": { lat: 16.7488, lng: 77.9864, population: 190000, state: "Telangana" },
+  "Nalgonda": { lat: 17.0575, lng: 79.2671, population: 154648, state: "Telangana" },
+  // Tripura
+  "Agartala": { lat: 23.8315, lng: 91.2868, population: 399688, state: "Tripura" },
+  // Uttar Pradesh
+  "Lucknow": { lat: 26.8467, lng: 80.9462, population: 2817105, state: "Uttar Pradesh" },
+  "Kanpur": { lat: 26.4499, lng: 80.3319, population: 2768057, state: "Uttar Pradesh" },
+  "Ghaziabad": { lat: 28.6692, lng: 77.4538, population: 1636068, state: "Uttar Pradesh" },
+  "Agra": { lat: 27.1767, lng: 78.0081, population: 1585704, state: "Uttar Pradesh" },
+  "Meerut": { lat: 28.9845, lng: 77.7064, population: 1305429, state: "Uttar Pradesh" },
+  "Varanasi": { lat: 25.3176, lng: 82.9739, population: 1201815, state: "Uttar Pradesh", aliases: ["Banaras", "Kashi"] },
+  "Allahabad": { lat: 25.4358, lng: 81.8463, population: 1112544, state: "Uttar Pradesh", aliases: ["Prayagraj"] },
+  "Bareilly": { lat: 28.3670, lng: 79.4304, population: 900235, state: "Uttar Pradesh" },
+  "Aligarh": { lat: 27.8974, lng: 78.0880, population: 874408, state: "Uttar Pradesh" },
+  "Moradabad": { lat: 28.8386, lng: 78.7733, population: 889810, state: "Uttar Pradesh" },
+  "Saharanpur": { lat: 29.9680, lng: 77.5510, population: 703345, state: "Uttar Pradesh" },
+  "Gorakhpur": { lat: 26.7606, lng: 83.3732, population: 673446, state: "Uttar Pradesh" },
+  "Noida": { lat: 28.5355, lng: 77.3910, population: 642381, state: "Uttar Pradesh" },
+  "Firozabad": { lat: 27.1591, lng: 78.3957, population: 603797, state: "Uttar Pradesh" },
+  "Jhansi": { lat: 25.4484, lng: 78.5685, population: 505693, state: "Uttar Pradesh" },
+  "Muzaffarnagar": { lat: 29.4727, lng: 77.7085, population: 392451, state: "Uttar Pradesh" },
+  "Mathura": { lat: 27.4924, lng: 77.6737, population: 441894, state: "Uttar Pradesh" },
+  "Rampur": { lat: 28.8195, lng: 79.0257, population: 323231, state: "Uttar Pradesh" },
+  "Shahjahanpur": { lat: 27.8813, lng: 79.9065, population: 360145, state: "Uttar Pradesh" },
+  "Farrukhabad": { lat: 27.3892, lng: 79.5754, population: 260004, state: "Uttar Pradesh" },
+  "Mau": { lat: 25.9397, lng: 83.5610, population: 288800, state: "Uttar Pradesh" },
+  "Hapur": { lat: 28.7241, lng: 77.7757, population: 254864, state: "Uttar Pradesh" },
+  "Etawah": { lat: 26.7827, lng: 79.0254, population: 256838, state: "Uttar Pradesh" },
+  "Mirzapur": { lat: 25.1459, lng: 82.5690, population: 233691, state: "Uttar Pradesh" },
+  "Budaun": { lat: 28.0456, lng: 79.1258, population: 186791, state: "Uttar Pradesh" },
+  "Bulandshahr": { lat: 28.4072, lng: 77.8490, population: 215000, state: "Uttar Pradesh" },
+  "Khair": { lat: 27.9392, lng: 77.8347, population: 102000, state: "Uttar Pradesh" },
+  "Sultanpur": { lat: 26.2648, lng: 82.0726, population: 175000, state: "Uttar Pradesh" },
+  "Azamgarh": { lat: 26.0558, lng: 83.1838, population: 157195, state: "Uttar Pradesh" },
+  "Bahraich": { lat: 27.5743, lng: 81.5946, population: 168062, state: "Uttar Pradesh" },
+  "Sitapur": { lat: 27.5625, lng: 80.6819, population: 161802, state: "Uttar Pradesh" },
+  "Lakhimpur": { lat: 27.9453, lng: 80.7803, population: 126482, state: "Uttar Pradesh" },
+  "Unnao": { lat: 26.5480, lng: 80.4984, population: 178000, state: "Uttar Pradesh" },
+  "Jaunpur": { lat: 25.7462, lng: 82.6867, population: 183145, state: "Uttar Pradesh" },
+  "Hardoi": { lat: 27.3950, lng: 80.1270, population: 125000, state: "Uttar Pradesh" },
+  "Raebareli": { lat: 26.2307, lng: 81.2322, population: 162000, state: "Uttar Pradesh" },
+  "Bijnor": { lat: 29.3723, lng: 78.1373, population: 100842, state: "Uttar Pradesh" },
+  "Fatehpur": { lat: 25.9315, lng: 80.8140, population: 152000, state: "Uttar Pradesh" },
+  // Uttarakhand
+  "Dehradun": { lat: 30.3165, lng: 78.0322, population: 578420, state: "Uttarakhand" },
+  "Haridwar": { lat: 29.9457, lng: 78.1642, population: 240390, state: "Uttarakhand" },
+  "Roorkee": { lat: 29.8543, lng: 77.8880, population: 118748, state: "Uttarakhand" },
+  "Haldwani": { lat: 29.2183, lng: 79.5130, population: 156039, state: "Uttarakhand" },
+  "Rudrapur": { lat: 28.9845, lng: 79.4010, population: 130000, state: "Uttarakhand" },
+  "Nainital": { lat: 29.3803, lng: 79.4636, population: 41371, state: "Uttarakhand" },
+  "Mussoorie": { lat: 30.4598, lng: 78.0664, population: 30118, state: "Uttarakhand" },
+  "Rishikesh": { lat: 30.0869, lng: 78.2676, population: 102138, state: "Uttarakhand" },
+  "Almora": { lat: 29.5971, lng: 79.6591, population: 35513, state: "Uttarakhand" },
+  // West Bengal
+  "Kolkata": { lat: 22.5726, lng: 88.3639, population: 4496694, state: "West Bengal", aliases: ["Calcutta"] },
+  "Asansol": { lat: 23.6832, lng: 86.9625, population: 1243414, state: "West Bengal" },
+  "Siliguri": { lat: 26.7271, lng: 88.3953, population: 705000, state: "West Bengal" },
+  "Durgapur": { lat: 23.5204, lng: 87.3119, population: 566517, state: "West Bengal" },
+  "Bardhaman": { lat: 23.2324, lng: 87.8615, population: 314265, state: "West Bengal", aliases: ["Burdwan"] },
+  "Malda": { lat: 25.0108, lng: 88.1406, population: 186440, state: "West Bengal" },
+  "Baharampur": { lat: 24.1020, lng: 88.2509, population: 186040, state: "West Bengal", aliases: ["Berhampore"] },
+  "Habra": { lat: 22.8413, lng: 88.6548, population: 153656, state: "West Bengal" },
+  "Kharagpur": { lat: 22.3460, lng: 87.3195, population: 293000, state: "West Bengal" },
+  "Jalpaiguri": { lat: 26.5172, lng: 88.7170, population: 127000, state: "West Bengal" },
+  "Krishnanagar": { lat: 23.4003, lng: 88.5009, population: 155779, state: "West Bengal" },
+  "Cooch Behar": { lat: 26.3452, lng: 89.4454, population: 106743, state: "West Bengal" },
+  "Bankura": { lat: 23.2324, lng: 87.0727, population: 138413, state: "West Bengal" },
+  "Purulia": { lat: 23.3329, lng: 86.3645, population: 114590, state: "West Bengal" },
+  // Union Territories
+  "Delhi": { lat: 28.7041, lng: 77.1025, population: 11034555, state: "Delhi", aliases: ["New Delhi"] },
+  "Chandigarh": { lat: 30.7333, lng: 76.7794, population: 1055450, state: "Chandigarh" },
+  "Srinagar": { lat: 34.0837, lng: 74.7973, population: 1180570, state: "Jammu & Kashmir" },
+  "Jammu": { lat: 32.7266, lng: 74.8570, population: 502197, state: "Jammu & Kashmir" },
+  "Leh": { lat: 34.1526, lng: 77.5771, population: 30000, state: "Ladakh" },
+  "Puducherry": { lat: 11.9416, lng: 79.8083, population: 244377, state: "Puducherry", aliases: ["Pondicherry"] },
+};
+
+// ---------------------------------------------------------------------------
+// Merge all regions — CT is always hardcoded (169 towns, always accurate).
+// TX and India are supplemented/replaced by generated JSON files when present.
+// Run:  npx tsx src/scripts/build-location-data.ts
+// to download GeoNames data and regenerate the JSON files.
+// ---------------------------------------------------------------------------
+import path from "path";
+import fs from "fs";
+
+function loadJsonLocations(filename: string): Record<string, LocationData> {
+  const filePath = path.resolve(__dirname, "../data", filename);
+  if (!fs.existsSync(filePath)) return {};
+  try {
+    const entries = JSON.parse(fs.readFileSync(filePath, "utf-8")) as Array<{
+      name: string;
+      lat: number;
+      lng: number;
+      population: number;
+      state: string;
+      district?: string;
+      aliases?: string[];
+    }>;
+    const result: Record<string, LocationData> = {};
+    for (const entry of entries) {
+      result[entry.name] = {
+        lat: entry.lat,
+        lng: entry.lng,
+        population: entry.population,
+        state: entry.state,
+        district: entry.district,
+        aliases: entry.aliases,
+      };
+    }
+    return result;
+  } catch (err) {
+    console.warn(`[geocode] Failed to load ${filename}:`, err);
+    return {};
+  }
+}
+
+const generatedTX = loadJsonLocations("locations-tx.json");
+const generatedIN = loadJsonLocations("locations-in.json");
+
+// Generated data takes precedence over the built-in baseline where keys overlap
+const locationData: Record<string, LocationData> = {
+  ...CT_LOCATIONS,
+  ...(Object.keys(generatedTX).length > 0 ? generatedTX : TX_LOCATIONS),
+  ...(Object.keys(generatedIN).length > 0 ? generatedIN : INDIA_LOCATIONS),
+};
+
+function normalizeLocationName(location: string): string {
+  const trimmed = location.trim().replace(/\s+/g, " ");
+  // Exact case-insensitive match
+  const exact = Object.keys(locationData).find(
+    (name) => name.toLowerCase() === trimmed.toLowerCase()
+  );
   if (exact) return exact;
-  return normalized;
+  // Alias match
+  const aliasMatch = Object.entries(locationData).find(([, data]) =>
+    data.aliases?.some((alias) => alias.toLowerCase() === trimmed.toLowerCase())
+  );
+  if (aliasMatch) return aliasMatch[0];
+  return trimmed;
 }
 
 export function getCoordinatesForVillage(village: string): { lat: number; lng: number } {
@@ -81,7 +688,9 @@ export function resolveLocation(village: string): LocationData & { name: string 
   if (locationData[name]) {
     return { name, ...locationData[name], district: locationData[name].district || name };
   }
-  if (village.toUpperCase().includes("CT") || village.toLowerCase().includes("connecticut")) {
+
+  const lower = village.toLowerCase();
+  if (lower.includes("ct") || lower.includes("connecticut")) {
     return {
       name: name || "Connecticut",
       lat: 41.6032 + (Math.random() - 0.5) * 0.5,
@@ -91,7 +700,7 @@ export function resolveLocation(village: string): LocationData & { name: string 
       district: name || "Connecticut",
     };
   }
-  if (village.toUpperCase().includes("TX") || village.toLowerCase().includes("texas")) {
+  if (lower.includes("tx") || lower.includes("texas")) {
     return {
       name: name || "Texas",
       lat: 31.9686 + (Math.random() - 0.5) * 5,
@@ -101,6 +710,7 @@ export function resolveLocation(village: string): LocationData & { name: string 
       district: name || "Texas",
     };
   }
+
   const baseLat = 20.5937 + (Math.random() - 0.5) * 12;
   const baseLng = 78.9629 + (Math.random() - 0.5) * 14;
   return {
@@ -114,41 +724,46 @@ export function resolveLocation(village: string): LocationData & { name: string 
 }
 
 export function getLocationPopulation(location: string): number {
-    const name = normalizeLocationName(location);
-    return locationData[name]?.population || 50000;
+  const name = normalizeLocationName(location);
+  return locationData[name]?.population ?? 50000;
 }
 
-export function searchLocations(query: string, limit = 8) {
+export function searchLocations(query: string, limit = 10): Array<{
+  name: string;
+  displayName: string;
+  city: string;
+  district: string;
+  state: string;
+  latitude: number;
+  longitude: number;
+  population: number;
+}> {
   const normalized = query.trim().toLowerCase();
   if (normalized.length < 1) return [];
 
-  return Object.entries(locationData)
-    .map(([name, data]) => {
-      const haystack = [name, data.state, data.district, ...(data.aliases || [])].filter(Boolean).join(" ").toLowerCase();
-      const cityName = data.district || name.split(",")[0];
-      const displayName = name.includes(",") ? name : `${name}, ${data.state}`;
-      const startsWithScore =
-        name.toLowerCase().startsWith(normalized) ||
-        cityName.toLowerCase().startsWith(normalized) ||
-        (data.aliases || []).some((alias) => alias.toLowerCase().startsWith(normalized))
-          ? 0
-          : 1;
-      const containsScore = haystack.includes(normalized) ? startsWithScore : 2;
+  const scored = Object.entries(locationData).map(([name, data]) => {
+    const cityName = data.district || name.split(",")[0].trim();
+    const displayName = `${cityName}, ${data.state}`;
+    const allTerms = [name, cityName, data.state, ...(data.aliases || [])].map((t) =>
+      t.toLowerCase()
+    );
 
-      return {
-        name,
-        displayName,
-        city: cityName,
-        district: data.district || cityName,
-        state: data.state,
-        latitude: data.lat,
-        longitude: data.lng,
-        population: data.population,
-        score: containsScore,
-      };
-    })
-    .filter((item) => item.score < 2 || item.displayName.toLowerCase().includes(normalized))
-    .sort((a, b) => a.score - b.score || a.displayName.localeCompare(b.displayName))
+    // Score: 0 = starts-with match on city name or alias, 1 = starts-with on state, 2 = contains anywhere
+    let score = 3;
+    if (allTerms.slice(0, 2 + (data.aliases?.length ?? 0)).some((t) => t.startsWith(normalized))) {
+      score = 0;
+    } else if (allTerms.some((t) => t.startsWith(normalized))) {
+      score = 1;
+    } else if (allTerms.some((t) => t.includes(normalized))) {
+      score = 2;
+    }
+
+    return { name, displayName, city: cityName, district: data.district || cityName, state: data.state, latitude: data.lat, longitude: data.lng, population: data.population, score };
+  });
+
+  return scored
+    .filter((item) => item.score < 3)
+    .sort((a, b) => a.score - b.score || b.population - a.population || a.displayName.localeCompare(b.displayName))
     .slice(0, limit)
     .map(({ score, ...item }) => item);
 }
