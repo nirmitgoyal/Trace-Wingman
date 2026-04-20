@@ -1,1 +1,389 @@
-aW1wb3J0IHsgUmVxdWVzdCwgUmVzcG9uc2UgfSBmcm9tICJleHByZXNzIjsKaW1wb3J0IENhc2UsIHsgVXJnZW5jeSB9IGZyb20gIi4uL21vZGVscy9DYXNlIjsKaW1wb3J0IHsgY2FzZUV2ZW50cyB9IGZyb20gIi4uL3V0aWxzL2V2ZW50cyI7CmltcG9ydCB7IHJlc29sdmVMb2NhdGlvbiwgc2VhcmNoTG9jYXRpb25zIH0gZnJvbSAiLi4vdXRpbHMvZ2VvY29kZSI7CmltcG9ydCB7IG5vdGlmeUFkbWluIH0gZnJvbSAiLi4vdXRpbHMvbm90aWZpY2F0aW9ucyI7CmltcG9ydCB7IGdldEFuYWx5c2lzRmluZ2VycHJpbnQsIGdldEFuYWx5c2lzTW9kZWxOYW1lIH0gZnJvbSAiLi4vdXRpbHMvYW5hbHlzaXNGaW5nZXJwcmludCI7CmltcG9ydCB7IGFuYWx5emVTeW1wdG9tcywgYnVpbGRQb3J0YWxSZXNwb25zZSwgUGF0aWVudENvbnRleHQgfSBmcm9tICIuLi91dGlscy9zeW1wdG9tQW5hbHl6ZXIiOwoKY29uc3QgUE9QVUxBVElPTlM6IFJlY29yZDxzdHJpbmcsIG51bWJlcj4gPSB7CiAgIkdMT0JBTCI6IDgwMDAwMDAwMDAsCiAgIklORElBIjogMTQwMDAwMDAwMCwKICAiQ1QiOiAzNjAwMDAwLAogICJURVhBUyI6IDMwMDAwMDAwLAp9OwoKZnVuY3Rpb24gbG9jYXRpb25Qb2ludChsb25naXR1ZGU6IG51bWJlciwgbGF0aXR1ZGU6IG51bWJlcikgewogIHJldHVybiB7CiAgICB0eXBlOiAiUG9pbnQiIGFzIGNvbnN0LAogICAgY29vcmRpbmF0ZXM6IFtsb25naXR1ZGUsIGxhdGl0dWRlXSBhcyBbbnVtYmVyLCBudW1iZXJdLAogIH07Cn0KCmZ1bmN0aW9uIGFkZENvb3JkaW5hdGVBbGlhc2VzPFQgZXh0ZW5kcyBSZWNvcmQ8c3RyaW5nLCBhbnk+PihjYXNlRG9jOiBUKSB7CiAgY29uc3QgY29vcmRpbmF0ZXMgPSBjYXNlRG9jLmxvY2F0aW9uPy5jb29yZGluYXRlczsKICBpZiAoQXJyYXkuaXNBcnJheShjb29yZGluYXRlcykgJiYgY29vcmRpbmF0ZXMubGVuZ3RoID09PSAyKSB7CiAgICByZXR1cm4gewogICAgICAuLi5jYXNlRG9jLAogICAgICBsb25naXR1ZGU6IGNvb3JkaW5hdGVzWzBdLAogICAgICBsYXRpdHVkZTogY29vcmRpbmF0ZXNbMV0sCiAgICB9OwogIH0KICByZXR1cm4gY2FzZURvYzsKfQoKZnVuY3Rpb24gcmVnaW9uRmlsdGVyKHJlZ2lvbjogdW5rbm93bik6IFJlY29yZDxzdHJpbmcsIGFueT4gfCBudWxsIHsKICBpZiAocmVnaW9uID09PSAiQ1QiKSB7CiAgICByZXR1cm4gewogICAgICAkb3I6IFsKICAgICAgICB7IHN0YXRlOiB7ICRyZWdleDogIkNUfENvbm5lY3RpY3V0IiwgJG9wdGlvbnM6ICJpIiB9IH0sCiAgICAgICAgeyB2aWxsYWdlOiB7ICRyZWdleDogIkNUfENvbm5lY3RpY3V0IiwgJG9wdGlvbnM6ICJpIiB9IH0sCiAgICAgIF0sCiAgICB9OwogIH0KICBpZiAocmVnaW9uID09PSAiVEVYQVMiKSB7CiAgICByZXR1cm4gewogICAgICAkb3I6IFsKICAgICAgICB7IHN0YXRlOiB7ICRyZWdleDogIlRYfFRleGFzIiwgJG9wdGlvbnM6ICJpIiB9IH0sCiAgICAgICAgeyB2aWxsYWdlOiB7ICRyZWdleDogIlRYfFRleGFzIiwgJG9wdGlvbnM6ICJpIiB9IH0sCiAgICAgIF0sCiAgICB9OwogIH0KICBpZiAocmVnaW9uID09PSAiSU5ESUEiKSByZXR1cm4geyAibG9jYXRpb24uY29vcmRpbmF0ZXMuMCI6IHsgJGd0OiA2MCwgJGx0OiAxMDAgfSB9OwogIHJldHVybiBudWxsOwp9CgpmdW5jdGlvbiBidWlsZENhc2VGaWx0ZXIocXVlcnk6IFJlcXVlc3RbInF1ZXJ5Il0pIHsKICBjb25zdCB7IHVyZ2VuY3ksIGRpc3RyaWN0LCBzZWFyY2gsIHJlZ2lvbiB9ID0gcXVlcnk7CiAgY29uc3QgY2xhdXNlczogUmVjb3JkPHN0cmluZywgYW55PltdID0gW107CgogIGlmICh1cmdlbmN5ICYmIHVyZ2VuY3kgIT09ICJBTEwiKSBjbGF1c2VzLnB1c2goeyB1cmdlbmN5OiB1cmdlbmN5IGFzIFVyZ2VuY3kgfSk7CiAgaWYgKGRpc3RyaWN0KSBjbGF1c2VzLnB1c2goeyBkaXN0cmljdDogeyAkcmVnZXg6IGRpc3RyaWN0IGFzIHN0cmluZywgJG9wdGlvbnM6ICJpIiB9IH0pOwoKICBjb25zdCBzY29wZWRSZWdpb24gPSByZWdpb25GaWx0ZXIocmVnaW9uKTsKICBpZiAoc2NvcGVkUmVnaW9uKSBjbGF1c2VzLnB1c2goc2NvcGVkUmVnaW9uKTsKCiAgaWYgKHNlYXJjaCkgewogICAgY2xhdXNlcy5wdXNoKHsKICAgICAgJG9yOiBbCiAgICAgICAgeyBwYXRpZW50TmFtZTogeyAkcmVnZXg6IHNlYXJjaCBhcyBzdHJpbmcsICRvcHRpb25zOiAiaSIgfSB9LAogICAgICAgIHsgdmlsbGFnZTogeyAkcmVnZXg6IHNlYXJjaCBhcyBzdHJpbmcsICRvcHRpb25zOiAiaSIgfSB9LAogICAgICAgIHsgc3ltcHRvbXM6IHsgJHJlZ2V4OiBzZWFyY2ggYXMgc3RyaW5nLCAkb3B0aW9uczogImkiIH0gfSwKICAgICAgICB7IHByZWRpY3RlZERpc2Vhc2U6IHsgJHJlZ2V4OiBzZWFyY2ggYXMgc3RyaW5nLCAkb3B0aW9uczogImkiIH0gfSwKICAgICAgXSwKICAgIH0pOwogIH0KCiAgaWYgKGNsYXVzZXMubGVuZ3RoID09PSAwKSByZXR1cm4ge307CiAgaWYgKGNsYXVzZXMubGVuZ3RoID09PSAxKSByZXR1cm4gY2xhdXNlc1swXTsKICByZXR1cm4geyAkYW5kOiBjbGF1c2VzIH07Cn0KCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBnZXRDYXNlcyhyZXE6IFJlcXVlc3QsIHJlczogUmVzcG9uc2UpIHsKICB0cnkgewogICAgY29uc3QgeyBwYWdlID0gIjEiLCBsaW1pdCA9ICI1MCIgfSA9IHJlcS5xdWVyeTsKICAgIGNvbnN0IGZpbHRlciA9IGJ1aWxkQ2FzZUZpbHRlcihyZXEucXVlcnkpOwoKICAgIGNvbnN0IHBhZ2VOdW0gPSBwYXJzZUludChwYWdlIGFzIHN0cmluZywgMTApOwogICAgY29uc3QgbGltaXROdW0gPSBwYXJzZUludChsaW1pdCBhcyBzdHJpbmcsIDEwKTsKICAgIGNvbnN0IHNraXAgPSAocGFnZU51bSAtIDEpICogbGltaXROdW07CgogICAgY29uc3QgW2Nhc2VzLCB0b3RhbF0gPSBhd2FpdCBQcm9taXNlLmFsbChbCiAgICAgIENhc2UuZmluZChmaWx0ZXIpLnNvcnQoeyBjcmVhdGVkQXQ6IC0xIH0pLnNraXAoc2tpcCkubGltaXQobGltaXROdW0pLmxlYW4oKSwKICAgICAgQ2FzZS5jb3VudERvY3VtZW50cyhmaWx0ZXIpLAogICAgXSk7CgogICAgcmVzLmpzb24oeyBjYXNlczogY2FzZXMubWFwKGFkZENvb3JkaW5hdGVBbGlhc2VzKSwgdG90YWwsIHBhZ2U6IHBhZ2VOdW0sIHRvdGFsUGFnZXM6IE1hdGguY2VpbCh0b3RhbCAvIGxpbWl0TnVtKSB9KTsKICB9IGNhdGNoIChlcnJvcikgewogICAgcmVzLnN0YXR1cyg1MDApLmpzb24oeyBlcnJvcjogIkZhaWxlZCIgfSk7CiAgfQp9CgpleHBvcnQgZnVuY3Rpb24gZ2V0TG9jYXRpb25TdWdnZXN0aW9ucyhyZXE6IFJlcXVlc3QsIHJlczogUmVzcG9uc2UpIHsKICBjb25zdCBxdWVyeSA9IFN0cmluZyhyZXEucXVlcnkucXVlcnkgfHwgIiIpOwogIHJlcy5qc29uKHsgbG9jYXRpb25zOiBzZWFyY2hMb2NhdGlvbnMocXVlcnkpIH0pOwp9Cgphc3luYyBmdW5jdGlvbiBidWlsZENsdXN0ZXJDb250ZXh0KGRpc3RyaWN0TmFtZTogc3RyaW5nLCBzdGF0ZU5hbWU6IHN0cmluZyk6IFByb21pc2U8c3RyaW5nIHwgdW5kZWZpbmVkPiB7CiAgY29uc3QgbGFzdDdEYXlzID0gbmV3IERhdGUoRGF0ZS5ub3coKSAtIDcgKiAyNCAqIDYwICogNjAgKiAxMDAwKTsKICBjb25zdCBsb2NhdGlvbkZpbHRlciA9IGRpc3RyaWN0TmFtZSAmJiBkaXN0cmljdE5hbWUgIT09ICJVbmtub3duIgogICAgPyB7IGRpc3RyaWN0OiB7ICRyZWdleDogZGlzdHJpY3ROYW1lLCAkb3B0aW9uczogImkiIH0gfQogICAgOiBzdGF0ZU5hbWUgJiYgc3RhdGVOYW1lICE9PSAiVW5rbm93biIKICAgID8geyBzdGF0ZTogeyAkcmVnZXg6IHN0YXRlTmFtZSwgJG9wdGlvbnM6ICJpIiB9IH0KICAgIDogbnVsbDsKCiAgaWYgKCFsb2NhdGlvbkZpbHRlcikgcmV0dXJuIHVuZGVmaW5lZDsKCiAgY29uc3QgcmVjZW50ID0gYXdhaXQgQ2FzZS5hZ2dyZWdhdGUoWwogICAgeyAkbWF0Y2g6IHsgLi4ubG9jYXRpb25GaWx0ZXIsIGNyZWF0ZWRBdDogeyAkZ3Q6IGxhc3Q3RGF5cyB9LCBwcmVkaWN0ZWREaXNlYXNlOiB7ICRleGlzdHM6IHRydWUsICRuZTogIiIgfSB9IH0sCiAgICB7ICRncm91cDogeyBfaWQ6ICIkcHJlZGljdGVkRGlzZWFzZSIsIGNvdW50OiB7ICRzdW06IDEgfSB9IH0sCiAgICB7ICRzb3J0OiB7IGNvdW50OiAtMSB9IH0sCiAgICB7ICRsaW1pdDogNSB9LAogIF0pOwoKICBpZiAocmVjZW50Lmxlbmd0aCA9PT0gMCkgcmV0dXJuIHVuZGVmaW5lZDsKCiAgY29uc3Qgc2NvcGUgPSBkaXN0cmljdE5hbWUgJiYgZGlzdHJpY3ROYW1lICE9PSAiVW5rbm93biIgPyBgJHtkaXN0cmljdE5hbWV9IGRpc3RyaWN0YCA6IGAke3N0YXRlTmFtZX0gc3RhdGVgOwogIGNvbnN0IHBhcnRzID0gcmVjZW50Lm1hcCgocjogeyBfaWQ6IHN0cmluZzsgY291bnQ6IG51bWJlciB9KSA9PiBgJHtyLmNvdW50fSBjYXNlJHtyLmNvdW50ID4gMSA/ICJzIiA6ICIifSBvZiAke3IuX2lkfWApOwogIHJldHVybiBgJHtwYXJ0cy5qb2luKCIsICIpfSByZXBvcnRlZCBpbiAke3Njb3BlfSBpbiB0aGUgbGFzdCA3IGRheXNgOwp9CgpleHBvcnQgYXN5bmMgZnVuY3Rpb24gY3JlYXRlQ2FzZShyZXE6IFJlcXVlc3QsIHJlczogUmVzcG9uc2UpIHsKICAgIHRyeSB7CiAgICAgICAgY29uc3QgeyBzeW1wdG9tcywgcm9sZSwgcmVwb3J0ZXJSb2xlLCB2aWxsYWdlLCBkaXN0cmljdCwgc3RhdGUsIGxhdGl0dWRlLCBsb25naXR1ZGUsIGxvY2F0aW9uOiByZXF1ZXN0TG9jYXRpb24sIHN5bXB0b21EdXJhdGlvbiwgLi4ucmVzdCB9ID0gcmVxLmJvZHk7CiAgICAgICAgY29uc3Qgbm9ybWFsaXplZFN5bXB0b21zID0gQXJyYXkuaXNBcnJheShzeW1wdG9tcykKICAgICAgICAgID8gc3ltcHRvbXMubWFwKChzOiB1bmtub3duKSA9PiBTdHJpbmcocykudHJpbSgpKS5maWx0ZXIoQm9vbGVhbikKICAgICAgICAgIDogU3RyaW5nKHN5bXB0b21zIHx8ICIiKS5zcGxpdCgiLCIpLm1hcCgocykgPT4gcy50cmltKCkpLmZpbHRlcihCb29sZWFuKTsKCiAgICAgICAgY29uc3QgbG9jYXRpb24gPSByZXNvbHZlTG9jYXRpb24odmlsbGFnZSB8fCAiIik7CiAgICAgICAgY29uc3QgcmVzb2x2ZWREaXN0cmljdCA9IGRpc3RyaWN0IHx8IGxvY2F0aW9uLmRpc3RyaWN0IHx8IGxvY2F0aW9uLm5hbWU7CiAgICAgICAgY29uc3QgcmVzb2x2ZWRTdGF0ZSA9IHN0YXRlIHx8IGxvY2F0aW9uLnN0YXRlOwoKICAgICAgICBjb25zdCBjbHVzdGVyQ29udGV4dCA9IGF3YWl0IGJ1aWxkQ2x1c3RlckNvbnRleHQocmVzb2x2ZWREaXN0cmljdCwgcmVzb2x2ZWRTdGF0ZSk7CgogICAgICAgIGNvbnN0IHBhdGllbnRDdHg6IFBhdGllbnRDb250ZXh0ID0gewogICAgICAgICAgYWdlOiBOdW1iZXIuaXNGaW5pdGUoTnVtYmVyKHJlc3QuYWdlKSkgPyBOdW1iZXIocmVzdC5hZ2UpIDogdW5kZWZpbmVkLAogICAgICAgICAgZ2VuZGVyOiByZXN0LmdlbmRlciB8fCB1bmRlZmluZWQsCiAgICAgICAgICBzeW1wdG9tRHVyYXRpb246IHN5bXB0b21EdXJhdGlvbiB8fCB1bmRlZmluZWQsCiAgICAgICAgICBjbHVzdGVyQ29udGV4dCwKICAgICAgICB9OwoKICAgICAgICBjb25zdCBhbmFseXNpcyA9IGF3YWl0IGFuYWx5emVTeW1wdG9tcyhub3JtYWxpemVkU3ltcHRvbXMsIHBhdGllbnRDdHgpOwogICAgICAgIGNvbnN0IGFuYWx5c2lzSGFzaCA9IGdldEFuYWx5c2lzRmluZ2VycHJpbnQobm9ybWFsaXplZFN5bXB0b21zKTsKICAgICAgICBjb25zdCByZXF1ZXN0Q29vcmRpbmF0ZXMgPSByZXF1ZXN0TG9jYXRpb24/LmNvb3JkaW5hdGVzOwogICAgICAgIGNvbnN0IGNvb3JkcyA9IEFycmF5LmlzQXJyYXkocmVxdWVzdENvb3JkaW5hdGVzKSAmJgogICAgICAgICAgTnVtYmVyLmlzRmluaXRlKE51bWJlcihyZXF1ZXN0Q29vcmRpbmF0ZXNbMF0pKSAmJgogICAgICAgICAgTnVtYmVyLmlzRmluaXRlKE51bWJlcihyZXF1ZXN0Q29vcmRpbmF0ZXNbMV0pKQogICAgICAgICAgPyB7IGxhdDogTnVtYmVyKHJlcXVlc3RDb29yZGluYXRlc1sxXSksIGxuZzogTnVtYmVyKHJlcXVlc3RDb29yZGluYXRlc1swXSkgfQogICAgICAgICAgOiBOdW1iZXIuaXNGaW5pdGUobGF0aXR1ZGUpICYmIE51bWJlci5pc0Zpbml0ZShsb25naXR1ZGUpCiAgICAgICAgICA/IHsgbGF0OiBOdW1iZXIobGF0aXR1ZGUpLCBsbmc6IE51bWJlcihsb25naXR1ZGUpIH0KICAgICAgICAgIDogeyBsYXQ6IGxvY2F0aW9uLmxhdCwgbG5nOiBsb2NhdGlvbi5sbmcgfTsKICAgICAgICBjb25zdCBmaW5hbFJvbGUgPSByZXBvcnRlclJvbGUgfHwgcm9sZSB8fCAocmVzdC53b3JrZXJfcGhvbmUgPT09ICJXZWItUGF0aWVudCIgPyAiUEFUSUVOVCIgOiAiQ0FSRUdJVkVSIik7CgogICAgICAgIGNvbnN0IG5ld0Nhc2UgPSBuZXcgQ2FzZSh7CiAgICAgICAgICAgIC4uLnJlc3QsCiAgICAgICAgICAgIHN5bXB0b21zOiBub3JtYWxpemVkU3ltcHRvbXMsCiAgICAgICAgICAgIHZpbGxhZ2U6IGxvY2F0aW9uLm5hbWUsCiAgICAgICAgICAgIGRpc3RyaWN0OiByZXNvbHZlZERpc3RyaWN0LAogICAgICAgICAgICBzdGF0ZTogcmVzb2x2ZWRTdGF0ZSwKICAgICAgICAgICAgdXJnZW5jeTogYW5hbHlzaXMudXJnZW5jeSwKICAgICAgICAgICAgbG9jYXRpb246IGxvY2F0aW9uUG9pbnQoY29vcmRzLmxuZywgY29vcmRzLmxhdCksCiAgICAgICAgICAgIHByZWRpY3RlZERpc2Vhc2U6IGFuYWx5c2lzLnByZWRpY3RlZERpc2Vhc2UsCiAgICAgICAgICAgIGFpQW5hbHlzaXM6IGFuYWx5c2lzLnN1bW1hcnksCiAgICAgICAgICAgIHJlY29tbWVuZGVkQWN0aW9uOiBhbmFseXNpcy5hY3Rpb25SZXF1aXJlZCwKICAgICAgICAgICAgY2FsbGJhY2tXaW5kb3c6IGFuYWx5c2lzLmNhbGxiYWNrV2luZG93LAogICAgICAgICAgICBkaWZmZXJlbnRpYWxEaWFnbm9zZXM6IGFuYWx5c2lzLmRpZmZlcmVudGlhbERpYWdub3NlcyB8fCBbXSwKICAgICAgICAgICAgcmVkRmxhZ3M6IGFuYWx5c2lzLnJlZEZsYWdzIHx8IFtdLAogICAgICAgICAgICBhaUNvbmZpZGVuY2U6IGFuYWx5c2lzLmNvbmZpZGVuY2UsCiAgICAgICAgICAgIGFpQW5hbHlzaXNIYXNoOiBhbmFseXNpc0hhc2gsCiAgICAgICAgICAgIGFpTW9kZWw6IGdldEFuYWx5c2lzTW9kZWxOYW1lKCksCiAgICAgICAgICAgIGFpQW5hbHl6ZWRBdDogbmV3IERhdGUoKSwKICAgICAgICAgICAgc3ltcHRvbUR1cmF0aW9uOiBzeW1wdG9tRHVyYXRpb24gfHwgdW5kZWZpbmVkLAogICAgICAgICAgICByZXBvcnRlclJvbGU6IGZpbmFsUm9sZSwKICAgICAgICAgICAgc3RhdHVzOiAiUEVORElORyIKICAgICAgICB9KTsKICAgICAgICAKICAgICAgICBjb25zdCBzYXZlZCA9IGF3YWl0IG5ld0Nhc2Uuc2F2ZSgpOwogICAgICAgIGNvbnN0IHJlZmVyZW5jZSA9IHNhdmVkLl9pZC50b1N0cmluZygpLnNsaWNlKC04KTsKICAgICAgICBjb25zdCByZXNwb25zZSA9IGJ1aWxkUG9ydGFsUmVzcG9uc2UoewogICAgICAgICAgcm9sZTogZmluYWxSb2xlID09PSAiUEFUSUVOVCIgPyAiUEFUSUVOVCIgOiAiQ0FSRUdJVkVSIiwKICAgICAgICAgIHJlZmVyZW5jZSwKICAgICAgICAgIGFuYWx5c2lzLAogICAgICAgIH0pOwogICAgICAgIGNhc2VFdmVudHMuZW1pdCgibmV3LWNhc2UiLCBzYXZlZCk7CiAgICAgICAgCiAgICAgICAgY29uc3QgYWxlcnRNc2cgPSBgJHtyZXNwb25zZS5oZWFkaW5nfQpSZWY6ICR7cmVzcG9uc2UucmVmZXJlbmNlfQpVcmdlbmN5OiAke3Jlc3BvbnNlLnVyZ2VuY3l9ClBhdGllbnQ6ICR7c2F2ZWQucGF0aWVudE5hbWV9ICgke3NhdmVkLmFnZX0pClZpbGxhZ2U6ICR7c2F2ZWQudmlsbGFnZX0KU3ltcHRvbXM6ICR7c2F2ZWQuc3ltcHRvbXMuam9pbigiLCAiKX0KQUkgU3ltcHRvbSBBbmFseXNpczogJHtyZXNwb25zZS5hbmFseXNpc30KQWN0aW9uIHJlcXVpcmVkOiAke3Jlc3BvbnNlLmFjdGlvblJlcXVpcmVkfWA7CiAgICAgICAgbm90aWZ5QWRtaW4oYWxlcnRNc2cpOwogICAgICAgIAogICAgICAgIHJlcy5zdGF0dXMoMjAxKS5qc29uKHsgLi4uYWRkQ29vcmRpbmF0ZUFsaWFzZXMoc2F2ZWQudG9PYmplY3QoKSksIHJlc3BvbnNlIH0pOwogICAgfSBjYXRjaCAoZXJyKSB7CiAgICAgICAgY29uc29sZS5lcnJvcigiQ1JFQVRFX0VSUk9SOiIsIGVycik7CiAgICAgICAgcmVzLnN0YXR1cyg0MDApLmpzb24oeyBlcnJvcjogIlZhbGlkYXRpb24gZmFpbGVkIiB9KTsKICAgIH0KfQoKZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIGdldFN0YXRzKHJlcTogUmVxdWVzdCwgcmVzOiBSZXNwb25zZSkgewogIHRyeSB7CiAgICBjb25zdCB7IHJlZ2lvbiB9ID0gcmVxLnF1ZXJ5OwogICAgY29uc3QgZmlsdGVyID0gcmVnaW9uRmlsdGVyKHJlZ2lvbikgfHwge307CgogICAgY29uc3QgbGFzdDdEYXlzID0gbmV3IERhdGUoRGF0ZS5ub3coKSAtIDcgKiAyNCAqIDYwICogNjAgKiAxMDAwKTsKICAgIGNvbnN0IGxhc3QxNERheXMgPSBuZXcgRGF0ZShEYXRlLm5vdygpIC0gMTQgKiAyNCAqIDYwICogNjAgKiAxMDAwKTsKCiAgICBjb25zdCBbdG90YWwsIGNyaXRpY2FsLCBtb2RlcmF0ZSwgbG93LCB2aWxsYWdlT3V0YnJlYWtzLCBzdGF0ZU91dGJyZWFrcywgcGFuZGVtaWNDaGVjaywgYnlEaXN0cmljdF0gPSBhd2FpdCBQcm9taXNlLmFsbChbCiAgICAgIENhc2UuY291bnREb2N1bWVudHMoZmlsdGVyKSwKICAgICAgQ2FzZS5jb3VudERvY3VtZW50cyh7IC4uLmZpbHRlciwgdXJnZW5jeTogIkNSSVRJQ0FMIiB9KSwKICAgICAgQ2FzZS5jb3VudERvY3VtZW50cyh7IC4uLmZpbHRlciwgdXJnZW5jeTogIk1PREVSQVRFIiB9KSwKICAgICAgQ2FzZS5jb3VudERvY3VtZW50cyh7IC4uLmZpbHRlciwgdXJnZW5jeTogIkxPVyIgfSksCiAgICAgIENhc2UuYWdncmVnYXRlKFsKICAgICAgICB7ICRtYXRjaDogeyAuLi5maWx0ZXIsIGNyZWF0ZWRBdDogeyAkZ3Q6IGxhc3Q3RGF5cyB9LCBwcmVkaWN0ZWREaXNlYXNlOiB7ICRleGlzdHM6IHRydWUsICRuZTogIiIgfSB9IH0sCiAgICAgICAgeyAkZ3JvdXA6IHsgX2lkOiB7IHZpbGxhZ2U6ICIkdmlsbGFnZSIsIGRpc2Vhc2U6ICIkcHJlZGljdGVkRGlzZWFzZSIgfSwgY291bnQ6IHsgJHN1bTogMSB9IH0gfSwKICAgICAgICB7ICRtYXRjaDogeyBjb3VudDogeyAkZ3RlOiAzIH0gfSB9LAogICAgICAgIHsgJHNvcnQ6IHsgY291bnQ6IC0xIH0gfSwKICAgICAgXSksCiAgICAgIENhc2UuYWdncmVnYXRlKFsKICAgICAgICB7ICRtYXRjaDogeyAuLi5maWx0ZXIsIGNyZWF0ZWRBdDogeyAkZ3Q6IGxhc3Q3RGF5cyB9LCBwcmVkaWN0ZWREaXNlYXNlOiB7ICRleGlzdHM6IHRydWUsICRuZTogIiIgfSB9IH0sCiAgICAgICAgeyAkZ3JvdXA6IHsgX2lkOiB7IHN0YXRlOiAiJHN0YXRlIiwgZGlzZWFzZTogIiRwcmVkaWN0ZWREaXNlYXNlIiB9LCBjb3VudDogeyAkc3VtOiAxIH0sIHZpbGxhZ2VzOiB7ICRhZGRUb1NldDogIiR2aWxsYWdlIiB9IH0gfSwKICAgICAgICB7ICRtYXRjaDogeyBjb3VudDogeyAkZ3RlOiAxNSB9IH0gfSwKICAgICAgICB7ICRzb3J0OiB7IGNvdW50OiAtMSB9IH0sCiAgICAgIF0pLAogICAgICBDYXNlLmFnZ3JlZ2F0ZShbCiAgICAgICAgeyAkbWF0Y2g6IHsgLi4uZmlsdGVyLCBjcmVhdGVkQXQ6IHsgJGd0OiBsYXN0MTREYXlzIH0sIHByZWRpY3RlZERpc2Vhc2U6IHsgJGV4aXN0czogdHJ1ZSwgJG5lOiAiIiB9IH0gfSwKICAgICAgICB7ICRncm91cDogeyBfaWQ6ICIkcHJlZGljdGVkRGlzZWFzZSIsIHN0YXRlczogeyAkYWRkVG9TZXQ6ICIkc3RhdGUiIH0sIGNvdW50OiB7ICRzdW06IDEgfSB9IH0sCiAgICAgICAgeyAkcHJvamVjdDogeyBkaXNlYXNlOiAiJF9pZCIsIHN0YXRlQ291bnQ6IHsgJHNpemU6ICIkc3RhdGVzIiB9LCBjb3VudDogMSB9IH0sCiAgICAgICAgeyAkbWF0Y2g6IHsgc3RhdGVDb3VudDogeyAkZ3RlOiAzIH0sIGNvdW50OiB7ICRndGU6IDMwIH0gfSB9LAogICAgICAgIHsgJHNvcnQ6IHsgY291bnQ6IC0xIH0gfSwKICAgICAgXSksCiAgICAgIENhc2UuYWdncmVnYXRlKFsKICAgICAgICB7ICRtYXRjaDogZmlsdGVyIH0sCiAgICAgICAgeyAkZ3JvdXA6IHsgX2lkOiAiJGRpc3RyaWN0IiwgY291bnQ6IHsgJHN1bTogMSB9IH0gfSwKICAgICAgICB7ICRzb3J0OiB7IGNvdW50OiAtMSB9IH0sCiAgICAgICAgeyAkcHJvamVjdDogeyBfaWQ6IDAsIGRpc3RyaWN0OiAiJF9pZCIsIGNvdW50OiAxIH0gfSwKICAgICAgXSksCiAgICBdKTsKCiAgICB0eXBlIEFsZXJ0TGV2ZWwgPSAiT1VUQlJFQUsiIHwgIlJFR0lPTkFMX0FMRVJUIiB8ICJQQU5ERU1JQ19BTEVSVCIOwogICAgaW50ZXJmYWNlIE91dGJyZWFrQWxlcnQgewogICAgICBsb2NhdGlvbjogc3RyaW5nOwogICAgICBkaXNlYXNlOiBzdHJpbmc7CiAgICAgIGNvdW50OiBudW1iZXI7CiAgICAgIGFsZXJ0TGV2ZWw6IEFsZXJ0TGV2ZWw7CiAgICB9CgogICAgY29uc3QgcGFuZGVtaWNBbGVydHM6IE91dGJyZWFrQWxlcnRbXSA9IHBhbmRlbWljQ2hlY2subWFwKChwOiBhbnkpID0+ICh7CiAgICAgIGxvY2F0aW9uOiAiTXVsdGlwbGUgcmVnaW9ucyIsCiAgICAgIGRpc2Vhc2U6IHAuZGlzZWFzZSwKICAgICAgY291bnQ6IHAuY291bnQsCiAgICAgIGFsZXJ0TGV2ZWw6ICJQQU5ERU1JQ19BTEVSVCIgYXMgQWxlcnRMZXZlbCwKICAgIH0pKTsKCiAgICBjb25zdCBwYW5kZW1pY0Rpc2Vhc2VzID0gbmV3IFNldChwYW5kZW1pY0FsZXJ0cy5tYXAoYSA9PiBhLmRpc2Vhc2UpKTsKICAgIGNvbnN0IHJlZ2lvbmFsQWxlcnRzOiBPdXRicmVha0FsZXJ0W10gPSBzdGF0ZU91dGJyZWFrcwogICAgICAuZmlsdGVyKChvOiBhbnkpID0+ICFwYW5kZW1pY0Rpc2Vhc2VzLmhhcyhvLl9pZC5kaXNlYXNlKSkKICAgICAgLm1hcCgobzogYW55KSA9PiAoewogICAgICAgIGxvY2F0aW9uOiBvLl9pZC5zdGF0ZSwKICAgICAgICBkaXNlYXNlOiBvLl9pZC5kaXNlYXNlLAogICAgICAgIGNvdW50OiBvLmNvdW50LAogICAgICAgIGFsZXJ0TGV2ZWw6ICJSRUdJT05BTF9BTEVSVCIgYXMgQWxlcnRMZXZlbCwKICAgICAgfSkpOwoKICAgIGNvbnN0IGVzY2FsYXRlZERpc2Vhc2VzID0gbmV3IFNldChbLi4ucGFuZGVtaWNBbGVydHMsIC4uLnJlZ2lvbmFsQWxlcnRzXS5tYXAoYSA9PiBhLmRpc2Vhc2UpKTsKICAgIGNvbnN0IHZpbGxhZ2VBbGVydHM6IE91dGJyZWFrQWxlcnRbXSA9IHZpbGxhZ2VPdXRicmVha3MKICAgICAgLmZpbHRlcigobzogYW55KSA9PiAhZXNjYWxhdGVkRGlzZWFzZXMuaGFzKG8uX2lkLmRpc2Vhc2UpKQogICAgICAubWFwKChvOiBhbnkpID0+ICh7CiAgICAgICAgbG9jYXRpb246IG8uX2lkLnZpbGxhZ2UsCiAgICAgICAgZGlzZWFzZTogby5faWQuZGlzZWFzZSwKICAgICAgICBjb3VudDogby5jb3VudCwKICAgICAgICBhbGVydExldmVsOiAiT1VUQlJFQUsiIGFzIEFsZXJ0TGV2ZWwsCiAgICAgIH0pKTsKCiAgICBjb25zdCBvdXRicmVha3M6IE91dGJyZWFrQWxlcnRbXSA9IFsuLi5wYW5kZW1pY0FsZXJ0cywgLi4ucmVnaW9uYWxBbGVydHMsIC4uLnZpbGxhZ2VBbGVydHNdOwoKICAgIGNvbnN0IHJlZ2lvbk5hbWUgPSAocmVnaW9uIGFzIHN0cmluZykgfHwgIkdMT0JBTCI7CiAgICByZXMuanNvbih7IHRvdGFsLCBjcml0aWNhbCwgbW9kZXJhdGUsIGxvdywgcG9wdWxhdGlvbjogUE9QVUxBVElPTlNbcmVnaW9uTmFtZV0gfHwgMCwgYnlEaXN0cmljdCwgb3V0YnJlYWtzIH0pOwogIH0gY2F0Y2ggKGVycm9yKSB7CiAgICByZXMuc3RhdHVzKDUwMCkuanNvbih7IGVycm9yOiAiRmFpbGVkIiB9KTsKICB9Cn0KCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBnZXRWaWxsYWdlU3RhdHMocmVxOiBSZXF1ZXN0LCByZXM6IFJlc3BvbnNlKSB7CiAgICBjb25zdCB7IHJlZ2lvbiB9ID0gcmVxLnF1ZXJ5OwogICAgY29uc3QgZmlsdGVyID0gcmVnaW9uRmlsdGVyKHJlZ2lvbikgfHwge307CgogICAgY29uc3Qgc3RhdHMgPSBhd2FpdCBDYXNlLmFnZ3JlZ2F0ZShbCiAgICAgIHsgJG1hdGNoOiBmaWx0ZXIgfSwKICAgICAgeyAkZ3JvdXA6IHsgX2lkOiAiJHZpbGxhZ2UiLCBjYXNlQ291bnQ6IHsgJHN1bTogMSB9LCBjcml0aWNhbENvdW50OiB7ICRzdW06IHsgJGNvbmQ6IFt7ICRlcTogWyIkdXJnZW5jeSIsICJDUklUSUNBTCJdIH0sIDEsIDBdIH0gfSwgbG9jYXRpb246IHsgJGZpcnN0OiAiJGxvY2F0aW9uIiB9IH19CiAgICBdKTsKICAgIGNvbnN0IHsgZ2V0TG9jYXRpb25Qb3B1bGF0aW9uIH0gPSByZXF1aXJlKCIuLi91dGlscy9nZW9jb2RlIik7CiAgICByZXMuanNvbihzdGF0cy5tYXAocyA9PiAoewogICAgICB2aWxsYWdlOiBzLl9pZCwKICAgICAgY2FzZUNvdW50OiBzLmNhc2VDb3VudCwKICAgICAgY3JpdGljYWxDb3VudDogcy5jcml0aWNhbENvdW50LAogICAgICBsYXQ6IHMubG9jYXRpb24/LmNvb3JkaW5hdGVzPy5bMV0sCiAgICAgIGxuZzogcy5sb2NhdGlvbj8uY29vcmRpbmF0ZXM/LlswXSwKICAgICAgcG9wdWxhdGlvbjogZ2V0TG9jYXRpb25Qb3B1bGF0aW9uKHMuX2lkKSwKICAgIH0pKSk7Cn0KCmV4cG9ydCBhc3luYyBmdW5jdGlvbiBnZXRTdHJlYW0ocmVxOiBSZXF1ZXN0LCByZXM6IFJlc3BvbnNlKSB7CiAgcmVzLnNldEhlYWRlcigiQ29udGVudC1UeXBlIiwgInRleHQvZXZlbnQtc3RyZWFtIik7CiAgcmVzLnNldEhlYWRlcigiQ2FjaGUtQ29udHJvbCIsICJuby1jYWNoZSIpOwogIHJlcy5zZXRIZWFkZXIoIkNvbm5lY3Rpb24iLCAia2VlcC1hbGl2ZSIpOwogIHJlcy5mbHVzaEhlYWRlcnMoKTsKICBjb25zdCBvbk5ld0Nhc2UgPSAoZGF0YTogYW55KSA9PiB7IHJlcy53cml0ZShgZGF0YTogJHtKU09OLnN0cmluZ2lmeShkYXRhKX1cblxuYCk7IH07CiAgY2FzZUV2ZW50cy5vbigibmV3LWNhc2UiLCBvbk5ld0Nhc2UpOwogIHJlcS5vbigiY2xvc2UiLCAoKSA9PiB7IGNhc2VFdmVudHMub2ZmKCJuZXctY2FzZSIsIG9uTmV3Q2FzZSk7IH0pOwp9CgpleHBvcnQgYXN5bmMgZnVuY3Rpb24gZ2V0Q2FzZUJ5SWQocmVxOiBSZXF1ZXN0LCByZXM6IFJlc3BvbnNlKSB7CiAgICBjb25zdCBjYXNlRG9jID0gYXdhaXQgQ2FzZS5maW5kQnlJZChyZXEucGFyYW1zLmlkKS5sZWFuKCk7CiAgICBpZiAoIWNhc2VEb2MpIHsKICAgICAgcmVzLnN0YXR1cyg0MDQpLmpzb24oeyBlcnJvcjogIkNhc2Ugbm90IGZvdW5kIiB9KTsKICAgICAgcmV0dXJuOwogICAgfQogICAgcmVzLmpzb24oYWRkQ29vcmRpbmF0ZUFsaWFzZXMoY2FzZURvYykpOwp9CgpleHBvcnQgYXN5bmMgZnVuY3Rpb24gY2xhaW1DYXNlKHJlcTogUmVxdWVzdCwgcmVzOiBSZXNwb25zZSkgewogICAgY29uc3QgdXBkYXRlZCA9IGF3YWl0IENhc2UuZmluZEJ5SWRBbmRVcGRhdGUocmVxLnBhcmFtcy5pZCwgeyBzdGF0dXM6ICJJTl9QUk9HUkVTUyIgfSwgeyBuZXc6IHRydWUgfSk7CiAgICByZXMuanNvbih1cGRhdGVkKTsKfQoKZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIHJlc29sdmVDYXNlKHJlcTogUmVxdWVzdCwgcmVzOiBSZXNwb25zZSkgewogICAgY29uc3QgdXBkYXRlZCA9IGF3YWl0IENhc2UuZmluZEJ5SWRBbmRVcGRhdGUocmVxLnBhcmFtcy5pZCwgeyBzdGF0dXM6ICJSRVNPTFZFRCIgfSwgeyBuZXc6IHRydWUgfSk7CiAgICByZXMuanNvbih1cGRhdGVkKTsKfQo=
+import { Request, Response } from "express";
+import Case, { Urgency } from "../models/Case";
+import { caseEvents } from "../utils/events";
+import { resolveLocation, searchLocations } from "../utils/geocode";
+import { notifyAdmin } from "../utils/notifications";
+import { getAnalysisFingerprint, getAnalysisModelName } from "../utils/analysisFingerprint";
+import {
+  analyzeSymptomsStrict,
+  buildPortalResponse,
+  PatientContext,
+} from "../utils/symptomAnalyzer";
+
+/**
+ * Normalize whatever the user typed into an array of symptom strings.
+ * Accepts any format:
+ *   - already an array  → trimmed, empty-stripped array
+ *   - comma-separated   → split on commas
+ *   - newline-separated → split on newlines
+ *   - semicolon-separated → split on semicolons
+ *   - plain sentence with no delimiter → single-element array, unchanged
+ * This mirrors the old "no commas → single-element array" behavior while
+ * also accepting the common alternatives the frontend textarea produces.
+ */
+function normalizeSymptoms(input: unknown): string[] {
+  const splitOne = (raw: string): string[] => {
+    const trimmed = raw.trim();
+    if (!trimmed) return [];
+    return trimmed
+      .split(/[\n\r,;]+/g)
+      .map((s) => s.trim())
+      .filter(Boolean);
+  };
+
+  if (Array.isArray(input)) {
+    return input.flatMap((item) => splitOne(String(item)));
+  }
+  return splitOne(String(input || ""));
+}
+
+const POPULATIONS: Record<string, number> = {
+  "GLOBAL": 8000000000,
+  "INDIA": 1400000000,
+  "CT": 3600000,
+  "TEXAS": 30000000,
+};
+
+function locationPoint(longitude: number, latitude: number) {
+  return {
+    type: "Point" as const,
+    coordinates: [longitude, latitude] as [number, number],
+  };
+}
+
+function addCoordinateAliases<T extends Record<string, any>>(caseDoc: T) {
+  const coordinates = caseDoc.location?.coordinates;
+  if (Array.isArray(coordinates) && coordinates.length === 2) {
+    return {
+      ...caseDoc,
+      longitude: coordinates[0],
+      latitude: coordinates[1],
+    };
+  }
+  return caseDoc;
+}
+
+function regionFilter(region: unknown): Record<string, any> | null {
+  if (region === "CT") {
+    return {
+      $or: [
+        { state: { $regex: "CT|Connecticut", $options: "i" } },
+        { village: { $regex: "CT|Connecticut", $options: "i" } },
+      ],
+    };
+  }
+  if (region === "TEXAS") {
+    return {
+      $or: [
+        { state: { $regex: "TX|Texas", $options: "i" } },
+        { village: { $regex: "TX|Texas", $options: "i" } },
+      ],
+    };
+  }
+  if (region === "INDIA") return { "location.coordinates.0": { $gt: 60, $lt: 100 } };
+  return null;
+}
+
+function buildCaseFilter(query: Request["query"]) {
+  const { urgency, district, search, region } = query;
+  const clauses: Record<string, any>[] = [];
+
+  if (urgency && urgency !== "ALL") clauses.push({ urgency: urgency as Urgency });
+  if (district) clauses.push({ district: { $regex: district as string, $options: "i" } });
+
+  const scopedRegion = regionFilter(region);
+  if (scopedRegion) clauses.push(scopedRegion);
+
+  if (search) {
+    clauses.push({
+      $or: [
+        { patientName: { $regex: search as string, $options: "i" } },
+        { village: { $regex: search as string, $options: "i" } },
+        { symptoms: { $regex: search as string, $options: "i" } },
+        { predictedDisease: { $regex: search as string, $options: "i" } },
+      ],
+    });
+  }
+
+  if (clauses.length === 0) return {};
+  if (clauses.length === 1) return clauses[0];
+  return { $and: clauses };
+}
+
+export async function getCases(req: Request, res: Response) {
+  try {
+    const { page = "1", limit = "50" } = req.query;
+    const filter = buildCaseFilter(req.query);
+
+    const pageNum = parseInt(page as string, 10);
+    const limitNum = parseInt(limit as string, 10);
+    const skip = (pageNum - 1) * limitNum;
+
+    const [cases, total] = await Promise.all([
+      Case.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limitNum).lean(),
+      Case.countDocuments(filter),
+    ]);
+
+    res.json({ cases: cases.map(addCoordinateAliases), total, page: pageNum, totalPages: Math.ceil(total / limitNum) });
+  } catch (error) {
+    res.status(500).json({ error: "Failed" });
+  }
+}
+
+export function getLocationSuggestions(req: Request, res: Response) {
+  const query = String(req.query.query || "");
+  res.json({ locations: searchLocations(query) });
+}
+
+/** Summarize recent circulating diseases in a district/state for cluster-aware LLM context. */
+async function buildClusterContext(districtName: string, stateName: string): Promise<string | undefined> {
+  const last7Days = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  const locationFilter = districtName && districtName !== "Unknown"
+    ? { district: { $regex: districtName, $options: "i" } }
+    : stateName && stateName !== "Unknown"
+    ? { state: { $regex: stateName, $options: "i" } }
+    : null;
+
+  if (!locationFilter) return undefined;
+
+  const recent = await Case.aggregate([
+    { $match: { ...locationFilter, createdAt: { $gt: last7Days }, predictedDisease: { $exists: true, $ne: "" } } },
+    { $group: { _id: "$predictedDisease", count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+    { $limit: 5 },
+  ]);
+
+  if (recent.length === 0) return undefined;
+
+  const scope = districtName && districtName !== "Unknown" ? `${districtName} district` : `${stateName} state`;
+  const parts = recent.map((r: { _id: string; count: number }) => `${r.count} case${r.count > 1 ? "s" : ""} of ${r._id}`);
+  return `${parts.join(", ")} reported in ${scope} in the last 7 days`;
+}
+
+export async function createCase(req: Request, res: Response) {
+    try {
+        const { symptoms, role, reporterRole, village, district, state, latitude, longitude, location: requestLocation, symptomDuration, ...rest } = req.body;
+        const normalizedSymptoms = normalizeSymptoms(symptoms);
+
+        if (normalizedSymptoms.length === 0) {
+          res.status(400).json({ error: "At least one symptom is required." });
+          return;
+        }
+
+        const location = resolveLocation(village || "");
+        const resolvedDistrict = district || location.district || location.name;
+        const resolvedState = state || location.state;
+
+        // Build cluster context from recent cases in this area (fire in parallel with setup)
+        const clusterContext = await buildClusterContext(resolvedDistrict, resolvedState);
+
+        const patientCtx: PatientContext = {
+          age: Number.isFinite(Number(rest.age)) ? Number(rest.age) : undefined,
+          gender: rest.gender || undefined,
+          symptomDuration: symptomDuration || undefined,
+          clusterContext,
+        };
+
+        // Strict analyzer: blocks on LLM warmup and keeps retrying the LLM
+        // until it returns a real classification. It never returns the
+        // pending placeholder, so the case will always be persisted with a
+        // real predictedDisease.
+        const analysis = await analyzeSymptomsStrict(normalizedSymptoms, patientCtx);
+        const analysisHash = getAnalysisFingerprint(normalizedSymptoms);
+        const requestCoordinates = requestLocation?.coordinates;
+        const coords = Array.isArray(requestCoordinates) &&
+          Number.isFinite(Number(requestCoordinates[0])) &&
+          Number.isFinite(Number(requestCoordinates[1]))
+          ? { lat: Number(requestCoordinates[1]), lng: Number(requestCoordinates[0]) }
+          : Number.isFinite(latitude) && Number.isFinite(longitude)
+          ? { lat: Number(latitude), lng: Number(longitude) }
+          : { lat: location.lat, lng: location.lng };
+        const finalRole = reporterRole || role || (rest.worker_phone === "Web-Patient" ? "PATIENT" : "CAREGIVER");
+
+        const newCase = new Case({
+            ...rest,
+            symptoms: normalizedSymptoms,
+            village: location.name,
+            district: resolvedDistrict,
+            state: resolvedState,
+            urgency: analysis.urgency,
+            location: locationPoint(coords.lng, coords.lat),
+            predictedDisease: analysis.predictedDisease,
+            aiAnalysis: analysis.summary,
+            recommendedAction: analysis.actionRequired,
+            callbackWindow: analysis.callbackWindow,
+            differentialDiagnoses: analysis.differentialDiagnoses || [],
+            redFlags: analysis.redFlags || [],
+            aiConfidence: analysis.confidence,
+            aiAnalysisHash: analysisHash,
+            aiModel: getAnalysisModelName(),
+            aiAnalyzedAt: new Date(),
+            symptomDuration: symptomDuration || undefined,
+            reporterRole: finalRole,
+            status: "PENDING"
+        });
+        
+        const saved = await newCase.save();
+        const reference = saved._id.toString().slice(-8);
+        const response = buildPortalResponse({
+          role: finalRole === "PATIENT" ? "PATIENT" : "CAREGIVER",
+          reference,
+          analysis,
+        });
+        caseEvents.emit("new-case", saved);
+        
+        const alertMsg = `${response.heading}
+Ref: ${response.reference}
+Urgency: ${response.urgency}
+Patient: ${saved.patientName} (${saved.age})
+Village: ${saved.village}
+Symptoms: ${saved.symptoms.join(", ")}
+AI Symptom Analysis: ${response.analysis}
+Action required: ${response.actionRequired}`;
+        notifyAdmin(alertMsg);
+        
+        res.status(201).json({ ...addCoordinateAliases(saved.toObject()), response });
+    } catch (err) {
+        console.error("CREATE_ERROR:", err);
+        res.status(400).json({ error: "Validation failed" });
+    }
+}
+
+export async function getStats(req: Request, res: Response) {
+  try {
+    const { region } = req.query;
+    const filter = regionFilter(region) || {};
+
+    const last7Days = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const last14Days = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
+
+    const [total, critical, moderate, low, villageOutbreaks, stateOutbreaks, pandemicCheck, byDistrict] = await Promise.all([
+      Case.countDocuments(filter),
+      Case.countDocuments({ ...filter, urgency: "CRITICAL" }),
+      Case.countDocuments({ ...filter, urgency: "MODERATE" }),
+      Case.countDocuments({ ...filter, urgency: "LOW" }),
+      // Village-level outbreak: ≥3 cases, same disease + village, last 7 days
+      Case.aggregate([
+        { $match: { ...filter, createdAt: { $gt: last7Days }, predictedDisease: { $exists: true, $ne: "" } } },
+        { $group: { _id: { village: "$village", disease: "$predictedDisease" }, count: { $sum: 1 } } },
+        { $match: { count: { $gte: 3 } } },
+        { $sort: { count: -1 } },
+      ]),
+      // State-level alert: ≥15 cases, same disease + state, last 7 days
+      Case.aggregate([
+        { $match: { ...filter, createdAt: { $gt: last7Days }, predictedDisease: { $exists: true, $ne: "" } } },
+        { $group: { _id: { state: "$state", disease: "$predictedDisease" }, count: { $sum: 1 }, villages: { $addToSet: "$village" } } },
+        { $match: { count: { $gte: 15 } } },
+        { $sort: { count: -1 } },
+      ]),
+      // Pandemic check: same disease across ≥3 distinct states, last 14 days
+      Case.aggregate([
+        { $match: { ...filter, createdAt: { $gt: last14Days }, predictedDisease: { $exists: true, $ne: "" } } },
+        { $group: { _id: "$predictedDisease", states: { $addToSet: "$state" }, count: { $sum: 1 } } },
+        { $project: { disease: "$_id", stateCount: { $size: "$states" }, count: 1 } },
+        { $match: { stateCount: { $gte: 3 }, count: { $gte: 30 } } },
+        { $sort: { count: -1 } },
+      ]),
+      Case.aggregate([
+        { $match: filter },
+        { $group: { _id: "$district", count: { $sum: 1 } } },
+        { $sort: { count: -1 } },
+        { $project: { _id: 0, district: "$_id", count: 1 } },
+      ]),
+    ]);
+
+    // Merge into unified alerts array with severity tiers
+    type AlertLevel = "OUTBREAK" | "REGIONAL_ALERT" | "PANDEMIC_ALERT";
+    interface OutbreakAlert {
+      location: string;
+      disease: string;
+      count: number;
+      alertLevel: AlertLevel;
+    }
+
+    // Pandemic alerts (highest tier, 14-day window)
+    const pandemicAlerts: OutbreakAlert[] = pandemicCheck.map((p: any) => ({
+      location: "Multiple regions",
+      disease: p.disease,
+      count: p.count,
+      alertLevel: "PANDEMIC_ALERT" as AlertLevel,
+    }));
+
+    // State-level regional alerts — exclude diseases already flagged as pandemic
+    const pandemicDiseases = new Set(pandemicAlerts.map(a => a.disease));
+    const regionalAlerts: OutbreakAlert[] = stateOutbreaks
+      .filter((o: any) => !pandemicDiseases.has(o._id.disease))
+      .map((o: any) => ({
+        location: o._id.state,
+        disease: o._id.disease,
+        count: o.count,
+        alertLevel: "REGIONAL_ALERT" as AlertLevel,
+      }));
+
+    // Village-level outbreaks — exclude diseases already at higher tier
+    const escalatedDiseases = new Set([...pandemicAlerts, ...regionalAlerts].map(a => a.disease));
+    const villageAlerts: OutbreakAlert[] = villageOutbreaks
+      .filter((o: any) => !escalatedDiseases.has(o._id.disease))
+      .map((o: any) => ({
+        location: o._id.village,
+        disease: o._id.disease,
+        count: o.count,
+        alertLevel: "OUTBREAK" as AlertLevel,
+      }));
+
+    const outbreaks: OutbreakAlert[] = [...pandemicAlerts, ...regionalAlerts, ...villageAlerts];
+
+    const regionName = (region as string) || "GLOBAL";
+    res.json({ total, critical, moderate, low, population: POPULATIONS[regionName] || 0, byDistrict, outbreaks });
+  } catch (error) {
+    res.status(500).json({ error: "Failed" });
+  }
+}
+
+export async function getVillageStats(req: Request, res: Response) {
+    const { region } = req.query;
+    const filter = regionFilter(region) || {};
+
+    const stats = await Case.aggregate([
+      { $match: filter },
+      { $group: { _id: "$village", caseCount: { $sum: 1 }, criticalCount: { $sum: { $cond: [{ $eq: ["$urgency", "CRITICAL"] }, 1, 0] } }, location: { $first: "$location" } }}
+    ]);
+    const { getLocationPopulation } = require("../utils/geocode");
+    res.json(stats.map(s => ({
+      village: s._id,
+      caseCount: s.caseCount,
+      criticalCount: s.criticalCount,
+      lat: s.location?.coordinates?.[1],
+      lng: s.location?.coordinates?.[0],
+      population: getLocationPopulation(s._id),
+    })));
+}
+
+export async function getStream(req: Request, res: Response) {
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
+  res.flushHeaders();
+  const onNewCase = (data: any) => { res.write(`data: ${JSON.stringify(data)}\n\n`); };
+  caseEvents.on("new-case", onNewCase);
+  req.on("close", () => { caseEvents.off("new-case", onNewCase); });
+}
+
+export async function getCaseById(req: Request, res: Response) {
+    const caseDoc = await Case.findById(req.params.id).lean();
+    if (!caseDoc) {
+      res.status(404).json({ error: "Case not found" });
+      return;
+    }
+    res.json(addCoordinateAliases(caseDoc));
+}
+
+export async function claimCase(req: Request, res: Response) {
+    const updated = await Case.findByIdAndUpdate(req.params.id, { status: "IN_PROGRESS" }, { new: true });
+    res.json(updated);
+}
+
+export async function resolveCase(req: Request, res: Response) {
+    const updated = await Case.findByIdAndUpdate(req.params.id, { status: "RESOLVED" }, { new: true });
+    res.json(updated);
+}

@@ -133,7 +133,13 @@ export function SevakPortal({ onCaseCreated }: Props) {
         reporterRole: role,
         worker_phone: role === "PATIENT" ? "Web-Patient" : "Web-Caregiver",
         age: parseInt(formData.age),
-        symptoms: formData.symptoms.split(",").map(s => s.trim()).filter(Boolean),
+        // Split on commas, newlines, or semicolons so a textarea with one
+        // symptom per line is sent as a proper list — otherwise the LLM
+        // receives a single malformed blob and classification quality drops.
+        symptoms: formData.symptoms
+          .split(/[\n\r,;]+/g)
+          .map((s) => s.trim())
+          .filter(Boolean),
       };
 
       const res = await fetch("/api/cases", {
@@ -147,6 +153,11 @@ export function SevakPortal({ onCaseCreated }: Props) {
       if (res.ok && data.response) {
         setSubmissionResponse(data.response);
         onCaseCreated();
+      } else if (res.status === 503 && data?.code === "ANALYZER_UNAVAILABLE") {
+        setError(
+          data.error ||
+            "The AI symptom analyzer is warming up. Please wait a few seconds and submit again — your case has not been logged."
+        );
       } else {
         setError(data.error || "Unable to log case. Please check the patient details and try again.");
       }
@@ -308,7 +319,7 @@ export function SevakPortal({ onCaseCreated }: Props) {
           </div>
         </div>
         <div className="form-group">
-          <label>Symptoms (comma separated)</label>
+          <label>Symptoms (one per line, or comma separated)</label>
           <textarea
             required
             placeholder="e.g. Fever, Cough, Chest pain"
