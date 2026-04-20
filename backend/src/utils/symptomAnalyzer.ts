@@ -1,5 +1,5 @@
 import { Urgency } from "../models/Case";
-import { isSymptomModelReady } from "./localModel";
+import { ensureLocalSymptomModel, isSymptomModelReady } from "./localModel";
 import { findCachedAnalysis, cacheAnalysis } from "./symptomVectorCache";
 
 export interface PatientContext {
@@ -333,7 +333,9 @@ export function buildPortalResponse(params: {
 }
 
 // ---------------------------------------------------------------------------
-// Main entry point
+// Main entry point — may return PENDING_ANALYSIS if LLM unavailable and
+// cache has no neighbour. Used by batch/seed paths where a placeholder is
+// acceptable. Interactive submissions must use `analyzeSymptomsStrict`.
 // ---------------------------------------------------------------------------
 export async function analyzeSymptoms(symptoms: string[], ctx: PatientContext = {}): Promise<SymptomAnalysis> {
   const llmReady = process.env.SYMPTOM_ANALYZER === "gemma" || isSymptomModelReady();
@@ -358,4 +360,73 @@ export async function analyzeSymptoms(symptoms: string[], ctx: PatientContext = 
   // Nothing available — return pending placeholder
   console.warn("[Analyzer] LLM unavailable and no cache hit — returning pending placeholder.");
   return PENDING_ANALYSIS;
+}
+
+// ---------------------------------------------------------------------------
+// Strict entry point — used by interactive patient/caregiver submissions.
+// Blocks on LLM warmup and keeps retrying the LLM (with exponential backoff)
+// until it returns a real classification. NEVER returns PENDING_ANALYSIS and
+// NEVER throws: the caller can rely on always getting a real SymptomAnalysis
+// from Gemma (or from a semantically equivalent cached LLM result).
+// ---------------------------------------------------------------------------
+export async function analyzeSymptomsStrict(
+  symptoms: string[],
+  ctx: PatientContext = {},
+): Promise<SymptomAnalysis> {
+  const baseDelayMs = Math.max(100, Number(process.env.GEMMA_STRICT_RETRY_MS || 750));
+  const maxDelayMs = Math.max(baseDelayMs, Number(process.env.GEMMA_STRICT_MAX_DELAY_MS || 15000));
+
+  // Block on warmup so the very first submission after boot still gets real AI.
+  try {
+    await ensureLocalSymptomModel();
+  } catch (err) {
+    console.warn("[Analyzer] ensureLocalSymptomModel threw — will still attempt LLM.", err);
+  }
+
+  let attempt = 0;
+  // Unbounded retry loop: the request blocks until the LLM classifies the
+  // case. This is intentional — the frontend stays in its "Logging..."
+  // state and we never persist a pending placeholder.
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    attempt += 1;
+    try {
+      const result = await analyzeWithGemma(symptoms, ctx);
+      if (result) {
+        void cacheAnalysis(symptoms, result, "llm");
+        if (attempt > 1) {
+          console.log(`[Analyzer] Strict: classified on attempt ${attempt}.`);
+        }
+        return result;
+      }
+      console.warn(`[Analyzer] Strict attempt ${attempt} produced no result — retrying.`);
+    } catch (err) {
+      console.warn(`[Analyzer] Strict attempt ${attempt} errored — retrying.`, err);
+    }
+
+    // If we have a cached analysis from a previous semantically similar case,
+    // we can short-circuit on the second attempt onwards. This lets us avoid
+    // burning time on an LLM that's clearly down while still surfacing a
+    // real classification.
+    if (attempt >= 2) {
+      const cached = await findCachedAnalysis(symptoms);
+      if (cached) {
+        console.log(`[Analyzer] Strict: LLM unavailable after ${attempt} attempts, serving cached result from a similar prior case.`);
+        return cached as SymptomAnalysis;
+      }
+    }
+
+    // Exponential backoff, capped — keeps us polite to a struggling LLM but
+    // never gives up. While warmup is still in progress `ensureLocalSymptomModel`
+    // will also cheaply await the in-flight warmup promise on next call.
+    const delay = Math.min(maxDelayMs, baseDelayMs * Math.pow(2, Math.min(attempt - 1, 6)));
+    await new Promise((resolve) => setTimeout(resolve, delay));
+
+    // Re-await warmup in case Ollama was restarted mid-flight.
+    try {
+      await ensureLocalSymptomModel();
+    } catch {
+      // Swallow — next LLM attempt will surface the real error.
+    }
+  }
 }

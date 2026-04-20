@@ -4,7 +4,38 @@ import { caseEvents } from "../utils/events";
 import { resolveLocation, searchLocations } from "../utils/geocode";
 import { notifyAdmin } from "../utils/notifications";
 import { getAnalysisFingerprint, getAnalysisModelName } from "../utils/analysisFingerprint";
-import { analyzeSymptoms, buildPortalResponse, PatientContext } from "../utils/symptomAnalyzer";
+import {
+  analyzeSymptomsStrict,
+  buildPortalResponse,
+  PatientContext,
+} from "../utils/symptomAnalyzer";
+
+/**
+ * Normalize whatever the user typed into an array of symptom strings.
+ * Accepts any format:
+ *   - already an array  → trimmed, empty-stripped array
+ *   - comma-separated   → split on commas
+ *   - newline-separated → split on newlines
+ *   - semicolon-separated → split on semicolons
+ *   - plain sentence with no delimiter → single-element array, unchanged
+ * This mirrors the old "no commas → single-element array" behavior while
+ * also accepting the common alternatives the frontend textarea produces.
+ */
+function normalizeSymptoms(input: unknown): string[] {
+  const splitOne = (raw: string): string[] => {
+    const trimmed = raw.trim();
+    if (!trimmed) return [];
+    return trimmed
+      .split(/[\n\r,;]+/g)
+      .map((s) => s.trim())
+      .filter(Boolean);
+  };
+
+  if (Array.isArray(input)) {
+    return input.flatMap((item) => splitOne(String(item)));
+  }
+  return splitOne(String(input || ""));
+}
 
 const POPULATIONS: Record<string, number> = {
   "GLOBAL": 8000000000,
@@ -132,9 +163,12 @@ async function buildClusterContext(districtName: string, stateName: string): Pro
 export async function createCase(req: Request, res: Response) {
     try {
         const { symptoms, role, reporterRole, village, district, state, latitude, longitude, location: requestLocation, symptomDuration, ...rest } = req.body;
-        const normalizedSymptoms = Array.isArray(symptoms)
-          ? symptoms.map((s: unknown) => String(s).trim()).filter(Boolean)
-          : String(symptoms || "").split(",").map((s) => s.trim()).filter(Boolean);
+        const normalizedSymptoms = normalizeSymptoms(symptoms);
+
+        if (normalizedSymptoms.length === 0) {
+          res.status(400).json({ error: "At least one symptom is required." });
+          return;
+        }
 
         const location = resolveLocation(village || "");
         const resolvedDistrict = district || location.district || location.name;
@@ -150,7 +184,11 @@ export async function createCase(req: Request, res: Response) {
           clusterContext,
         };
 
-        const analysis = await analyzeSymptoms(normalizedSymptoms, patientCtx);
+        // Strict analyzer: blocks on LLM warmup and keeps retrying the LLM
+        // until it returns a real classification. It never returns the
+        // pending placeholder, so the case will always be persisted with a
+        // real predictedDisease.
+        const analysis = await analyzeSymptomsStrict(normalizedSymptoms, patientCtx);
         const analysisHash = getAnalysisFingerprint(normalizedSymptoms);
         const requestCoordinates = requestLocation?.coordinates;
         const coords = Array.isArray(requestCoordinates) &&
