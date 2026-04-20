@@ -182,14 +182,11 @@ async function analyzeWithGemma(symptoms: string[], ctx: PatientContext = {}): P
   const model = process.env.GEMMA_MODEL || "gemma4:e2b";
   const keepAlive = process.env.OLLAMA_KEEP_ALIVE || "30m";
   const numCtx = Number(process.env.GEMMA_NUM_CTX || 2048);
-  // 600 minimum — a full JSON response with differentials + redFlags runs 500-700 tokens.
-  // 360 caused silent truncation → JSON parse failure → wrong results.
   const numPredict = Number(process.env.GEMMA_NUM_PREDICT || 600);
   const timeoutMs = Number(process.env.GEMMA_TIMEOUT_MS || 45000);
 
   const cleanedSymptoms = symptoms.map(cleanSymptom).filter(Boolean);
 
-  // Build patient context lines for the prompt
   const patientLines: string[] = [];
   if (ctx.age !== undefined && ctx.gender) {
     patientLines.push(`Patient: ${ctx.age}-year-old ${ctx.gender}`);
@@ -346,18 +343,15 @@ export async function analyzeSymptoms(symptoms: string[], ctx: PatientContext = 
       void cacheAnalysis(symptoms, result, "llm");
       return result;
     }
-    // LLM failed — fall through to cache
     console.warn("[Analyzer] LLM call failed, checking vector cache as fallback.");
   }
 
-  // Check vector cache for a semantically similar past result (context not used for cache key)
   const cached = await findCachedAnalysis(symptoms);
   if (cached) {
     console.log("[Analyzer] Serving result from vector cache.");
     return cached as SymptomAnalysis;
   }
 
-  // Nothing available — return pending placeholder
   console.warn("[Analyzer] LLM unavailable and no cache hit — returning pending placeholder.");
   return PENDING_ANALYSIS;
 }

@@ -54,7 +54,6 @@ function extractJson(raw: string): string {
   const withoutFence = raw.replace(/^```(?:json)?/i, "").replace(/```$/i, "").trim();
   const firstBrace = withoutFence.indexOf("{");
   const firstBracket = withoutFence.indexOf("[");
-  // Prefer whichever comes first
   const start =
     firstBracket !== -1 && (firstBrace === -1 || firstBracket < firstBrace)
       ? firstBracket
@@ -186,8 +185,8 @@ Each element must match this schema exactly:
 
 Coverage requirements:
 - At least 5 scenarios with regionHints specific to CT (illnesses/exposures plausible in New England tick/woodland/urban contexts, e.g. Lyme, EEE, seasonal respiratory).
-- At least 5 scenarios specific to TEXAS (e.g. Valley Fever, West Nile, Gulf-coast enteric, heat illness, Chagas).
-- At least 5 scenarios specific to INDIA (e.g. Dengue, Chikungunya, Typhoid, Japanese Encephalitis, Kala-azar, Cholera, TB, monsoon-related gastroenteritis).
+- A of least 5 scenarios specific to TEXAS (e.g. Valley Fever, West Nile, Gulf-coast enteric, heat illness, Chagas).
+- A of least 5 scenarios specific to INDIA (e.g. Dengue, Chikungunya, Typhoid, Japanese Encephalitis, Kala-azar, Cholera, TB, monsoon-related gastroenteritis).
 - At least 3 scenarios with suggestedTier="OUTBREAK" (acute, clustering-prone illnesses), 3 with "REGIONAL_ALERT", 3 with "PANDEMIC_ALERT" (highly transmissible, multi-state potential).
 - Remaining scenarios "BASELINE" (non-clustering, everyday presentations).
 - All scenarios must be medically distinct from each other.
@@ -195,7 +194,6 @@ Coverage requirements:
 Return exactly: {"scenarios": [ ... ${count} entries ... ]}. No other keys.`;
 }
 
-/** Generate and validate N illness scenarios. Retries with a reduced target if validation drops too many. */
 export async function generateIllnessScenarios(count = 25): Promise<IllnessScenario[]> {
   const attempts = 3;
   let collected: IllnessScenario[] = [];
@@ -232,7 +230,7 @@ Schema per element:
 {
   "symptoms": string[],                           // 2–6 first-person phrases; allow rare combos, overlapping syndromes, or context cues (travel, exposure, pre-existing conditions)
   "symptomDuration": string,                       // exactly one of: ${JSON.stringify(NON_EMPTY_SYMPTOM_DURATIONS)}
-  "age": number,                                   // 0–120
+  "age": number,                                   // 0 – 120
   "gender": "Male" | "Female" | "Other",
   "regionHint": "CT" | "TEXAS" | "INDIA"
 }
@@ -298,11 +296,6 @@ export interface ParaphrasePair {
   paraphrased: string[];
 }
 
-/**
- * Ask the LLM to paraphrase each symptom list in `bases` so that the
- * paraphrase means the same thing but uses different wording. Used by the
- * vector-cache stress test to probe semantic similarity hits.
- */
 export async function paraphraseSymptomSets(bases: string[][]): Promise<ParaphrasePair[]> {
   if (bases.length === 0) return [];
   const user = `For each entry in the "inputs" array, produce a paraphrased version of the symptoms that means the same thing medically but uses different wording (synonyms, different sentence structure, patient-voice).
@@ -333,5 +326,4 @@ inputs = ${JSON.stringify(bases)}`;
   return out;
 }
 
-// Re-export so callers don't have to import from two places
 export { SYMPTOM_DURATIONS, NON_EMPTY_SYMPTOM_DURATIONS };

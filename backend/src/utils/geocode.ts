@@ -215,13 +215,6 @@ export function searchLocations(query: string, limit = 10): Array<{
   const normalized = query.trim().toLowerCase();
   if (normalized.length < 1) return [];
 
-  // Score tiers (lower is better):
-  //   0  — query is a prefix of the city name (or one of its aliases)
-  //   1  — query exactly matches the state name as a prefix
-  //   2  — query is a prefix of the district (county / planning region)
-  //   3  — query appears anywhere in city name or aliases
-  //   4  — query appears anywhere in state or district
-  //  99  — no match, filtered out
   const scored = Object.entries(locationData).map(([name, data]) => {
     const city = name;
     const district = data.district || name;
@@ -231,9 +224,6 @@ export function searchLocations(query: string, limit = 10): Array<{
     const districtLower = district.toLowerCase();
     const stateLower = state.toLowerCase();
 
-    // Human-readable label: "City, District, State" when district differs from city,
-    // otherwise just "City, State". This is what disambiguates Richardson/Plano/etc.
-    // that all share the same district ("Dallas County").
     const displayName =
       district && district.toLowerCase() !== city.toLowerCase()
         ? `${city}, ${district}, ${state}`

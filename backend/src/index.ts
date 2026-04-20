@@ -41,13 +41,9 @@ app.get("*", (_req, res) => {
 // Connect to MongoDB and start server
 async function start() {
   try {
-    // Always block on LLM warmup so every case gets live AI analysis.
-    // New cases submitted before the model is ready return a PENDING placeholder
-    // and will need to be reclassified once the LLM is live.
-    // Set LOCAL_LLM_STARTUP=background to skip blocking (useful in CI / testing).
     if (process.env.LOCAL_LLM_STARTUP === "background") {
       console.log("[LLM] Starting Ollama warmup in background (LOCAL_LLM_STARTUP=background).");
-      console.log("[LLM] ⚠️  Cases submitted before warmup completes will receive a PENDING analysis.");
+      console.log("[LLM] \u26a0\ufe0f  Cases submitted before warmup completes will receive a PENDING analysis.");
       ensureLocalSymptomModelInBackground();
     } else {
       console.log("[LLM] Waiting for Ollama to be ready before accepting requests...");
@@ -55,9 +51,9 @@ async function start() {
     }
 
     await mongoose.connect(MONGODB_URI);
-    console.log("✅  Connected to MongoDB");
+    console.log("\u2705  Connected to MongoDB");
     app.listen(PORT, () => {
-      console.log(`\n🚀  Sevak Dashboard running on http://localhost:${PORT}\n`);
+      console.log(`\n\ud83d\ude80  Sevak Dashboard running on http://localhost:${PORT}\n`);
     });
   } catch (error) {
     console.error("Failed to connect to MongoDB:", error);

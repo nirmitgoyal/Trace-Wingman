@@ -58,7 +58,7 @@ function analyseFile(filename: string): FileReport {
   try {
     entries = JSON.parse(fs.readFileSync(filePath, "utf-8"));
   } catch (err) {
-    report.invalid.push(`${filename}: JSON parse error — ${String(err)}`);
+    report.invalid.push(`${filename}: JSON parse error \u2014 ${String(err)}`);
     return report;
   }
   if (!Array.isArray(entries)) {
@@ -77,7 +77,7 @@ function analyseFile(filename: string): FileReport {
     seen.set(name, (seen.get(name) ?? 0) + 1);
   }
   for (const [name, count] of seen) {
-    if (count > 1) report.duplicateNames.push(`${name} (×${count})`);
+    if (count > 1) report.duplicateNames.push(`${name} (\u00d7${count})`);
   }
   report.count = entries.length;
   return report;
@@ -107,14 +107,14 @@ function analyseCrossFile(reports: FileReport[]): string[] {
 }
 
 function main() {
-  console.log("Verifying location data in backend/src/data…\n");
+  console.log("Verifying location data in backend/src/data\u2026\n");
 
   const reports = FILES.map(analyseFile);
   let totalDuplicates = 0;
   let totalInvalid = 0;
 
   for (const r of reports) {
-    console.log(`── ${r.file} ── entries: ${r.count}`);
+    console.log(`\u2500\u2500 ${r.file} \u2500\u2500 entries: ${r.count}`);
     if (r.invalid.length > 0) {
       console.log(`   invalid (${r.invalid.length}):`);
       for (const line of r.invalid) console.log(`     - ${line}`);
@@ -124,36 +124,32 @@ function main() {
       for (const d of r.duplicateNames) console.log(`     - ${d}`);
     }
     if (r.invalid.length === 0 && r.duplicateNames.length === 0) {
-      console.log("   ✓ clean");
+      console.log("   \u2713 clean");
     }
     totalDuplicates += r.duplicateNames.length;
     totalInvalid += r.invalid.length;
   }
 
-  // Cross-file name collisions (e.g. Bridgeport exists in both CT and TX, and
-  // Salem exists in CT and India) are legitimate in real-world geography, so
-  // we surface them as warnings rather than failing. The runtime loader's
-  // `mergeLocations` keeps the highest-population entry to prevent ambiguity.
   const cross = analyseCrossFile(reports);
   if (cross.length > 0) {
-    console.log(`\n── cross-file name collisions (${cross.length}) — informational ──`);
+    console.log(`\n\u2500\u2500 cross-file name collisions (${cross.length}) \u2014 informational \u2500\u2500`);
     for (const c of cross) console.log(`  - ${c}`);
     console.log(
       "   These are accepted at runtime by the highest-population tie-breaker.",
     );
   } else {
-    console.log("\n── cross-file name collisions ── ✓ none");
+    console.log("\n\u2500\u2500 cross-file name collisions \u2500\u2500 \u2713 none");
   }
 
   if (totalDuplicates > 0 || totalInvalid > 0) {
     console.error(
-      `\n❌  Verification failed: ${totalDuplicates} within-file duplicate(s), ${totalInvalid} invalid entrie(s).`,
+      `\n\u274c  Verification failed: ${totalDuplicates} within-file duplicate(s), ${totalInvalid} invalid entrie(s).`,
     );
     process.exit(1);
   }
 
   console.log(
-    `\n✅  All location files are clean. (${cross.length} cross-file name collision(s) accepted.)`,
+    `\n\u2705  All location files are clean. (${cross.length} cross-file name collision(s) accepted.)`,
   );
 }
 
